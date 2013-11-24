@@ -4,13 +4,17 @@ using System.Collections;
 
 public class MapElement:MonoBehaviour
 {
-	GameObject room, guiElement;
+	public GameObject room, guiElement;
 	
-	public MapElement (GameObject room, GameObject guiElement)
-	{
-		room = room;
+	public int ID;
+	
+	// Use this for initialization
+	void Start () {
 		
-		guiElement = guiElement;
+	}
+	
+	// Update is called once per frame
+	void Update () {
 	}
 }
 
