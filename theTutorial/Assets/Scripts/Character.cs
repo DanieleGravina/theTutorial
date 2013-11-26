@@ -6,6 +6,7 @@ public class Character : MonoBehaviour {
     GameObject gui, controller, anti;
     bool idiot, diff;
 	// Use this for initialization
+	// try
 	void Start () {
         gui = GameObject.Find("GUI Text");
         controller = GameObject.Find("First Person Controller");
