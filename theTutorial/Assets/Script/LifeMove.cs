@@ -10,6 +10,24 @@ public class LifeMove : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.localScale += new Vector3(-0.1F, 0, 0);
+		if(transform.localScale.x > 0){
+			transform.localScale += new Vector3(-0.1F, 0, 0);
+			transform.Translate(-3, 0,0); 
+		}
 	}
+	
+	public void ReduceLife(){
+		if(transform.localScale.x > 0){
+			transform.localScale += new Vector3(-0.1F, 0, 0);
+			transform.Translate(-3, 0,0); 
+		}
+	}
+	
+	public void RestoreLife(){
+		if(transform.localScale.x < 1){
+			transform.localScale += new Vector3(0.1F, 0, 0);
+			transform.Translate(3, 0,0); 
+		}
+	}
+		
 }

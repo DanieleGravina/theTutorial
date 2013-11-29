@@ -49,8 +49,6 @@ public class HUDPosition : MonoBehaviour {
 		
 		if(!onButton && other.tag == "Player"){
 			
-			//this.transform.parent.GetComponent<MeshRenderer>().material.color = Color.red;
-			
 			onButton = true;
 			
 			manager.gameObject.GetComponent<Manager>().MovePlatform(ID, typeButton, hud, room, transform.parent.gameObject, collider);
