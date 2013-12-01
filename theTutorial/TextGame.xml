@@ -1,0 +1,89 @@
+<?xml version=”1.0″ ?>
+
+<rule id="S">
+	
+	<output>
+		"You find yourself in a strange place. You see <ruleref uri = "#Places/name"/>.
+		 <ruleref uri = "#Satellite/Description"/>."	
+	</output>
+	
+	<input>
+		"Go <ruleref uri = "#Places/name"/>"
+	</input>
+		
+</rule>		
+
+<rule id="Places">	
+	<home>
+		<bedroom>
+			<wardrobe>
+				<costume>
+				</costume>
+			</wardrobe>
+		</bedroom>
+		<kitchen>
+			<fridge>
+				<beer>
+				</beer>
+			</fridge>
+		</kitchen>
+	</home>
+	
+	<garden>
+		<party>
+			<kids>
+			</kids>
+			<parents>
+			</parents>
+			<cake>
+			</cake>
+		</party>
+	</garden>
+	
+	<street>
+	</street>
+	
+	<woods>
+	</woods>	
+</rule>
+
+
+<satellite>
+	<context>
+		<drunk>
+			<behaviour>
+			</behaviour>
+			<reaction>
+			</reaction>
+			<description>
+				All around you is confused, you can barely stand"
+			</description>
+		</drunk>
+		<costume>
+			<behaviour>
+			</behaviour>
+			<reaction>
+			</reaction>
+			<description>
+				"You are very funny, you look like an pink elephant".
+			</description>
+		</costume>
+		<steal>
+			<behaviour>
+			</behaviour>
+			<reaction>
+			</reaction>
+			<description>
+			</description>
+		</steal>
+		<normal>
+			<behaviour>
+			</behaviour>
+			<reaction>
+			</reaction>
+			<description>
+			</description>
+		</normal>
+	</context>	
+	
+</satellite>
