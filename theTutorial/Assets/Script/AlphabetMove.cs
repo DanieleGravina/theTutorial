@@ -10,7 +10,11 @@ public class AlphabetMove : MonoBehaviour {
 
 	public int velocity = 10;
 	
-	int angles = 0;
+	int targetAngle = 0;
+	
+	int angle;
+	
+	states myState = states.TRANSLATION; 
 	
 	float translation;
 	
@@ -20,13 +24,16 @@ public class AlphabetMove : MonoBehaviour {
 	
 	Vector3 position;
 	
-	Vector3 midpoint;
+	Vector3 midPoint;
 	
 	Vector3 axes = new Vector3(0, 0, 1);
 	
-	int angle;
+	Vector3 initial_midPoint = new Vector3(184.3105f, 11.32259f, -152.3448f);
 	
-	public states myState = states.TRANSLATION; 
+	Vector3 final_midPoint = new Vector3(-22.18954f, 11.32259f, -152.3448f);
+	
+	Vector3 tmp;
+	
 	
 	// Use this for initialization
 	void Start () {
@@ -40,21 +47,19 @@ public class AlphabetMove : MonoBehaviour {
 		
 		if( transform.position.x <= -22.18954f && myState == states.TRANSLATION){
 			
-			//Debug.Log("begin rotation1: position" + transform.position + "angle" + transform.eulerAngles.z + " state"+ myState);
-			midpoint = new Vector3(-22.18954f, 11.32259f, -152.3448f);
+			midPoint = final_midPoint;
 			myState = states.ROTATION;
 			angle = 179;
-			angles = 180;
+			targetAngle = 180;
 			
 			
 		}else if( transform.position.x >= 183.6f && transform.position.y <= 11f && myState == states.TRANSLATION) {
 			
-			Debug.Log("begin rotation2: position" + transform.position + "angle" + transform.eulerAngles.z + " state"+ myState);
-			midpoint = new Vector3(184.3105f, 11.32259f, -152.3448f);
+			midPoint = initial_midPoint;
 			myState = states.ROTATION;
 			
 			angle = 340;
-			angles = 0;
+			targetAngle = 0;
 			position = initial_pos;
 			
 			
@@ -62,12 +67,12 @@ public class AlphabetMove : MonoBehaviour {
 		
 		if(myState == states.ROTATION ){
 			
-			transform.RotateAround(midpoint, axes, velocity * deltaTime * 3.14f);
+			transform.RotateAround(midPoint, axes, velocity * deltaTime * 3.14f);
 			
 			if(transform.rotation.eulerAngles.z >= angle){
 				myState = states.TRANSLATION;
-				Vector3 tmp = transform.eulerAngles;
-				tmp.z = angles;
+				tmp = transform.eulerAngles;
+				tmp.z = targetAngle;
 				transform.eulerAngles = tmp;
 				
 				if(angle == 340)
