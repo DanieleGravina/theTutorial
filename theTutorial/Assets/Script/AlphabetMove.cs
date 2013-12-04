@@ -62,7 +62,6 @@ public class AlphabetMove : MonoBehaviour {
 		
 		if(myState == states.ROTATION ){
 			
-			Debug.Log("rotating: position" + transform.position + "angle" + transform.eulerAngles.z + " state"+ myState);
 			transform.RotateAround(midpoint, axes, velocity * deltaTime * 3.14f);
 			
 			if(transform.rotation.eulerAngles.z >= angle){
@@ -76,24 +75,29 @@ public class AlphabetMove : MonoBehaviour {
 			}
 			
 		}else {
-			Debug.Log("translation: position" + transform.position + "angle" + transform.eulerAngles.z + " state"+ myState);
 			translation = deltaTime * velocity;
 	        transform.Translate(-translation, 0, 0);
 		}
 	
 	}
 	
+	/*void OnTriggerStay(Collider other)
+	{
+		if(other.tag == "Player"){
+			other.attachedRigidbody.AddForce(new Vector3(-10, 0, 0));
+		}
+	}*/
+	
 	void OnTriggerEnter (Collider other)
 	{
 	    if (other.tag == "Player")
 	    {
-	       other.transform.parent = transform;
+	       other.transform.parent = this.transform;
 	    }
 	}
  
 	void OnTriggerExit (Collider other)
 	{
-		Debug.LogError("Exit");
 	    if (other.tag == "Player")
 	    {
 	       other.transform.parent = null;
