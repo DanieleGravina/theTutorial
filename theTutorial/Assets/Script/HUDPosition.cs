@@ -5,7 +5,8 @@ public enum buttons{
 	UP,
 	RIGHT,
 	LEFT,
-	DOWN
+	DOWN,
+	NULL
 	
 }
 
@@ -17,13 +18,13 @@ public class HUDPosition : MonoBehaviour {
 	
 	Transform manager;
 	
-	public buttons typeButton;
-	
 	public int ID;
 	
 	private bool onButton = false;
 	
-	private float timer = 0.0f;
+	bool pressArrow = false;
+	
+	buttons typeButton = buttons.NULL;
 
 	// Use this for initialization
 	void Start () {
@@ -35,25 +36,49 @@ public class HUDPosition : MonoBehaviour {
 	void Update () {
 		
 		if(onButton){
-			timer += 1*Time.deltaTime;
+		
+			if(Input.GetKey("i"))
+				typeButton = buttons.UP;
+				
+			if(Input.GetKey("k"))
+				typeButton = buttons.DOWN;
 			
-			if (timer >= 10f){
-				onButton = false;
-				timer = 0.0f;
+			if(Input.GetKey("l"))
+				typeButton = buttons.RIGHT;
+			
+			if(Input.GetKey("j"))
+				typeButton = buttons.LEFT;	
+			
+			if(typeButton != buttons.NULL){
+				manager.gameObject.GetComponent<Manager>().MovePlatform(ID, typeButton, hud, room, transform.parent.gameObject, collider);
+				typeButton = buttons.NULL;
 			}
 		}
-	
+		
 	}
 	
 	void OnTriggerEnter(Collider other){
 		
-		if(!onButton && other.tag == "Player"){
+		if(other.tag == "Player"){
 			
 			onButton = true;
+			
+			other.transform.parent = this.transform;
 			
 			manager.gameObject.GetComponent<Manager>().MovePlatform(ID, typeButton, hud, room, transform.parent.gameObject, collider);
 			
 		}
 		
 	}
+		
+	void OnTriggerExit(Collider other){
+			
+		if(other.tag == "Player"){
+				
+				onButton = false;
+			
+				other.transform.parent = null;
+		}
+	}
+			
 }
