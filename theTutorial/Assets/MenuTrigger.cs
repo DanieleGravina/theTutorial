@@ -13,7 +13,7 @@ public class MenuTrigger : MonoBehaviour {
 	
 	GameObject player;
 	
-	GameObject menu;
+	GameObject menu, blueScreen;
 	
 	bool afterTrigger = false;
 
@@ -24,7 +24,7 @@ public class MenuTrigger : MonoBehaviour {
 		
 		menu = GameObject.Find("MenuCamera");
 		
-		menu.active = false;
+		blueScreen = GameObject.Find("BlueScreenCamera");
 	
 		GUIdialog = GameObject.Find("GUI Text");
 	}
@@ -40,6 +40,9 @@ public class MenuTrigger : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other){
+		
+		Globals.currentLevel = Level.MENU;
+		
 		if(other.tag == "Player"){
 			BeginMenuSequence();
 			afterTrigger = true;
@@ -49,6 +52,10 @@ public class MenuTrigger : MonoBehaviour {
 	void BeginMenuSequence(){
 		
 		GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(welcome);
+		
+		GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(menuExplanation);
+		
+		GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(menuExplanation2);
 		
 		
 		
