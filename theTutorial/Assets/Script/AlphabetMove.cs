@@ -30,7 +30,7 @@ public class AlphabetMove : MonoBehaviour {
 	
 	Vector3 initial_midPoint = new Vector3(184.3105f, 11.32259f, -152.3448f);
 	
-	Vector3 final_midPoint = new Vector3(-22.18954f, 11.32259f, -152.3448f);
+	Vector3 final_midPoint = new Vector3(-14.06157f, 11.32259f, -152.3448f);
 	
 	Vector3 tmp;
 	
@@ -45,7 +45,7 @@ public class AlphabetMove : MonoBehaviour {
 		
 		deltaTime = Time.deltaTime;
 		
-		if( transform.position.x <= -22.18954f && myState == states.TRANSLATION){
+		if( transform.position.x <= final_midPoint.x && myState == states.TRANSLATION){
 			
 			midPoint = final_midPoint;
 			myState = states.ROTATION;
