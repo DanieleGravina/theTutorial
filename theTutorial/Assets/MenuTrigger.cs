@@ -13,18 +13,14 @@ public class MenuTrigger : MonoBehaviour {
 	
 	GameObject player;
 	
-	GameObject menu, blueScreen;
+	GameObject managerCamera, menu, blueScreen;
 	
 	bool afterTrigger = false;
 
 	// Use this for initialization
 	void Start () {
 		
-		player = GameObject.Find("RigidbodyController");
-		
-		menu = GameObject.Find("MenuCamera");
-		
-		blueScreen = GameObject.Find("BlueScreenCamera");
+		managerCamera = GameObject.Find ("ManagerCamera");
 	
 		GUIdialog = GameObject.Find("GUI Text");
 	}
@@ -33,8 +29,8 @@ public class MenuTrigger : MonoBehaviour {
 	void Update () {
 		
 		 if (Input.GetKeyDown(KeyCode.Escape) && afterTrigger){
-			player.active = false;
-			menu.active = true;
+			managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = false;
+			managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = true;
 		}
 	
 	}

@@ -6,6 +6,13 @@ public enum state{
 	JOKE
 }
 
+public enum arrow{
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+}
+
 public class Selector : MonoBehaviour {
 	
 	string explainManu = "This is the menu, with four option: Controls, Audio, Achievement and Exit.";
@@ -16,7 +23,9 @@ public class Selector : MonoBehaviour {
 	
 	string joke = "Have you any problem?";
 	
-	GameObject menu, GUIdialog, blueScreen;
+	GameObject menu, GUIdialog, blueScreen, managerCamera;
+	
+	public GameObject[] MenuOption;
 	
 	
 	//say in witch state it's the menu
@@ -24,12 +33,14 @@ public class Selector : MonoBehaviour {
 	
 	const int DELTA_MOVE = 130;
 	
+	const float DELTA_SCALE = 1.1f;
+	
 	
 	//position of the cursor
 	int position = 0;
 	
 	// num of option in the menu
-	const int MAX_POS = 4;
+	const int MAX_POS = 3;
 	
 	float timer = 0.0f;
 	
@@ -40,19 +51,18 @@ public class Selector : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
-		menu = GameObject.Find("MenuCamera");
-		blueScreen = GameObject.Find("BlueScreenCamera");
-		
-		menu.active = false;
+		managerCamera = GameObject.Find ("ManagerCamera");
 		
 		GUIdialog = GameObject.Find("GUI Text");
+		
+		MenuOption[position].transform.localScale += new Vector3(DELTA_SCALE, DELTA_SCALE, DELTA_SCALE);
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		
-		if(menu.active){
+		if(managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active){
 			
 			
 			timer += Time.deltaTime;
@@ -63,31 +73,21 @@ public class Selector : MonoBehaviour {
 				begin = false;
 			}
 			
-			if(Input.GetKeyDown("down"))
-			{
-				if(myState == state.NORMAL)
-					moveCursorDown();
-				else
-				{
-					moveCursorUp();
-					GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(joke);
-				}
-			}
 			
 			if(Input.GetKeyDown("up"))
 			{
-				if(myState == state.NORMAL)
-					moveCursorUp();
-				else
-				{
-					moveCursorDown();
-					GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(joke);
-				}
+				getInput("up");
+			}
+			
+			if(Input.GetKeyDown("down"))
+			{
+				getInput("down");
 			}
 			
 			if(Input.GetKeyDown(KeyCode.Return) && position == 3){
-				menu.active = false;
-				blueScreen.active = true;
+				managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = false;
+				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = true;
+				Globals.currentLevel = Level.BLUESCREEN;
 			}
 			
 			if(timer >= TIMEOUT){
@@ -103,11 +103,36 @@ public class Selector : MonoBehaviour {
 	
 	}
 	
+	void getInput(string arrow){
+		
+		if(myState == state.NORMAL){
+			
+			if(arrow == "down")
+				moveCursorDown();
+			else
+				moveCursorUp();
+			
+		}
+		else
+		{
+			int decision = Mathf.CeilToInt(Random.Range(0,10)%2); 
+			
+			if(decision == 0)
+				moveCursorDown();
+			else
+				moveCursorUp();
+			
+			GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(joke);
+		}
+	}
+	
 	void moveCursorDown(){
 		
-		if(position <= MAX_POS){
+		if(position < MAX_POS){
 			transform.Translate(Vector3.down*DELTA_MOVE);
+			MenuOption[position].transform.localScale -= new Vector3(DELTA_SCALE, DELTA_SCALE, DELTA_SCALE);
 			position++;
+			MenuOption[position].transform.localScale += new Vector3(DELTA_SCALE, DELTA_SCALE, DELTA_SCALE);
 		}
 	}
 	
@@ -115,7 +140,9 @@ public class Selector : MonoBehaviour {
 		
 		if(position > 0){
 			transform.Translate(Vector3.up*DELTA_MOVE);
+			MenuOption[position].transform.localScale -= new Vector3(DELTA_SCALE, DELTA_SCALE, DELTA_SCALE);
 			position--;
+			MenuOption[position].transform.localScale += new Vector3(DELTA_SCALE, DELTA_SCALE, DELTA_SCALE);
 		}
 		
 	}
