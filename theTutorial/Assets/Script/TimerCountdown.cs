@@ -3,11 +3,13 @@ using System.Collections;
 
 public class TimerCountdown : MonoBehaviour {
 	
-	public float seconds = 99f;
+	public float init_seconds = 100f;
+	float seconds;
 	// Use this for initialization
 	void Start () {
-		this.guiText.text = seconds.ToString();
-		InvokeRepeating("Countdown",seconds,1f);
+		seconds= init_seconds;
+		this.GetComponent<GUIText>().text = seconds.ToString();
+		InvokeRepeating("Countdown",1f,1f);
 	}
 	
 	// Update is called once per frame
@@ -18,8 +20,13 @@ public class TimerCountdown : MonoBehaviour {
 	void Countdown (){
 		seconds--;
 		if (seconds == 0){
-			CancelInvoke("Countdown");
+			//CancelInvoke("Countdown");
+			seconds = init_seconds;
 		}
-		this.guiText.text  = seconds.ToString();
+		this.GetComponent<GUIText>().text = seconds.ToString();
+	}
+	
+	public void setSeconds() {
+		seconds = init_seconds;
 	}
 }

@@ -3,11 +3,12 @@ using System.Collections;
 
 public class TimerReset : MonoBehaviour {
 	
-	GUIText timer;
+	GameObject timer;
 	
 	// Use this for initialization
 	void Start () {
-		timer = GameObject.Find("timer_text").GetComponent<GUIText>();
+		
+		timer = GameObject.Find("timer_text");
 	}
 	
 	// Update is called once per frame
@@ -17,8 +18,7 @@ public class TimerReset : MonoBehaviour {
 	
 	
 	void OnTriggerEnter (Collider other) {
-		Debug.Log("time reset");
-		timer.text = "99";
+		timer.GetComponent<TimerCountdown>().setSeconds();
 	}
 }
 
