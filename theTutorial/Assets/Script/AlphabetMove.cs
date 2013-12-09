@@ -28,7 +28,7 @@ public class AlphabetMove : MonoBehaviour {
 	
 	Vector3 axes = new Vector3(0, 0, 1);
 	
-	Vector3 initial_midPoint = new Vector3(184.3105f, 11.32259f, -152.3448f);
+	Vector3 initial_midPoint = new Vector3(177.6943f, 11.32259f, -152.3448f);
 	
 	Vector3 final_midPoint = new Vector3(-14.06157f, 11.32259f, -152.3448f);
 	
@@ -53,12 +53,12 @@ public class AlphabetMove : MonoBehaviour {
 			targetAngle = 180;
 			
 			
-		}else if( transform.position.x >= 183.6f && transform.position.y <= 11f && myState == states.TRANSLATION) {
+		}else if( transform.position.x >= initial_midPoint.x && transform.position.y <= 11f && myState == states.TRANSLATION) {
 			
 			midPoint = initial_midPoint;
 			myState = states.ROTATION;
 			
-			angle = 340;
+			angle = 345;
 			targetAngle = 0;
 			position = initial_pos;
 			
