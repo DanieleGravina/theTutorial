@@ -25,5 +25,6 @@ public class NoGravity : MonoBehaviour {
 		
 		if(other.tag == "Key" && Globals.numInventory < 3)
 			Globals.numInventory++;
+			other.rigidbody.freezeRotation = true;
 	}
 }

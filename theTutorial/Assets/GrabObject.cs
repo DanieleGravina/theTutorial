@@ -38,6 +38,7 @@ public class GrabObject : MonoBehaviour {
 	    if(Input.GetKey("e") && !grabbed){
 	    	
 	    	if(Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.collider.tag == "Key"){
+				Debug.DrawLine (transform.position, hit.point, Color.cyan);
 	    		grabbed = true;
 	    		grabbedObject = hit.collider.gameObject;
 				

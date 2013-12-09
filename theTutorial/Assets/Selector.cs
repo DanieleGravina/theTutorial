@@ -84,6 +84,14 @@ public class Selector : MonoBehaviour {
 				getInput("down");
 			}
 			
+			if(Input.GetKeyDown("left")){
+				getInput("left");
+			}
+			
+			if(Input.GetKeyDown("right")){
+				getInput("right");
+			}
+			
 			if(Input.GetKeyDown(KeyCode.Return) && position == 3){
 				managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = false;
 				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = true;
@@ -103,11 +111,11 @@ public class Selector : MonoBehaviour {
 	
 	}
 	
-	void getInput(string arrow){
+	void getInput(string input){
 		
 		if(myState == state.NORMAL){
 			
-			if(arrow == "down")
+			if(input == "down")
 				moveCursorDown();
 			else
 				moveCursorUp();
@@ -115,12 +123,15 @@ public class Selector : MonoBehaviour {
 		}
 		else
 		{
-			int decision = Mathf.CeilToInt(Random.Range(0,10)%2); 
+			int decisionArrow = Mathf.CeilToInt(Random.Range(0,10)%4); 
+			int decisionMove = Mathf.CeilToInt(Random.Range(0,10)%2); 
+			arrow myArrow = arrow.UP;
 			
-			if(decision == 0)
-				moveCursorDown();
-			else
-				moveCursorUp();
+			//if(input == myArrow.toString())
+				if(decision == 0)
+					moveCursorDown();
+				else
+					moveCursorUp();
 			
 			GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(joke);
 		}

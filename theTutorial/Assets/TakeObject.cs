@@ -22,7 +22,7 @@ public class TakeObject : MonoBehaviour {
 		
 		if(Input.GetKey("e") && Globals.numInventory <= 2){
 			
-			if(Physics.Raycast(transform.position, transform.forward, out hit, 3)){
+			if(Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.collider.tag == "Key"){
 				Destroy(hit.collider.gameObject);
 				setInventoryHUD();
 			}

@@ -54,6 +54,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 			
 			if(textPosition == 3) {
 				Globals.currentLevel = Level.INVENTORY;
+				Debug.Log(Globals.currentLevel);
 				managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
 				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
 				
