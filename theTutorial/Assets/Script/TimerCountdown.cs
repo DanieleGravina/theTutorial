@@ -20,8 +20,8 @@ public class TimerCountdown : MonoBehaviour {
 	void Countdown (){
 		seconds--;
 		if (seconds == 0){
-			//CancelInvoke("Countdown");
-			seconds = init_seconds;
+			CancelInvoke("Countdown");
+			Application.LoadLevel("HUD_Level");
 		}
 		this.GetComponent<GUIText>().text = seconds.ToString();
 	}
