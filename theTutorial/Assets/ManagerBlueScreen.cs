@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Text.RegularExpressions;
 
 public class ManagerBlueScreen : MonoBehaviour {
+	
+	string loadingParallelWorld = "Loading Hud World, please wait...";
 	
 	string ExplainParallel = "Press P to go on the parallel world";
 	
@@ -30,13 +32,15 @@ public class ManagerBlueScreen : MonoBehaviour {
 		
 		output = lines[0].GetComponent<TextMesh>();
 		
-		text = new string[3];
+		text = new string[4];
 		
 		text[0] = ExplainParallel;
 		
 		text[1] = CakeInTheTextGame;
 		
-		text[2] = "";
+		text[2] = loadingParallelWorld;
+		
+		//text[3] = "";
 		
 		managerCamera = GameObject.Find ("ManagerCamera");
 	
@@ -55,8 +59,12 @@ public class ManagerBlueScreen : MonoBehaviour {
 			if(textPosition == 3) {
 				Globals.currentLevel = Level.INVENTORY;
 				Debug.Log(Globals.currentLevel);
-				managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
-				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
+				
+				//Globals.playerPositionLevel2 = GameObject.Find("RigidbodyController").transform.position;
+				Application.LoadLevel("HUD_Level");
+				//managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
+				//managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
+				
 				
 			}
 				

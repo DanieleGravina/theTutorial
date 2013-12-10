@@ -3,11 +3,11 @@ using System.Collections;
 
 public class MenuTrigger : MonoBehaviour {
 	
-	string welcome = "Welcome to the second part of the tutorial!";
+	string welcome = "Oh you're back!";
 	
-	string menuExplanation = "Now i will explain how the menu works: ";
+	string menuExplanation = "Now i will explain how the inventory works: ";
 	
-	string menuExplanation2 = "press the 'Esc' button to access the menu";
+	string menuExplanation2 = "find the the three hidden keys in this room";
 	
 	const int TEXT_MAX = 3;
 	
@@ -19,7 +19,7 @@ public class MenuTrigger : MonoBehaviour {
 	
 	GameObject player;
 	
-	GameObject managerCamera, menu, blueScreen;
+	GameObject managerCamera, menu, blueScreen, HUDMenu;
 	
 	bool afterTrigger = false;
 
@@ -31,6 +31,8 @@ public class MenuTrigger : MonoBehaviour {
 		text[2] = menuExplanation2;
 		
 		managerCamera = GameObject.Find ("ManagerCamera");
+		
+		HUDMenu = GameObject.Find ("HUDMenu");
 	
 		GUIdialog = GameObject.Find("GUI Text");
 		
@@ -44,6 +46,7 @@ public class MenuTrigger : MonoBehaviour {
 		 if (Input.GetKeyDown(KeyCode.Escape) && afterTrigger){
 			managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = false;
 			managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = true;
+			HUDMenu.guiTexture.enabled = false;
 		}
 		
 		if(Input.GetKeyDown(KeyCode.Return)){
@@ -61,6 +64,7 @@ public class MenuTrigger : MonoBehaviour {
 		
 		if(other.tag == "Player"){
 			afterTrigger = true;
+			HUDMenu.guiTexture.enabled = true;
 			GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text[textPos]);
 			textPos++;
 		}

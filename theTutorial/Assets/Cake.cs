@@ -13,9 +13,4 @@ public class Cake : MonoBehaviour {
 	
 	}
 	
-	void OnTriggerEnter(Collider other){
-		if(other.tag == "Player"){
-			other.gameObject.GetComponent<Player>().OnRange(transform.gameObject);
-		}
-	}
 }

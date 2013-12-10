@@ -76,20 +76,20 @@ public class Selector : MonoBehaviour {
 			
 			if(Input.GetKeyDown("up"))
 			{
-				getInput("up");
+				getInput("UP");
 			}
 			
 			if(Input.GetKeyDown("down"))
 			{
-				getInput("down");
+				getInput("DOWN");
 			}
 			
 			if(Input.GetKeyDown("left")){
-				getInput("left");
+				getInput("LEFT");
 			}
 			
 			if(Input.GetKeyDown("right")){
-				getInput("right");
+				getInput("RIGHT");
 			}
 			
 			if(Input.GetKeyDown(KeyCode.Return) && position == 3){
@@ -115,7 +115,7 @@ public class Selector : MonoBehaviour {
 		
 		if(myState == state.NORMAL){
 			
-			if(input == "down")
+			if(input == "DOWN")
 				moveCursorDown();
 			else
 				moveCursorUp();
@@ -123,12 +123,13 @@ public class Selector : MonoBehaviour {
 		}
 		else
 		{
+			// random arrow to move up and down in the menu
 			int decisionArrow = Mathf.CeilToInt(Random.Range(0,10)%4); 
 			int decisionMove = Mathf.CeilToInt(Random.Range(0,10)%2); 
-			arrow myArrow = arrow.UP;
-			
-			//if(input == myArrow.toString())
-				if(decision == 0)
+			arrow myArrow = (arrow)decisionArrow;
+	
+			if(input == myArrow.ToString())
+				if(decisionMove == 0)
 					moveCursorDown();
 				else
 					moveCursorUp();
@@ -157,4 +158,5 @@ public class Selector : MonoBehaviour {
 		}
 		
 	}
+	
 }

@@ -17,11 +17,14 @@ public class Globals : MonoBehaviour {
 	
 	public static Level currentLevel;
 	
-	public const float TIMEOUT = 5.0f;
+	public static float TIMEOUT = 5.0f;
+	
+	public static Vector3 playerPositionLevel2; 
 
 	// Use this for initialization
 	void Start () {
 	
+		playerPositionLevel2 = new Vector3(-7f, 1.5f, 152f);
 	}
 	
 	// Update is called once per frame
