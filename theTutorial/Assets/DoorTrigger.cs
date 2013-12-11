@@ -7,9 +7,9 @@ public class DoorTrigger : MonoBehaviour {
 	
 	public Level levelDoor;
 	
-	public float speed = 1.0F;
+	public float speed = 3.0F;
 	
-	const float translate = -8.5f;
+	const float translate = -4f;
 	
 	Vector3 start, end;
 	

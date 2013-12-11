@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 public class ManagerBlueScreen : MonoBehaviour {
 	
-	string loadingParallelWorld = "Loading Hud World, please wait...";
+	string loadingParallelWorld = "Loading Korz, please wait...";
 	
 	string ExplainParallel = "Press P to go on the parallel world";
 	
@@ -21,11 +21,15 @@ public class ManagerBlueScreen : MonoBehaviour {
 	float Timer;
 	
 	public GameObject[] lines;
+	public GameObject[] options;
+	public GameObject cursor;
 	
 	TextMesh output;
 	
 	const int MAX_CHAR = 35;
 	const int MAX_LINES = 4;
+	const float DELTA_X = 478;
+	const float DELTA_Y = 60;
 
 	// Use this for initialization
 	void Start () {
@@ -51,7 +55,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 		
 		if(Globals.currentLevel == Level.BLUESCREEN){
 			
-			if(Input.anyKeyDown){
+			if(Input.GetKeyDown(KeyCode.Return)){
 				writeOutput();
 				textPosition++;
 			}
@@ -61,14 +65,33 @@ public class ManagerBlueScreen : MonoBehaviour {
 				Debug.Log(Globals.currentLevel);
 				
 				//Globals.playerPositionLevel2 = GameObject.Find("RigidbodyController").transform.position;
-				Application.LoadLevel("HUD_Level");
-				//managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
-				//managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
+				//Application.LoadLevel("HUD_Level");
+				managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
+				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
 				
 				
 			}
+			
+			if(Input.GetKeyDown(KeyCode.RightArrow)){
+				cursor.transform.Translate(Vector3.right*DELTA_X);
+			}
+			
+			if(Input.GetKeyDown(KeyCode.LeftArrow)){
+				cursor.transform.Translate(Vector3.left*DELTA_X);
+			}
+			
+			if(Input.GetKeyDown(KeyCode.UpArrow)){
+				cursor.transform.Translate(Vector3.up*DELTA_Y);
+			}
+			
+			if(Input.GetKeyDown(KeyCode.DownArrow)){
+				cursor.transform.Translate(Vector3.down*DELTA_Y);
+			}
 				
+			
 		}
+		
+		
 	
 	}
 	

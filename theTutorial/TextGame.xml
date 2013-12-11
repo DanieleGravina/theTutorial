@@ -1,17 +1,29 @@
-<?xml version=”1.0″ ?>
-
-<rule id="S">
+﻿<root>
 	
 	<output>
-		"You find yourself in a strange place. You see <ruleref uri = "#Places/name"/>.
-		 <ruleref uri = "#Satellite/Description"/>."	
+		"Welcome to Korz Game."
+		" "
+		"You are in strange place." 
+		"You don't remember anything."
+		"You don't know who you are"
+		"You notice that there is a house in front of you."	
 	</output>
 	
-	<input>
-		"Go <ruleref uri = "#Places/name"/>"
-	</input>
+	<option>
+		[HOUSE]
+	</option>
 		
-</rule>		
+</root>		
+
+<home>
+	<name>
+		"Go to the house."
+	</name>
+
+	<output>
+	<output>
+
+</home>
 
 <rule id="Places">	
 	<home>
