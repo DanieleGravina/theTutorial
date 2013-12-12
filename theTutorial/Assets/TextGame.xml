@@ -1,0 +1,36 @@
+﻿<root>
+
+	<command>
+		"Root"
+	</command>
+	
+	<output>
+		"Welcome to Korz Game."
+		" "
+		"You are in strange place." 
+		"You don't remember anything."
+		"You don't know who you are"
+		"You notice that there is a house in front of you."	
+	</output>
+	
+	<option>
+		home
+	</option>
+		
+</root>		
+
+<home>
+	<command>
+		"Go to the house."
+	</command>
+
+	<output>
+		"You enter in the house"
+	</output>
+	
+	<option>
+	</option>
+
+</home>
+
+
