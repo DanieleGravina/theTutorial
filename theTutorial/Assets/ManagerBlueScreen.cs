@@ -2,17 +2,30 @@ using UnityEngine;
 using System.Collections;
 using System.Text.RegularExpressions;
 
+public enum textState{
+		NORMAL, 
+		DRUNK, 
+		DRESS, 
+		DRUNK_ELPHANT,
+		CAKE
+	}
+	
+
 public class ManagerBlueScreen : MonoBehaviour {
+	
+	
+	string angry = "I SAID TO NOT PRESS ESC, YOU &%$%&";
+	string textGame1 = "Now i have to fix this mess.";
+	string textGame2 = "In the while, play this textual game";
+	string textGame3 = "Beware to not break anything, ok?";
 	
 	string loadingParallelWorld = "Loading Korz, please wait...";
 	
-	string ExplainParallel = "Press P to go on the parallel world";
+	string[] text, textGUI;
 	
-	string CakeInTheTextGame = "To get the cake key, try the bluescreen textual game";
+	bool begin = true;
 	
-	string[] text;
-	
-	GameObject managerCamera, blueScreen;
+	GameObject managerCamera, blueScreen, GUIdialog, HUDMenu;
 	
 	int textPosition = 0;
 	int cursorPosition = 0;
@@ -34,6 +47,8 @@ public class ManagerBlueScreen : MonoBehaviour {
 	
 	XMLparser textGame;
 	
+	textState myState = textState.NORMAL;
+	
 	Node tree;
 
 	// Use this for initialization
@@ -41,20 +56,25 @@ public class ManagerBlueScreen : MonoBehaviour {
 		
 		output = lines[0].GetComponent<TextMesh>();
 		
-		/*text = new string[4];
+		textGUI = new string[5];
 		
-		text[0] = ExplainParallel;
+		textGUI[0] = angry;
 		
-		text[1] = CakeInTheTextGame;
-		
-		text[2] = loadingParallelWorld;*/
+		textGUI[1] = textGame1;
+		textGUI[2] = textGame2;
+		textGUI[3] = textGame3;
+		textGUI[4] = loadingParallelWorld;
 		
 		XMLparser textGame = new XMLparser(Application.dataPath + "/TextGame.xml"); 
 		tree = textGame.getRoot();
 		
-		text = tree.Output;
+		text = tree.getOutput(myState);
 		
 		managerCamera = GameObject.Find ("ManagerCamera");
+		
+		GUIdialog = GameObject.Find("GUI Text");
+		
+		HUDMenu = GameObject.Find ("HUDMenu");
 		
 	
 	}
@@ -63,6 +83,11 @@ public class ManagerBlueScreen : MonoBehaviour {
 	void Update () {
 		
 		if(Globals.currentLevel == Level.BLUESCREEN){
+			
+			if(begin){
+				writeBegin();
+				begin = false;
+			}
 			
 			if(Input.GetKeyDown("k")){ 
 				if(text[textPosition]!= null){
@@ -73,9 +98,12 @@ public class ManagerBlueScreen : MonoBehaviour {
 			}
 			
 			if(Input.GetKeyDown(KeyCode.Return)){
-				if(cursorPosition < tree.numChilds){
+				if(cursorPosition <= tree.numChilds){
 					tree = tree.getChild(cursorPosition);
-					text = tree.Output;
+					
+					changeState();
+					checkCake();
+					text = tree.getOutput(myState);
 					clearOutput();
 					writeOutput();
 					writeOptions();
@@ -86,32 +114,57 @@ public class ManagerBlueScreen : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.E)) {
 				Globals.currentLevel = Level.INVENTORY;
 				Debug.Log(Globals.currentLevel);
-				
-				//Globals.playerPositionLevel2 = GameObject.Find("RigidbodyController").transform.position;
-				//Application.LoadLevel("HUD_Level");
+				writeEnd();
 				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
 				managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
+				HUDMenu.guiTexture.enabled = true;
 				
 			}
 			
 			if(Input.GetKeyDown(KeyCode.RightArrow)){
-				cursor.transform.Translate(Vector3.right*DELTA_X);
-				//cursorPosition++;
+				if(cursorPosition == 0 || cursorPosition == 2){
+					cursor.transform.Translate(Vector3.right*DELTA_X);
+					if(cursorPosition == 0)
+						cursorPosition = 1;
+					
+					if(cursorPosition == 2) 
+						cursorPosition = 3;
+				}
 			}
 			
 			if(Input.GetKeyDown(KeyCode.LeftArrow)){
-				cursor.transform.Translate(Vector3.left*DELTA_X);
-				//cursorPosition--;
+				if(cursorPosition == 1 || cursorPosition == 3){
+					cursor.transform.Translate(Vector3.left*DELTA_X);
+					if(cursorPosition == 1)
+						cursorPosition = 0;
+					
+					if(cursorPosition == 3) 
+						cursorPosition = 2;
+				}
 			}
 			
 			if(Input.GetKeyDown(KeyCode.UpArrow)){
-				cursor.transform.Translate(Vector3.up*DELTA_Y);
-				//cursorPosition -= 2;
+				if(cursorPosition == 2 || cursorPosition == 3){
+					cursor.transform.Translate(Vector3.up*DELTA_Y);
+					
+					if(cursorPosition == 2) 
+						cursorPosition = 0;
+					
+					if(cursorPosition == 3) 
+						cursorPosition = 1;
+				}
 			}
 			
 			if(Input.GetKeyDown(KeyCode.DownArrow)){
-				cursor.transform.Translate(Vector3.down*DELTA_Y);
-				//cursorPosition += 2;
+				if(cursorPosition == 0 || cursorPosition == 1){
+					cursor.transform.Translate(Vector3.down*DELTA_Y);
+					
+					if(cursorPosition == 0) 
+						cursorPosition = 2;
+					
+					if(cursorPosition == 1) 
+						cursorPosition = 3;
+				}
 			}
 				
 			
@@ -126,6 +179,9 @@ public class ManagerBlueScreen : MonoBehaviour {
 			options[i].GetComponent<TextMesh>()
 				.text = tree.childs[i].command;
 		}
+		
+		options[tree.numChilds].GetComponent<TextMesh>()
+				.text = "Return back";
 	}
 	
 	void writeOutput(){
@@ -184,6 +240,43 @@ public class ManagerBlueScreen : MonoBehaviour {
 		for(int i = 0; i < MAX_LINES ; i++){
 			lines[i].GetComponent<TextMesh>().text = "";
 			options[i].GetComponent<TextMesh>().text = "";
+		}
+	}
+	
+	void writeBegin(){
+		GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(textGUI);
+	}
+	
+	void writeEnd(){
+		textGUI = new string[3];
+		textGUI[0] = "Ok, i've fix it";
+		textGUI[1] = "Now i will continue with your tutorial";
+		textGUI[2] = "";
+		GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(textGUI);
+	}
+	
+	void changeState(){
+		
+		if(myState == textState.NORMAL){
+			if(tree.name == "drink")
+				myState = textState.DRUNK;
+			if(tree.name == "costume")
+				myState = textState.DRESS;
+		}
+		
+		if(myState == textState.DRESS && tree.name == "drink")
+			myState = textState.DRUNK_ELPHANT;
+		
+		if(myState == textState.DRUNK && tree.name == "costume")
+			myState = textState.DRUNK_ELPHANT;
+		
+		if(myState == textState.DRUNK_ELPHANT && tree.name == "cake")
+			myState = textState.CAKE;
+	}
+	
+	void checkCake(){
+		if(myState == textState.CAKE){
+			GameObject.Find("Key3").renderer.enabled = true;
 		}
 	}
 }

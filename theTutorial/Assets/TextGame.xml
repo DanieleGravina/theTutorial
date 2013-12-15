@@ -4,33 +4,219 @@
 		"Root"
 	</command>
 	
+	<number>
+1
+	</number>
+	
 	<output>
-		"Welcome to Korz Game."
-		" "
-		"You are in strange place." 
-		"You don't remember anything."
-		"You don't know who you are"
-		"There is a house in front of you."	
+"Welcome to Korz Game."
+
+"You are in strange place.
+ You don't remember anything.
+ You don't know who you are.
+ There is a house in front of you."	
 	</output>
 	
 	<option>
-		home
+home
 	</option>
 		
 </root>		
 
 <home>
 	<command>
-		"Go to the house."
+"Go to the house."
 	</command>
+	
+	<number>
+1
+	</number>
 
 	<output>
-		"You enter in the house"
+"You enter in the house"
+	</output>
+	
+	<option>
+hall
+kitchen
+bedroom
+	</option>
+
+</home>
+
+<hall>
+	<command>
+"Go to the hall."
+	</command>
+	
+	<number>
+1
+	</number>
+
+	<output>
+"You are in a hall.
+Lots of children are 
+celebrating a birthday party.
+They are gathered around the cake,
+staring at it with blinking eyes."
+	</output>
+	
+	<option>
+cake
+scare
+	</option>
+
+</hall>
+
+<cake>
+	<command>
+		"Take the cake."
+	</command>
+	
+	<number>
+2
+	</number>
+
+	<output>
+"You try and reach the cake, 
+but there are too many kids 
+in your way"
+	</output>
+	
+	<output>
+"You take the cake.
+The cake is yours. 
+Yours only. 
+No one will take it away from you. 
+Your presciousss."
 	</output>
 	
 	<option>
 	</option>
 
-</home>
+</cake>
+
+<scare>
+	<command>
+"Scare kids"
+	</command>
+	
+	<number>
+4
+	</number>
+
+	<output>
+"They continue to look at the cake.
+Nowadays the kids 
+play to much violent games, 
+they are not easily scared"
+	</output>
+	
+	<output>
+"You try to scare them,
+dressed like an elephant,
+but you are just an idiot 
+with a costume."
+	</output>
+	
+	<output>
+"You are drunk, 
+half naked, 
+crouched on the floor. 
+Get up, 
+before someone calls the police"
+	</output>
+	
+	<output>
+"You walk towards the kids, 
+four-footed 'cause you are to drunk to get up. 
+You are dressed like an elephant. 
+You walk like an elephant. 
+The camouflage is perfect.
+Every one run away."
+	</output>
+	
+	<option>
+	</option>
+
+</scare>
+
+<kitchen>
+	<command>
+"Go to the kitchen."
+	</command>
+	
+	<number>
+1
+	</number>
+
+	<output>
+"You enter in the kitchen"
+	</output>
+	
+	<option>
+drink
+	</option>
+
+</kitchen>
+
+<drink>
+	<command>
+"Drink a lot"
+	</command>
+	
+	<number>
+1
+	</number>
+
+	<output>
+"You are drunk."
+	</output>
+	
+	<option>
+	</option>
+
+</drink>
+
+
+
+<bedroom>
+	<command>
+		"Go to the bedroom."
+	</command>
+	
+	<number>
+1
+	</number>
+
+	<output>
+		"You enter in your room, 
+		'cause the other kids are mean, 
+		and nobody wants to play with you. Boo Hoo."
+	</output>
+	
+	<option>
+costume
+	</option>
+
+</bedroom>
+
+<costume>
+	<command>
+		"Take the elephant costume"
+	</command>
+	
+	<number>
+1
+	</number>
+
+	<output>
+		"You dress the elephant costume"
+	</output>
+	
+	<option>
+	</option>
+
+</costume>
 
 

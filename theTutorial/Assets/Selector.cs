@@ -15,13 +15,19 @@ public enum arrow{
 
 public class Selector : MonoBehaviour {
 	
-	string explainManu = "This is the menu, with four option: Controls, Audio, Achievement and Exit.";
+	string explainMenu = "This is the menu, with four option: ";
 		
-	string exit = " DO NOT SELECT EXIT. We have some serious problem with the exit button, so pay attention";
+	string explainMenu2  =	"Controls, Audio, Achievement and Exit.";
+		
+	string exit = " DO NOT SELECT EXIT. ";
+	
+	string exit2 = "We have some serious problem with the exit button, so pay attention";
 	
 	string tryAudio = "Try to select audio";
 	
 	string joke = "Have you any problem?";
+	
+	string[] text;
 	
 	GameObject menu, GUIdialog, blueScreen, managerCamera;
 	
@@ -44,12 +50,19 @@ public class Selector : MonoBehaviour {
 	
 	float timer = 0.0f;
 	
-	const float TIMEOUT = 5.0f;
+	const float TIMEOUT = 10.0f;
 	
 	bool begin = true;
 
 	// Use this for initialization
 	void Start () {
+		
+		text = new string[5];
+		text[0] = explainMenu;
+		text[1] = explainMenu2;
+		text[2] = exit;
+		text[3] = exit2;
+		text[4] = tryAudio;
 	
 		managerCamera = GameObject.Find ("ManagerCamera");
 		
@@ -68,8 +81,7 @@ public class Selector : MonoBehaviour {
 			timer += Time.deltaTime;
 			
 			if(begin){
-				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(explainManu);
-				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(exit);
+				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
 				begin = false;
 			}
 			
@@ -99,8 +111,10 @@ public class Selector : MonoBehaviour {
 			}
 			
 			if(timer >= TIMEOUT){
-					
-				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(tryAudio);
+				
+				text = new string[1];
+				text[0] = joke;
+				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
 				myState = state.JOKE;
 				timer = 0.0f;
 			}
@@ -134,7 +148,7 @@ public class Selector : MonoBehaviour {
 				else
 					moveCursorUp();
 			
-			GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(joke);
+//			GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(joke);
 		}
 	}
 	

@@ -22,9 +22,7 @@ public class XMLparser
 		
 		index = 0;
 		
-		//while(index < lines.Length){
-			parseNode(node);
-		//}
+		parseNode(node);
 		
 	}
 	
@@ -46,12 +44,22 @@ public class XMLparser
 			
 			index++;
 			
-			while(!lines[index].Contains("<" + "output" + ">"))
+			while(!lines[index].Contains("<" + "number" + ">"))
 				index++;
+			
+			parseNumber(node);
 			
 			index++;
 			
-			parseOutput(node);
+			for(int i= 0; i < node.numberOutputs; i++){
+				while(!lines[index].Contains("<" + "output" + ">"))
+					index++;
+				
+				index++;
+				
+				parseOutput(node);
+				node.nextOutput();
+			}
 			
 			while(!lines[index].Contains("<" + "option" + ">"))
 				index++;
@@ -89,9 +97,17 @@ public class XMLparser
 	void parseOptions(Node node){
 		Node child;
 		while(!lines[index].Contains("<" + "/" + "option" + ">")){
-			child = new Node("home");
+			child = new Node(lines[index]);
 			child.insertParent(node);
 			node.insertchild(child);
+			index++;
+		}
+	}
+	
+	void parseNumber(Node node){
+		index++;
+		while(!lines[index].Contains("<" + "/" + "number" + ">")){
+			node.insertNumber(Convert.ToInt32(lines[index]));
 			index++;
 		}
 	}
