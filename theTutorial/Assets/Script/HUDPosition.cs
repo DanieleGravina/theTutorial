@@ -37,16 +37,16 @@ public class HUDPosition : MonoBehaviour {
 		
 		if(onButton){
 		
-			if(Input.GetKey("i"))
+			if(Input.GetKeyUp("i"))
 				typeButton = buttons.UP;
 				
-			if(Input.GetKey("k"))
+			if(Input.GetKeyUp("k"))
 				typeButton = buttons.DOWN;
 			
-			if(Input.GetKey("l"))
+			if(Input.GetKeyUp("l"))
 				typeButton = buttons.RIGHT;
 			
-			if(Input.GetKey("j"))
+			if(Input.GetKeyUp("j"))
 				typeButton = buttons.LEFT;	
 			
 			if(typeButton != buttons.NULL){
