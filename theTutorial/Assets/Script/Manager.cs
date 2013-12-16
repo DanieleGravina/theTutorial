@@ -17,13 +17,16 @@ public class Manager :MonoBehaviour{
 	private Camera map_camera;
 	private Camera life_camera;
 	
-	const float DELTA_HUD = 3.35f;   //10
-	const int DELTA_ROOM = 56; //18
-	const int DELTA_PLATFORM = 4;
-	const float DELTA_CAMERA = 0.3f;
+	const float DELTA_HUD_X = 3.75f;   
+	const float DELTA_HUD_Y = 3.35f;
+	const int DELTA_ROOM_X = 108; 
+	const int DELTA_ROOM_Y = 55;
+	const int DELTA_PLATFORM_x = 6;
+	const int DELTA_PLATFORM_y = 5;
+	const float DELTA_CAMERA = 0.2655f;
 	
-	const int MAX_X = 6;
-	const int MAX_Y = 6;
+	const int MAX_X = 4;
+	const int MAX_Y = 4;
 	
 	int[,] map = new int[MAX_X,MAX_Y];
 	
@@ -41,15 +44,15 @@ public class Manager :MonoBehaviour{
 		 * 0 0 0 0 0 0
 		 */ 
 		
-		map[1,1] = 1;
-		map[1,4] = 4;
-		map[2,1] = 2;
-		map[2,4] = 5;
-		map[3,1] = 3;
-		map[3,4] = 6;
+		map[0,0] = 1;
+		map[0,3] = 4;
+		map[1,0] = 2;
+		map[1,3] = 5;
+		map[2,0] = 3;
+		map[2,3] = 6;
 		
-		for(int i = 1; i<5; i++)
-			map[4,i] = 7;
+		for(int i = 1; i<3; i++)
+			map[3,i] = 7;
 		
 		map_camera = GameObject.Find("Map_camera").camera;
 		life_camera = GameObject.Find("Life_camera").camera;
@@ -66,9 +69,9 @@ public class Manager :MonoBehaviour{
 			 
 			case buttons.UP:
 				if(updateMap(ID, -1, 0,buttons.UP)){
-					HUDelem.transform.Translate(UP.x/DELTA_HUD, UP.y/DELTA_HUD, 0, Space.World);
-					RoomElem.transform.Translate(Vector3.forward*DELTA_ROOM);
-					platform.transform.Translate(Vector3.forward * (DELTA_PLATFORM+1));
+					HUDelem.transform.Translate(UP.x/DELTA_HUD_X, UP.y/DELTA_HUD_Y, 0, Space.World);
+					RoomElem.transform.Translate(Vector3.forward*DELTA_ROOM_Y);
+					platform.transform.Translate(Vector3.forward * DELTA_PLATFORM_y);
 					if (platform.name == "6_platform"){
 						tmp = map_camera.rect;
 						tmp.y = tmp.y + DELTA_CAMERA;
@@ -83,9 +86,9 @@ public class Manager :MonoBehaviour{
 				
 			case buttons.LEFT:
 				if(updateMap(ID, 0, -1,buttons.LEFT)){
-					HUDelem.transform.Translate(LEFT.x/DELTA_HUD, LEFT.y/DELTA_HUD, 0, Space.World);
-					RoomElem.transform.Translate(Vector3.left*DELTA_ROOM);
-					platform.transform.Translate(Vector3.left * DELTA_PLATFORM);
+					HUDelem.transform.Translate(LEFT.x/DELTA_HUD_X, LEFT.y/DELTA_HUD_Y, 0, Space.World);
+					RoomElem.transform.Translate(Vector3.left*DELTA_ROOM_X);
+					platform.transform.Translate(Vector3.left * DELTA_PLATFORM_x);
 					if (platform.name == "6_platform"){
 						tmp = map_camera.rect;
 						tmp.x = tmp.x - DELTA_CAMERA;
@@ -100,9 +103,9 @@ public class Manager :MonoBehaviour{
 				
 			case buttons.RIGHT:
 				if(updateMap(ID, 0, 1,buttons.RIGHT)){
-					HUDelem.transform.Translate(RIGHT.x/DELTA_HUD, RIGHT.y/DELTA_HUD, 0, Space.World);
-					RoomElem.transform.Translate(Vector3.right*DELTA_ROOM);
-					platform.transform.Translate(Vector3.right * DELTA_PLATFORM);
+					HUDelem.transform.Translate(RIGHT.x/DELTA_HUD_X, RIGHT.y/DELTA_HUD_Y, 0, Space.World);
+					RoomElem.transform.Translate(Vector3.right*DELTA_ROOM_X);
+					platform.transform.Translate(Vector3.right * DELTA_PLATFORM_x);
 					if (platform.name == "6_platform"){
 						tmp = map_camera.rect;
 						tmp.x = tmp.x + DELTA_CAMERA;
@@ -117,9 +120,9 @@ public class Manager :MonoBehaviour{
 				
 			case buttons.DOWN:
 				if(updateMap(ID, 1, 0,buttons.DOWN)){
-					HUDelem.transform.Translate(DOWN.x/DELTA_HUD, DOWN.y/DELTA_HUD, 0, Space.World);
-					RoomElem.transform.Translate(Vector3.back*DELTA_ROOM);
-					platform.transform.Translate(Vector3.back * (DELTA_PLATFORM+1));
+					HUDelem.transform.Translate(DOWN.x/DELTA_HUD_X, DOWN.y/DELTA_HUD_Y, 0, Space.World);
+					RoomElem.transform.Translate(Vector3.back*DELTA_ROOM_Y);
+					platform.transform.Translate(Vector3.back * DELTA_PLATFORM_y);
 					if (platform.name == "6_platform"){
 						tmp = map_camera.rect;
 						tmp.y = tmp.y - DELTA_CAMERA;
@@ -141,9 +144,9 @@ public class Manager :MonoBehaviour{
 		
 		if (ID == 7){
 			if (typeButton == buttons.RIGHT){
-				pos.y = pos.y + 3;
-			}else if (typeButton == buttons.DOWN && typeButton == buttons.UP){
-				for (int i=0; i<4; i++) {
+				pos.y = pos.y + 1;
+			}else if (typeButton == buttons.DOWN || typeButton == buttons.UP){
+				for (int i=0; i<2; i++) {
 					if (!(validPosition(pos,delta_x,delta_y + i) && map[pos.x  + delta_x, pos.y + delta_y + i] == 0)){
 						return false;
 					}
@@ -154,11 +157,11 @@ public class Manager :MonoBehaviour{
 		if (validPosition(pos, delta_x, delta_y) && map[pos.x  + delta_x, pos.y + delta_y] == 0){
 			map[pos.x + delta_x, pos.y + delta_y] = ID;
 			if (ID == 7 && typeButton == buttons.LEFT){
-				map[pos.x, pos.y + 3] = 0;
+				map[pos.x, pos.y + 1] = 0;
 			}else if (ID == 7 && typeButton == buttons.RIGHT){
-				map[pos.x, pos.y - 3] = 0;
+				map[pos.x, pos.y - 1] = 0;
 			}else if ( ID == 7 && (typeButton == buttons.DOWN || typeButton == buttons.UP)){
-				for (int i=0;i<4;i++){
+				for (int i=0;i<2;i++){
 					map[pos.x + delta_x, pos.y + delta_y + i] = ID;
 					map[pos.x, pos.y + i] = 0;
 				}
@@ -184,8 +187,8 @@ public class Manager :MonoBehaviour{
 	
     MyVector2 findPos(int ID){
 		
-		for(int i = 0; i < 6; i++)
-			for(int j = 0; j < 6; j++){
+		for(int i = 0; i < 4; i++)
+			for(int j = 0; j < 4; j++){
 			
 			if(map[i,j] == ID){
 				return new MyVector2(i,j);
