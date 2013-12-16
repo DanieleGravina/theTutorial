@@ -10,6 +10,9 @@ public class GenerateLetters : MonoBehaviour {
 	public GameObject LetterLeft;
 	public GameObject LetterRight;
 	
+	GameObject tmp;
+	Transform dialog;
+	
 	letter nextLetter = letter.RIGHT;
 	
 	Vector3 initialPositionLetterRight;
@@ -23,9 +26,10 @@ public class GenerateLetters : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+		dialog = GameObject.Find("7_Dialog").GetComponent<Transform>();
 		initialPositionLetterLeft = LetterLeft.transform.position;
 		initialPositionLetterRight = LetterRight.transform.position;
+		
 	}
 	
 	// Update is called once per frame
@@ -38,12 +42,14 @@ public class GenerateLetters : MonoBehaviour {
 			counter--;
 			
 			if(nextLetter == letter.LEFT){
-				Instantiate(LetterLeft, initialPositionLetterLeft, Quaternion.identity);
+				tmp = Instantiate(LetterLeft, initialPositionLetterLeft, Quaternion.identity) as GameObject;
 				nextLetter = letter.RIGHT;
 			}else{
-				Instantiate(LetterRight, initialPositionLetterRight, Quaternion.identity);
+				tmp = Instantiate(LetterRight, initialPositionLetterRight, Quaternion.identity) as GameObject;
 				nextLetter = letter.LEFT;
 			}
+			
+			tmp.transform.parent = dialog;
 			
 		}
 	

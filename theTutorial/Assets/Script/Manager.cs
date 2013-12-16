@@ -12,7 +12,7 @@ public class Manager :MonoBehaviour{
 	
 	private Vector3 DOWN = new Vector3(0, -1);
 	
-	const int DELTA_HUD = 10;
+	const int DELTA_HUD = 6;  //10
 	const int DELTA_ROOM = 18;
 	
 	const int MAX_X = 6;

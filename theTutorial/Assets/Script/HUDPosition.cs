@@ -65,7 +65,7 @@ public class HUDPosition : MonoBehaviour {
 			
 			other.transform.parent = this.transform;
 			
-			manager.gameObject.GetComponent<Manager>().MovePlatform(ID, typeButton, hud, room, transform.parent.gameObject, collider);
+			//manager.gameObject.GetComponent<Manager>().MovePlatform(ID, typeButton, hud, room, transform.parent.gameObject, collider);
 			
 		}
 		
