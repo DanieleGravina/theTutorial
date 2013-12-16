@@ -38,6 +38,7 @@ public class UserInput : MonoBehaviour {
 			if(text == cake_text){
 				
 				Globals.cakeTaken = true;
+				Globals.active_menu_platform = true;
 				Application.LoadLevel("HUD_Level");
 				
 			}

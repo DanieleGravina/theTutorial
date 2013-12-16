@@ -18,6 +18,7 @@ public class Teleport : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		map = GameObject.Find("6_Map").GetComponent<Transform>();
+		map.FindChild("4_platform").FindChild("MovementTrigger").GetComponent<HUDPosition>().active = Globals.active_menu_platform;
 		player = GameObject.FindWithTag("Player");
 		room = this.transform.parent.transform.parent;
 //a seconda della stanza in cui sono vado a prendere i teletrasporti presenti
