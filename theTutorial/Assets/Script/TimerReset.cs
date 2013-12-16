@@ -5,9 +5,11 @@ public class TimerReset : MonoBehaviour {
 	
 	GameObject timer;
 	
+	Transform platform;
+	
 	// Use this for initialization
 	void Start () {
-		
+		platform = GameObject.Find("3_platform").GetComponent<Transform>().FindChild("MovementTrigger");
 		timer = GameObject.Find("timer_text");
 	}
 	
@@ -19,6 +21,7 @@ public class TimerReset : MonoBehaviour {
 	
 	void OnTriggerEnter (Collider other) {
 		timer.GetComponent<TimerCountdown>().setSeconds();
+		platform.GetComponent<HUDPosition>().active = true;
 	}
 }
 

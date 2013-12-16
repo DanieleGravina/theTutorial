@@ -13,9 +13,11 @@ public class Teleport : MonoBehaviour {
 	Transform my_teleport4;
 	bool first = true;
 	bool active = false;
+	Transform map;
 	
 	// Use this for initialization
 	void Start () {
+		map = GameObject.Find("6_Map").GetComponent<Transform>();
 		player = GameObject.FindWithTag("Player");
 		room = this.transform.parent.transform.parent;
 //a seconda della stanza in cui sono vado a prendere i teletrasporti presenti
@@ -74,10 +76,27 @@ public class Teleport : MonoBehaviour {
 	void OnTriggerEnter (Collider other) {	
 		if (other.tag == "Player"){
 //vado a vedere se il portale e attivo e nel caso lo fosse vado a spostare il player sopra la piattaforma di arrivo
+			
+			
 			if (active){
+				
+				switch (room.name){
+				case "7_Dialog":
+					if (this.name == "teleport3_trigger"){
+						map.FindChild("7_platform").FindChild("MovementTrigger").GetComponent<HUDPosition>().active = true;
+					}
+					break;
+				case "3_Life":
+					if (this.name == "teleport1_trigger"){
+						map.FindChild("3_platform").FindChild("MovementTrigger").GetComponent<HUDPosition>().active = true;
+					}
+					break;
+				}
+				
 				if (room.name == "7_Dialog"){
 					if (this.name == "teleport1_trigger" || this.name == "teleport3_trigger"){
 						player.transform.position = target_teleport2.position;
+						
 					}else{
 						player.transform.position = target_teleport1.position;
 					}			

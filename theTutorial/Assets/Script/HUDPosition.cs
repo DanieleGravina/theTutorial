@@ -22,7 +22,7 @@ public class HUDPosition : MonoBehaviour {
 	
 	private bool onButton = false;
 	
-	bool pressArrow = false;
+	public bool active = false;
 	
 	buttons typeButton = buttons.NULL;
 
@@ -60,8 +60,9 @@ public class HUDPosition : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		
 		if(other.tag == "Player"){
-			
-			onButton = true;
+			if (active){
+				onButton = true;
+			}
 			
 			other.transform.parent = this.transform;
 			
