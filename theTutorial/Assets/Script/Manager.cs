@@ -17,9 +17,10 @@ public class Manager :MonoBehaviour{
 	private Camera map_camera;
 	private Camera life_camera;
 	
-	const int DELTA_HUD = 10;   //10
+	const float DELTA_HUD = 3.35f;   //10
 	const int DELTA_ROOM = 56; //18
 	const int DELTA_PLATFORM = 4;
+	const float DELTA_CAMERA = 0.3f;
 	
 	const int MAX_X = 6;
 	const int MAX_Y = 6;
@@ -70,11 +71,11 @@ public class Manager :MonoBehaviour{
 					platform.transform.Translate(Vector3.forward * (DELTA_PLATFORM+1));
 					if (platform.name == "6_platform"){
 						tmp = map_camera.rect;
-						tmp.y = tmp.y + 0.1f;
+						tmp.y = tmp.y + DELTA_CAMERA;
 						map_camera.rect = tmp ;
 					}else if (platform.name == "3_platform"){
 						tmp = life_camera.rect;
-						tmp.y = tmp.y + 0.1f;
+						tmp.y = tmp.y + DELTA_CAMERA;
 						life_camera.rect = tmp ;
 					}
 				}
@@ -87,11 +88,11 @@ public class Manager :MonoBehaviour{
 					platform.transform.Translate(Vector3.left * DELTA_PLATFORM);
 					if (platform.name == "6_platform"){
 						tmp = map_camera.rect;
-						tmp.x = tmp.x - 0.1f;
+						tmp.x = tmp.x - DELTA_CAMERA;
 						map_camera.rect = tmp ;
 					}else if (platform.name == "3_platform"){
 						tmp = life_camera.rect;
-						tmp.x = tmp.x - 0.1f;
+						tmp.x = tmp.x - DELTA_CAMERA;
 						life_camera.rect = tmp ;
 					}
 				}
@@ -104,11 +105,11 @@ public class Manager :MonoBehaviour{
 					platform.transform.Translate(Vector3.right * DELTA_PLATFORM);
 					if (platform.name == "6_platform"){
 						tmp = map_camera.rect;
-						tmp.x = tmp.x + 0.1f;
+						tmp.x = tmp.x + DELTA_CAMERA;
 						map_camera.rect = tmp ;
 					}else if (platform.name == "3_platform"){
 						tmp = life_camera.rect;
-						tmp.x = tmp.x + 0.1f;
+						tmp.x = tmp.x + DELTA_CAMERA;
 						life_camera.rect = tmp ;
 					}
 				}
@@ -121,11 +122,11 @@ public class Manager :MonoBehaviour{
 					platform.transform.Translate(Vector3.back * (DELTA_PLATFORM+1));
 					if (platform.name == "6_platform"){
 						tmp = map_camera.rect;
-						tmp.y = tmp.y - 0.1f;
+						tmp.y = tmp.y - DELTA_CAMERA;
 						map_camera.rect = tmp ;
 					}else if (platform.name == "3_platform"){
 						tmp = life_camera.rect;
-						tmp.y = tmp.y - 0.1f;
+						tmp.y = tmp.y - DELTA_CAMERA;
 						life_camera.rect = tmp ;
 					}
 				}
