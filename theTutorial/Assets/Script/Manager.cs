@@ -12,8 +12,9 @@ public class Manager :MonoBehaviour{
 	
 	private Vector3 DOWN = new Vector3(0, -1);
 	
-	const int DELTA_HUD = 10;  
+	const int DELTA_HUD = 10;   //10
 	const int DELTA_ROOM = 56; //18
+	const int DELTA_PLATFORM = 4;
 	
 	const int MAX_X = 6;
 	const int MAX_Y = 6;
@@ -56,12 +57,10 @@ public class Manager :MonoBehaviour{
 			{
 			 
 			case buttons.UP:
-				
 				if(updateMap(ID, -1, 0,buttons.UP)){
 					HUDelem.transform.Translate(UP.x/DELTA_HUD, UP.y/DELTA_HUD, 0, Space.World);
 					RoomElem.transform.Translate(Vector3.forward*DELTA_ROOM);
-					collider.gameObject.transform.Translate(Vector3.forward);
-					platform.transform.Translate(Vector3.forward);
+					platform.transform.Translate(Vector3.forward * (DELTA_PLATFORM+1));
 				}
 				break;
 				
@@ -69,8 +68,7 @@ public class Manager :MonoBehaviour{
 				if(updateMap(ID, 0, -1,buttons.LEFT)){
 					HUDelem.transform.Translate(LEFT.x/DELTA_HUD, LEFT.y/DELTA_HUD, 0, Space.World);
 					RoomElem.transform.Translate(Vector3.left*DELTA_ROOM);
-					collider.gameObject.transform.Translate(Vector3.left);
-					platform.transform.Translate(Vector3.left);
+					platform.transform.Translate(Vector3.left * DELTA_PLATFORM);
 				}
 				break;
 				
@@ -78,8 +76,7 @@ public class Manager :MonoBehaviour{
 				if(updateMap(ID, 0, 1,buttons.RIGHT)){
 					HUDelem.transform.Translate(RIGHT.x/DELTA_HUD, RIGHT.y/DELTA_HUD, 0, Space.World);
 					RoomElem.transform.Translate(Vector3.right*DELTA_ROOM);
-					collider.gameObject.transform.Translate(Vector3.right);
-					platform.transform.Translate(Vector3.right);
+					platform.transform.Translate(Vector3.right * DELTA_PLATFORM);
 				}
 				break;
 				
@@ -87,8 +84,7 @@ public class Manager :MonoBehaviour{
 				if(updateMap(ID, 1, 0,buttons.DOWN)){
 					HUDelem.transform.Translate(DOWN.x/DELTA_HUD, DOWN.y/DELTA_HUD, 0, Space.World);
 					RoomElem.transform.Translate(Vector3.back*DELTA_ROOM);
-					collider.gameObject.transform.Translate(Vector3.back);
-					platform.transform.Translate(Vector3.back);
+					platform.transform.Translate(Vector3.back * (DELTA_PLATFORM+1));
 				}
 				break;
 				
