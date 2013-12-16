@@ -12,6 +12,11 @@ public class Manager :MonoBehaviour{
 	
 	private Vector3 DOWN = new Vector3(0, -1);
 	
+	private Rect tmp;
+	
+	private Camera map_camera;
+	private Camera life_camera;
+	
 	const int DELTA_HUD = 10;   //10
 	const int DELTA_ROOM = 56; //18
 	const int DELTA_PLATFORM = 4;
@@ -45,6 +50,8 @@ public class Manager :MonoBehaviour{
 		for(int i = 1; i<5; i++)
 			map[4,i] = 7;
 		
+		map_camera = GameObject.Find("Map_camera").camera;
+		life_camera = GameObject.Find("Life_camera").camera;
 	}
 	
 	// Update is called once per frame
@@ -61,6 +68,15 @@ public class Manager :MonoBehaviour{
 					HUDelem.transform.Translate(UP.x/DELTA_HUD, UP.y/DELTA_HUD, 0, Space.World);
 					RoomElem.transform.Translate(Vector3.forward*DELTA_ROOM);
 					platform.transform.Translate(Vector3.forward * (DELTA_PLATFORM+1));
+					if (platform.name == "6_platform"){
+						tmp = map_camera.rect;
+						tmp.y = tmp.y + 0.1f;
+						map_camera.rect = tmp ;
+					}else if (platform.name == "3_platform"){
+						tmp = life_camera.rect;
+						tmp.y = tmp.y + 0.1f;
+						life_camera.rect = tmp ;
+					}
 				}
 				break;
 				
@@ -69,6 +85,15 @@ public class Manager :MonoBehaviour{
 					HUDelem.transform.Translate(LEFT.x/DELTA_HUD, LEFT.y/DELTA_HUD, 0, Space.World);
 					RoomElem.transform.Translate(Vector3.left*DELTA_ROOM);
 					platform.transform.Translate(Vector3.left * DELTA_PLATFORM);
+					if (platform.name == "6_platform"){
+						tmp = map_camera.rect;
+						tmp.x = tmp.x - 0.1f;
+						map_camera.rect = tmp ;
+					}else if (platform.name == "3_platform"){
+						tmp = life_camera.rect;
+						tmp.x = tmp.x - 0.1f;
+						life_camera.rect = tmp ;
+					}
 				}
 				break;
 				
@@ -77,6 +102,15 @@ public class Manager :MonoBehaviour{
 					HUDelem.transform.Translate(RIGHT.x/DELTA_HUD, RIGHT.y/DELTA_HUD, 0, Space.World);
 					RoomElem.transform.Translate(Vector3.right*DELTA_ROOM);
 					platform.transform.Translate(Vector3.right * DELTA_PLATFORM);
+					if (platform.name == "6_platform"){
+						tmp = map_camera.rect;
+						tmp.x = tmp.x + 0.1f;
+						map_camera.rect = tmp ;
+					}else if (platform.name == "3_platform"){
+						tmp = life_camera.rect;
+						tmp.x = tmp.x + 0.1f;
+						life_camera.rect = tmp ;
+					}
 				}
 				break;
 				
@@ -85,6 +119,15 @@ public class Manager :MonoBehaviour{
 					HUDelem.transform.Translate(DOWN.x/DELTA_HUD, DOWN.y/DELTA_HUD, 0, Space.World);
 					RoomElem.transform.Translate(Vector3.back*DELTA_ROOM);
 					platform.transform.Translate(Vector3.back * (DELTA_PLATFORM+1));
+					if (platform.name == "6_platform"){
+						tmp = map_camera.rect;
+						tmp.y = tmp.y - 0.1f;
+						map_camera.rect = tmp ;
+					}else if (platform.name == "3_platform"){
+						tmp = life_camera.rect;
+						tmp.y = tmp.y - 0.1f;
+						life_camera.rect = tmp ;
+					}
 				}
 				break;
 				
