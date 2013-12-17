@@ -24,6 +24,7 @@ public class Manager :MonoBehaviour{
 	const int DELTA_PLATFORM_x = 6;
 	const int DELTA_PLATFORM_y = 5;
 	const float DELTA_CAMERA = 0.2655f;
+	const float DELTA_CAMERA_Y = 0.3f;
 	
 	const int MAX_X = 4;
 	const int MAX_Y = 4;
@@ -74,11 +75,11 @@ public class Manager :MonoBehaviour{
 					platform.transform.Translate(Vector3.forward * DELTA_PLATFORM_y);
 					if (platform.name == "6_platform"){
 						tmp = map_camera.rect;
-						tmp.y = tmp.y + DELTA_CAMERA;
+						tmp.y = tmp.y + DELTA_CAMERA_Y;
 						map_camera.rect = tmp ;
 					}else if (platform.name == "3_platform"){
 						tmp = life_camera.rect;
-						tmp.y = tmp.y + DELTA_CAMERA;
+						tmp.y = tmp.y + DELTA_CAMERA_Y;
 						life_camera.rect = tmp ;
 					}
 				}
@@ -125,11 +126,11 @@ public class Manager :MonoBehaviour{
 					platform.transform.Translate(Vector3.back * DELTA_PLATFORM_y);
 					if (platform.name == "6_platform"){
 						tmp = map_camera.rect;
-						tmp.y = tmp.y - DELTA_CAMERA;
+						tmp.y = tmp.y - DELTA_CAMERA_Y;
 						map_camera.rect = tmp ;
 					}else if (platform.name == "3_platform"){
 						tmp = life_camera.rect;
-						tmp.y = tmp.y - DELTA_CAMERA;
+						tmp.y = tmp.y - DELTA_CAMERA_Y;
 						life_camera.rect = tmp ;
 					}
 				}
