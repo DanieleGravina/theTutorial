@@ -19,9 +19,11 @@ public class Selector : MonoBehaviour {
 		
 	string explainMenu2  =	"Controls, Audio, Achievement and Exit.";
 		
-	string exit = " DO NOT SELECT EXIT. ";
+	string exit = "DO NOT SELECT EXIT. ";
 	
-	string exit2 = "We have some serious problem with the exit button, so pay attention";
+	string exit2 = "We have some serious problem ";
+	
+	string exit3 = "with the exit button, so pay attention";
 	
 	string tryAudio = "Try to select audio";
 	
@@ -57,12 +59,13 @@ public class Selector : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		text = new string[5];
+		text = new string[6];
 		text[0] = explainMenu;
 		text[1] = explainMenu2;
 		text[2] = exit;
 		text[3] = exit2;
-		text[4] = tryAudio;
+		text[4] = exit3;
+		text[5] = tryAudio;
 	
 		managerCamera = GameObject.Find ("ManagerCamera");
 		

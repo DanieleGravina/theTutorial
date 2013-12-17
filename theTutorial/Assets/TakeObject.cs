@@ -43,6 +43,9 @@ public class TakeObject : MonoBehaviour {
 		inventory.guiTexture.texture = hudInventory[Globals.numInventory];
 		
 		Globals.numInventory++;
+		
+		if(Globals.numInventory == 3)
+			Application.LoadLevel("InitialMenu");
 			
 	}
 	

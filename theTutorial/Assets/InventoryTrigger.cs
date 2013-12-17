@@ -13,7 +13,7 @@ public class InventoryTrigger : MonoBehaviour {
 	
 	string[] text = new string[TEXT_MAX];
 	
-	GameObject GUIdialog, Arrow;
+	GameObject GUIdialog, Arrow, managerCamera, HUDMenu;
 	
 	bool afterTrigger = false;
 
@@ -25,10 +25,20 @@ public class InventoryTrigger : MonoBehaviour {
 	
 		GUIdialog = GameObject.Find("GUI Text");
 		Arrow = GameObject.Find("Arrow");
+		managerCamera = GameObject.Find ("ManagerCamera");
+		HUDMenu = GameObject.Find ("HUDMenu");
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
+		if(Globals.currentLevel == Level.INVENTORY){
+			 if (Input.GetKeyDown(KeyCode.Escape) && afterTrigger){
+				managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = false;
+				managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = true;
+				HUDMenu.guiTexture.enabled = false;
+			}
+		}
 
 	}
 	

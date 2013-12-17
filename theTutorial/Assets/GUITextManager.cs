@@ -5,21 +5,53 @@ public class GUITextManager : MonoBehaviour {
 	
 	bool onWriting = true;
 	
+	bool beginWrite = false;
+	
 	public float delay = 0.07f;
 	float actualDelay;
 	
 	string[] buffer;
-	int textPos = 0;
+	int textPos, index = 0;
+	
+	float timer;
 
 	// Use this for initialization
 	void Start () {
 		
 		actualDelay = delay;
+		
+		timer = 0;
+		
+		index = 0;
 	
 	}
 	
 	// Update is called once per frame
 	void Update () {
+		
+		if(beginWrite){
+			timer += Time.deltaTime;
+			
+			if(timer >= actualDelay){
+				
+				guiText.text += buffer[textPos].ToCharArray()[index];
+				timer = 0;
+				index++;
+				
+				if(index == buffer[textPos].Length){
+					beginWrite = false;
+					index = 0;
+					onWriting = false;
+				}
+				
+				if(textPos == buffer.Length){
+					beginWrite = false;
+					index = 0;
+					onWriting = false;
+				}
+				
+			}
+		}
 		
 		if (Input.GetMouseButtonUp(0)){
 			
@@ -27,32 +59,32 @@ public class GUITextManager : MonoBehaviour {
 				actualDelay = 0;
 			}
 			else
-				if(buffer != null && textPos < buffer.Length)
+				if(buffer != null && textPos < (buffer.Length - 1) )
 				{
 						guiText.text = "";
 						actualDelay = delay;
-						write();
 						textPos++;
+						index = 0;
 						onWriting = true;
+						beginWrite= true;
 				}
 		}
 	
-	}
-	
-	void write(){
-		StartCoroutine(PokeText(buffer[textPos]));
 	}
 	
 	public void WriteOutputOnGUI(string[] text){
 		
 		buffer = text;
 		textPos = 0;
+		index = 0;
 		guiText.text = "";
-		write ();
-		textPos++;
+		onWriting = true;
+		actualDelay = delay;
+		beginWrite = true;
+		textPos = 0;
 	}
 	
-	 IEnumerator PokeText(string t)
+	/* IEnumerator PokeText(string t)
     {
 		
         for (int i = 0; i < t.Length; i++)
@@ -63,7 +95,7 @@ public class GUITextManager : MonoBehaviour {
             yield return new WaitForSeconds(delay);
         }
 		onWriting = false;
-    }
+    }*/
 
      
 }

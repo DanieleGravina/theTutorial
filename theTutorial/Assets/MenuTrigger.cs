@@ -38,6 +38,8 @@ public class MenuTrigger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+		if(Globals.currentLevel == Level.MENU)
+			
 		 if (Input.GetKeyDown(KeyCode.Escape) && afterTrigger){
 			managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = false;
 			managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = true;

@@ -25,7 +25,7 @@ home
 
 <home>
 	<command>
-"Go to the house."
+House
 	</command>
 	
 	<number>
@@ -33,7 +33,9 @@ home
 	</number>
 
 	<output>
-"You enter in the house"
+"You enter in the house,
+there are a kitchen, a bedroom 
+and a hall."		
 	</output>
 	
 	<option>
@@ -46,7 +48,7 @@ bedroom
 
 <hall>
 	<command>
-"Go to the hall."
+Hall
 	</command>
 	
 	<number>
@@ -70,7 +72,7 @@ scare
 
 <cake>
 	<command>
-		"Take the cake."
+Take cake
 	</command>
 	
 	<number>
@@ -98,7 +100,7 @@ Your presciousss."
 
 <scare>
 	<command>
-"Scare kids"
+Scare kids
 	</command>
 	
 	<number>
@@ -143,7 +145,7 @@ Every one run away."
 
 <kitchen>
 	<command>
-"Go to the kitchen."
+Kitchen
 	</command>
 	
 	<number>
@@ -162,7 +164,7 @@ drink
 
 <drink>
 	<command>
-"Drink a lot"
+Drink
 	</command>
 	
 	<number>
@@ -182,7 +184,7 @@ drink
 
 <bedroom>
 	<command>
-		"Go to the bedroom."
+Bedroom
 	</command>
 	
 	<number>
@@ -190,9 +192,9 @@ drink
 	</number>
 
 	<output>
-		"You enter in your room, 
-		'cause the other kids are mean, 
-		and nobody wants to play with you. Boo Hoo."
+"You enter in your room, 
+'cause the other kids are mean, 
+and nobody wants to play with you. Boo Hoo."
 	</output>
 	
 	<option>
@@ -203,7 +205,7 @@ costume
 
 <costume>
 	<command>
-		"Take the elephant costume"
+Elephant costume
 	</command>
 	
 	<number>
@@ -211,7 +213,7 @@ costume
 	</number>
 
 	<output>
-		"You dress the elephant costume"
+"You dress the elephant costume"
 	</output>
 	
 	<option>

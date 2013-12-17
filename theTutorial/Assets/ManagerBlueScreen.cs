@@ -44,6 +44,10 @@ public class ManagerBlueScreen : MonoBehaviour {
 	const int MAX_LINES = 4;
 	const float DELTA_X = 478;
 	const float DELTA_Y = 60;
+	const float INITIAL_DELAY = 3.0f;
+	const float DELAY = 0.8f;
+	
+	float actualDelay = INITIAL_DELAY;
 	
 	XMLparser textGame;
 	
@@ -76,6 +80,8 @@ public class ManagerBlueScreen : MonoBehaviour {
 		
 		HUDMenu = GameObject.Find ("HUDMenu");
 		
+		Timer = 0;
+		
 	
 	}
 	
@@ -89,11 +95,18 @@ public class ManagerBlueScreen : MonoBehaviour {
 				begin = false;
 			}
 			
-			if(Input.GetKeyDown("k")){ 
-				if(text[textPosition]!= null){
+			if(text[textPosition]!= null){
+				
+				Timer += Time.deltaTime;
+				if(Timer >= actualDelay){
+					
+					actualDelay = DELAY;
+					Timer = 0;
 					writeOutput();
-					writeOptions();
 					textPosition++;
+					
+					if(text[textPosition] == null)
+						writeOptions();
 				}
 			}
 			
@@ -111,7 +124,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 				}
 			}
 			
-			if(Input.GetKeyDown(KeyCode.E)) {
+			if(Input.GetKeyDown(KeyCode.Escape)) {
 				Globals.currentLevel = Level.INVENTORY;
 				Debug.Log(Globals.currentLevel);
 				writeEnd();
