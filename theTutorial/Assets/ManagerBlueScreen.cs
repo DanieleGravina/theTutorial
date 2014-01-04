@@ -25,7 +25,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 	
 	bool begin = true;
 	
-	GameObject managerCamera, blueScreen, GUIdialog, HUDMenu;
+	GameObject managerCamera, blueScreen, GUIdialog, HUDMenu, HUDInventory;
 	
 	int textPosition = 0;
 	int cursorPosition = 0;
@@ -80,6 +80,8 @@ public class ManagerBlueScreen : MonoBehaviour {
 		
 		HUDMenu = GameObject.Find ("HUDMenu");
 		
+		HUDInventory = GameObject.Find("Inventory");
+		
 		Timer = 0;
 		
 	
@@ -111,20 +113,35 @@ public class ManagerBlueScreen : MonoBehaviour {
 			}
 			
 			if(Input.GetKeyDown(KeyCode.Return)){
-				if(cursorPosition <= tree.numChilds){
-					tree = tree.getChild(cursorPosition);
+				
+				if(tree.name == "root" && cursorPosition == 1){
+					Globals.currentLevel = Level.INVENTORY;
+					Debug.Log(Globals.currentLevel);
+					writeEnd();
+					managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
+					managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
+					HUDMenu.guiTexture.enabled = true;
 					
-					changeState();
-					checkCake();
-					text = tree.getOutput(myState);
-					clearOutput();
-					writeOutput();
-					writeOptions();
-					textPosition++;
+					if(Globals.hasHUDInventory)
+						HUDInventory.guiTexture.enabled = true;
+				}
+				else{
+				
+					if(cursorPosition <= tree.numChilds){
+						tree = tree.getChild(cursorPosition);
+						
+						changeState();
+						checkCake();
+						text = tree.getOutput(myState);
+						clearOutput();
+						writeOutput();
+						writeOptions();
+						textPosition++;
+					}
 				}
 			}
 			
-			if(Input.GetKeyDown(KeyCode.Escape)) {
+			/*if(Input.GetKeyDown(KeyCode.Escape)) {
 				Globals.currentLevel = Level.INVENTORY;
 				Debug.Log(Globals.currentLevel);
 				writeEnd();
@@ -132,7 +149,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 				managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
 				HUDMenu.guiTexture.enabled = true;
 				
-			}
+			}*/
 			
 			if(Input.GetKeyDown(KeyCode.RightArrow)){
 				if(cursorPosition == 0 || cursorPosition == 2){
@@ -261,10 +278,9 @@ public class ManagerBlueScreen : MonoBehaviour {
 	}
 	
 	void writeEnd(){
-		textGUI = new string[3];
+		textGUI = new string[2];
 		textGUI[0] = "Ok, i've fix it";
 		textGUI[1] = "Now i will continue with your tutorial";
-		textGUI[2] = "";
 		GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(textGUI);
 	}
 	

@@ -25,7 +25,7 @@ public class Selector : MonoBehaviour {
 	
 	string exit3 = "with the exit button, so pay attention";
 	
-	string tryAudio = "Try to select audio";
+	string tryAudio = "Try to select Achievement";
 	
 	string joke = "Have you any problem?";
 	
@@ -52,7 +52,7 @@ public class Selector : MonoBehaviour {
 	
 	float timer = 0.0f;
 	
-	const float TIMEOUT = 10.0f;
+	const float TIMEOUT = 8.0f;
 	
 	bool begin = true;
 
@@ -108,9 +108,9 @@ public class Selector : MonoBehaviour {
 			}
 			
 			if(Input.GetKeyDown(KeyCode.Return) && position == 3){
+				Globals.currentLevel = Level.BLUESCREEN;
 				managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = false;
 				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = true;
-				Globals.currentLevel = Level.BLUESCREEN;
 			}
 			
 			if(timer >= TIMEOUT){

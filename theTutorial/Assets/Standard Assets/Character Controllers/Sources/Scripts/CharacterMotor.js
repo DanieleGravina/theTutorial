@@ -36,6 +36,7 @@ class CharacterMotorMovement {
 	var gravity : float = 10.0;
 	var maxFallSpeed : float = 20.0;
 	
+
 	// For the next variables, @System.NonSerialized tells Unity to not serialize the variable or show it in the inspector view.
 	// Very handy for organization!
 
@@ -44,8 +45,8 @@ class CharacterMotorMovement {
 	var collisionFlags : CollisionFlags; 
 
 	// We will keep track of the character's current velocity,
-	@System.NonSerialized
-	var velocity : Vector3;
+	
+	public var velocity : Vector3;
 	
 	// This keeps track of our current velocity while we're not grounded
 	@System.NonSerialized
@@ -92,7 +93,7 @@ class CharacterMotorJumping {
 	// Are we jumping? (Initiated with jump button and not grounded yet)
 	// To see if we are just in the air (initiated by jumping OR falling) see the grounded variable.
 	@System.NonSerialized
-	var jumping : boolean = false;
+	 var jumping : boolean = false;
 	
 	@System.NonSerialized
 	var holdingJumpButton : boolean = false;
@@ -163,8 +164,9 @@ class CharacterMotorSliding {
 
 var sliding : CharacterMotorSliding = CharacterMotorSliding();
 
-@System.NonSerialized
-var grounded : boolean = true;
+//@System.NonSerialized
+ public var grounded : boolean = true;
+ 
 
 @System.NonSerialized
 var groundNormal : Vector3 = Vector3.zero;
@@ -181,6 +183,8 @@ function Awake () {
 }
 
 private function UpdateFunction () {
+
+   
 	// We copy the actual velocity into a temporary variable that we can manipulate.
 	var velocity : Vector3 = movement.velocity;
 	
@@ -207,6 +211,9 @@ private function UpdateFunction () {
 	        // Prevent rotation of the local up vector
 	        tr.Rotate(0, yRotation, 0);
         }
+     
+      
+	
 	}
 	
 	// Save lastPosition for velocity calculation.
@@ -333,7 +340,8 @@ function FixedUpdate () {
 
 function Update () {
 	if (!useFixedUpdate)
-		UpdateFunction();
+	    UpdateFunction();
+    
 }
 
 private function ApplyInputVelocityChange (velocity : Vector3) {	

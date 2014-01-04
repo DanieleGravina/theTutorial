@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Prova : MonoBehaviour {
+public class CrossHair : MonoBehaviour {
+	
+	public GUITexture crossHair;
 
 	// Use this for initialization
 	void Start () {

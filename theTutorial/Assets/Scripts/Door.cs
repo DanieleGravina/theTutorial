@@ -20,8 +20,7 @@ public class Door : MonoBehaviour {
 			//Open the door
 			if(open)
 			{
-				Debug.Log("Apri");
-				transform.position = transform.position + new Vector3(-speed_open,0,0);
+                transform.position = transform.position + new Vector3(-speed_open,0,0);
 				
 			}
 			if(transform.position.x  - initial.x < -2.2)

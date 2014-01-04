@@ -7,6 +7,8 @@ public class EscapeFromPlayer : MonoBehaviour {
 	
 	public GameObject[] wallPositions;
 	
+	public GameObject player;
+	
 	float maxX, minX;
 	float maxZ, minZ;
 	
@@ -23,6 +25,8 @@ public class EscapeFromPlayer : MonoBehaviour {
 		minZ = -wallPositions[3].transform.position.z;
 		
 		myY = transform.position.y;
+		
+		player = GameObject.Find("RigidbodyController");
 	
 	}
 	
@@ -34,13 +38,22 @@ public class EscapeFromPlayer : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		
 		if(other.tag == "Player"){
-		 	/*Quaternion rotation = Quaternion.LookRotation(other.transform.position - transform.position);
-			transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
-			transform.Translate(Vector3.back*moveSpeed);*/
+		 	
+			Vector3 newPos;
+			
 			float randX = Random.Range(minX, maxX);
 			float randZ = Random.Range(minZ, maxZ);
 			
-			transform.position = new Vector3(randX, myY, randZ);
+			newPos = new Vector3(randX, myY, randZ);
+			
+			while(player.transform.position.x == newPos.x && player.transform.position.z == newPos.z){
+				randX = Random.Range(minX, maxX);
+				randZ = Random.Range(minZ, maxZ);
+			
+				newPos = new Vector3(randX, myY, randZ);
+			}
+				
+			transform.position = newPos;
 		}
 	}
 	

@@ -7,7 +7,9 @@ public enum Level{
 	INVENTORY
 }
 
-public class Globals : MonoBehaviour {
+public class Globals {
+	
+	#region STATIC VARIABLES
 	
 	public static bool cakeTaken = false;
 	
@@ -19,15 +21,9 @@ public class Globals : MonoBehaviour {
 	
 	public static float TIMEOUT = 5.0f;
 	
-	public static Vector3 playerPositionLevel2; 
-
-	// Use this for initialization
-	void Start () {
+	public static Vector3 playerPositionLevel2 = new Vector3(-7f, 1.5f, 152f); 
 	
-		playerPositionLevel2 = new Vector3(-7f, 1.5f, 152f);
-	}
+	public static bool hasHUDInventory = false;
 	
-	// Update is called once per frame
-	void Update () {
-	}
+	#endregion
 }

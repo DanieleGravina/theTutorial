@@ -19,4 +19,5 @@ public class IndicatorMove : MonoBehaviour {
 		temp.x  = 90;
 		transform.eulerAngles = temp;
 	}
+	
 }

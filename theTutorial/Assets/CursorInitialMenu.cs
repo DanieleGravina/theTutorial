@@ -9,7 +9,7 @@ public class CursorInitialMenu : MonoBehaviour {
 	
 	const float DELTA_SCALE = 1.1f;
 	
-	const int MAX_POS = 4;
+	const int MAX_POS = 3;
 	
 	int position = 0;
 
@@ -41,10 +41,7 @@ public class CursorInitialMenu : MonoBehaviour {
 			case 1 : Application.LoadLevel("Level_2");
 				     break;
 				
-			case 2 : Application.LoadLevel("HUD_Level");
-					 break;
-				
-			case 3 : Application.Quit();
+			case 2 : Application.Quit();
 					 break;
 			}
 		}
@@ -55,7 +52,7 @@ public class CursorInitialMenu : MonoBehaviour {
 	
 	void moveCursorDown(){
 		
-		if(position < MAX_POS){
+		if(position < (MAX_POS - 1)){
 			transform.Translate(Vector3.down*DELTA_MOVE);
 			MenuOption[position].transform.localScale -= new Vector3(DELTA_SCALE, DELTA_SCALE, DELTA_SCALE);
 			position++;

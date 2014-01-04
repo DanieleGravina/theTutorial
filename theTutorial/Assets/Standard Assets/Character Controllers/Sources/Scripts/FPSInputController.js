@@ -1,6 +1,7 @@
 private var motor : CharacterMotor;
 var directionVector;
 var Disorient=false;
+var Disorient_2 = false;
 // Use this for initialization
 function Awake () {
 	motor = GetComponent(CharacterMotor);
@@ -10,19 +11,36 @@ function Awake () {
 function Update () {
 
 	// Get the input vector from kayboard or analog stick
-	if(!Disorient){
-		directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-	}else{
-		x=0; y=0;
-	    if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.UpArrow)) x = 1; 
-	    if(Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.RightArrow)) x -=1;
-	    if(Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.DownArrow)) z = 1; 
-	    if(Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.LeftArrow)) z -=1; 
-	   	directionVector = new Vector3(x,0,z);
+    if(Disorient){
+        x=0; y=0;
+        if(Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.UpArrow)) x = 1; 
+        if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.RightArrow)) x -=1;
+        if(Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.DownArrow)) z = 1; 
+        if(Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.LeftArrow)) z -=1; 
+        directionVector = new Vector3(x,0,z);
+
+
+
+
+    } else if (Disorient_2){
+        x=0; y=0;
+        if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.UpArrow)) x = 1; 
+        if(Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.RightArrow)) x -=1;
+        if(Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.DownArrow)) z = 1; 
+        if(Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.LeftArrow)) z -=1; 
+        directionVector = new Vector3(x,0,z);
+    }
+
+
+
+
+    else  directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+	
+	
 	
 	
 
-	}
+	
 	if (directionVector != Vector3.zero) {
 		// Get the length of the directon vector and then normalize it
 		// Dividing by the length is cheaper than normalizing when we already have the length anyway

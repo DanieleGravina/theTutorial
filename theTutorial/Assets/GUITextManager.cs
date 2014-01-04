@@ -29,7 +29,24 @@ public class GUITextManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if(beginWrite){
+		if (Input.GetMouseButtonUp(0)){
+			
+			if(onWriting){
+				actualDelay = 0;
+			}
+			else
+				if(buffer != null && textPos < (buffer.Length - 1) )
+				{
+						guiText.text = "";
+						actualDelay = delay;
+						textPos++;
+						index = 0;
+						onWriting = true;
+						beginWrite= true;
+				}
+		}
+		
+		if(beginWrite && guiText != null && buffer != null){
 			timer += Time.deltaTime;
 			
 			if(timer >= actualDelay){
@@ -52,23 +69,6 @@ public class GUITextManager : MonoBehaviour {
 				
 			}
 		}
-		
-		if (Input.GetMouseButtonUp(0)){
-			
-			if(onWriting){
-				actualDelay = 0;
-			}
-			else
-				if(buffer != null && textPos < (buffer.Length - 1) )
-				{
-						guiText.text = "";
-						actualDelay = delay;
-						textPos++;
-						index = 0;
-						onWriting = true;
-						beginWrite= true;
-				}
-		}
 	
 	}
 	
@@ -81,7 +81,6 @@ public class GUITextManager : MonoBehaviour {
 		onWriting = true;
 		actualDelay = delay;
 		beginWrite = true;
-		textPos = 0;
 	}
 	
 	/* IEnumerator PokeText(string t)
