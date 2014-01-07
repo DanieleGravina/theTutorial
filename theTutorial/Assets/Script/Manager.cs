@@ -61,10 +61,13 @@ public class Manager :MonoBehaviour{
 	
 	// Update is called once per frame
 	void Update () {
+		if (Input.GetKeyUp(KeyCode.Escape)){
+			Application.Quit();
+		}
 	}
 	
 	public void MovePlatform(int ID, buttons typeButton, GameObject HUDelem, GameObject RoomElem, GameObject platform, Collider collider){
-		
+
 		switch(typeButton)
 			{
 			 

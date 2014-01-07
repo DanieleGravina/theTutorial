@@ -16,7 +16,7 @@ public class MenuGame : MonoBehaviour {
 	GameObject tmp;
 	Transform menu;
 	
-	Vector3 positionMenu = new Vector3(24f+165f, -74.67452f, 24.47535f);
+	Vector3 positionMenu = new Vector3(74f+165f, -74.67452f, 24.47535f);
 
 	// Use this for initialization
 	void Start () {
