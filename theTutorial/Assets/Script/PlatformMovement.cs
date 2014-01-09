@@ -17,8 +17,6 @@ public class PlatformMovement : MonoBehaviour {
 
 	const int MAX_X = 4;
 	const int MAX_Z = 4;
-	
-	int[,] map = new int[MAX_Z,MAX_X];
 
 	public enum dirType{
 		UP,
@@ -32,15 +30,6 @@ public class PlatformMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
-		map[1,1] = 1;
-		map[2,0] = 5;
-		map[2,1] = 4;
-		map[2,3] = 3;
-
-		map[1,2] = 2;
-		map[2,2] = 2;
-		
 		platform = this.transform.parent;
 		ID = int.Parse(platform.name[0].ToString());
 		end_position = platform.position;
@@ -102,27 +91,27 @@ public class PlatformMovement : MonoBehaviour {
 			if (dir == dirType.DOWN){
 				pos.z = pos.z + 1;
 			}else if (dir == dirType.LEFT || dir == dirType.RIGHT){
-				for (int i=0; i<1; i++) {
-					if (!(validPosition(pos,delta_x,delta_z + i) && map[pos.z + delta_z + i,pos.x  + delta_x] == 0)){
+				for (int i=0; i<2; i++) {
+					if (!(validPosition(pos,delta_x,delta_z + i) && Globals.map[pos.z + delta_z + i,pos.x  + delta_x] == 0)){
 						return false;
 					}
 				}
 			}
 		}
 		
-		if (validPosition(pos, delta_x, delta_z) && map[pos.z + delta_z,pos.x  + delta_x] == 0){
-			map[pos.z + delta_z,pos.x + delta_x] = ID;
+		if (validPosition(pos, delta_x, delta_z) && Globals.map[pos.z + delta_z,pos.x  + delta_x] == 0){
+			Globals.map[pos.z + delta_z,pos.x + delta_x] = ID;
 			if (ID == 2 && dir == dirType.DOWN){
-				map[ pos.z - 1,pos.x] = 0;
+				Globals.map[ pos.z - 1,pos.x] = 0;
 			}else if (ID == 2 && dir == dirType.UP){
-				map[ pos.z + 1,pos.x] = 0;
+				Globals.map[ pos.z + 1,pos.x] = 0;
 			}else if ( ID == 2 && (dir == dirType.LEFT || dir == dirType.RIGHT)){
-				for (int i=0;i<1;i++){
-					map[pos.z + delta_z + i,pos.x + delta_x] = ID;
-					map[pos.z + i,pos.x] = 0;
+				for (int i=0;i<2;i++){
+					Globals.map[pos.z + delta_z + i,pos.x + delta_x] = ID;
+					Globals.map[pos.z + i,pos.x] = 0;
 				}
 			}else{
-				map[pos.z, pos.x] = 0;
+				Globals.map[pos.z, pos.x] = 0;
 			}
 			return true;
 		}
@@ -146,7 +135,7 @@ public class PlatformMovement : MonoBehaviour {
 		for(int i = 0; i < MAX_Z; i++){
 			for(int j = 0; j < MAX_X; j++){
 				
-				if(map[i,j] == ID){
+				if(Globals.map[i,j] == ID){
 					return new MyVector2(i,j);
 				}
 				
