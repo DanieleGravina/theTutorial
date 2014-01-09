@@ -10,15 +10,24 @@ public class PlatformMovement : MonoBehaviour {
 
 	public float distance = 10f;
 	public float speed = 0.5f;
-	public 	int ID;
 
+	int ID;
 	float weight;
 	bool active = false;
 
 	const int MAX_X = 4;
-	const int MAX_Y = 4;
+	const int MAX_Z = 4;
 	
-	int[,] map = new int[MAX_X,MAX_Y];
+	int[,] map = new int[MAX_Z,MAX_X];
+
+	public enum dirType{
+		UP,
+		RIGHT,
+		LEFT,
+		DOWN,	
+	}
+
+	dirType dir;
 
 
 	// Use this for initialization
@@ -33,6 +42,7 @@ public class PlatformMovement : MonoBehaviour {
 		map[2,2] = 2;
 		
 		platform = this.transform.parent;
+		ID = int.Parse(platform.name[0].ToString());
 		end_position = platform.position;
 	}
 	
@@ -50,19 +60,19 @@ public class PlatformMovement : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player"){
 			if (active == false){
+				weight=0;
 				direction =platform.position - other.transform.position;
 				direction.Normalize();
-				active = true;
 				if (Mathf.Abs(direction.x) <= 0.5) {
 					platform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
 					end_position.x =platform.position.x;
 					end_position.y = platform.position.y;
 					if (direction.z > 0){
-						if (updateMap(ID,0,1)){
+						if (updateMap(ID,0,1,dirType.DOWN)){
 							active = true;
 							end_position.z = platform.position.z + distance;
 						}
-					}else if (updateMap(ID,0,-1)){
+					}else if (updateMap(ID,0,-1,dirType.UP)){
 						active = true;
 						end_position.z = platform.position.z - distance;
 					}
@@ -71,11 +81,11 @@ public class PlatformMovement : MonoBehaviour {
 					end_position.y = platform.position.y;
 					end_position.z = platform.position.z;
 					if (direction.x > 0){
-						if (updateMap(ID,-1,0)){
+						if (updateMap(ID,-1,0,dirType.LEFT)){
 							active = true;
 							end_position.x = platform.position.x + distance;
 						}
-					}else if (updateMap(ID,1,0)){
+					}else if (updateMap(ID,1,0,dirType.RIGHT)){
 						active = true;
 						end_position.x = platform.position.x - distance;
 					}
@@ -84,60 +94,77 @@ public class PlatformMovement : MonoBehaviour {
 		}
 	}
 
-	bool updateMap(int ID, int delta_x, int delta_y){
+	bool updateMap(int ID, int delta_x, int delta_z,dirType dir){
 		
 		MyVector2 pos = findPos(ID);
 		
-		if (validPosition(pos, delta_x, delta_y) && map[pos.x  + delta_x, pos.y + delta_y] == 0){
-			
-			map[pos.x + delta_x, delta_y + delta_y] = ID;
-			map[pos.x, pos.y] = 0;
-			return true;
-		}else{
-			return false;
+		if (ID == 2){
+			if (dir == dirType.DOWN){
+				pos.z = pos.z + 1;
+			}else if (dir == dirType.LEFT || dir == dirType.RIGHT){
+				for (int i=0; i<1; i++) {
+					if (!(validPosition(pos,delta_x,delta_z + i) && map[pos.z + delta_z + i,pos.x  + delta_x] == 0)){
+						return false;
+					}
+				}
+			}
 		}
 		
+		if (validPosition(pos, delta_x, delta_z) && map[pos.z + delta_z,pos.x  + delta_x] == 0){
+			map[pos.z + delta_z,pos.x + delta_x] = ID;
+			if (ID == 2 && dir == dirType.DOWN){
+				map[ pos.z - 1,pos.x] = 0;
+			}else if (ID == 2 && dir == dirType.UP){
+				map[ pos.z + 1,pos.x] = 0;
+			}else if ( ID == 2 && (dir == dirType.LEFT || dir == dirType.RIGHT)){
+				for (int i=0;i<1;i++){
+					map[pos.z + delta_z + i,pos.x + delta_x] = ID;
+					map[pos.z + i,pos.x] = 0;
+				}
+			}else{
+				map[pos.z, pos.x] = 0;
+			}
+			return true;
+		}
+		return false;	
 	}
-
-	bool validPosition(MyVector2 pos, int delta_x, int delta_y){
+	
+	bool validPosition(MyVector2 pos, int delta_x, int delta_z){
 		
 		int new_x = pos.x + delta_x;
-		int new_y = pos.y + delta_y;
+		int new_z = pos.z + delta_z;
 		
-		if( (new_x > 0 && new_x < MAX_X) && (new_y > 0 && new_y < MAX_Y)) 
+		if( (new_x >= 0 && new_x < MAX_X) && (new_z >= 0 && new_z < MAX_Z)) 
 			return true;
 		else
 			return false;
 		
 	}
-
+	
 	MyVector2 findPos(int ID){
 		
-		for(int i = 0; i < MAX_X; i++){
-			for(int j = 0; j < MAX_Y; j++){
+		for(int i = 0; i < MAX_Z; i++){
+			for(int j = 0; j < MAX_X; j++){
 				
-				if(map[i,j] == ID)
+				if(map[i,j] == ID){
 					return new MyVector2(i,j);
+				}
 				
 			}
 		}
+		
 		return new MyVector2(0,0);
 	}
-
+	
+	//don't ask
 	public class MyVector2{
 		
 		public int x;
-		public int y;
+		public int z;
 		
-		public MyVector2(int x, int y){
-			x = x;
-			y = y;
+		public MyVector2(int z, int x){
+			this.x = x;
+			this.z = z;
 		}
-
-
 	}
-
 }
-
-
-
