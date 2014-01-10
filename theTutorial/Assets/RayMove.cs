@@ -39,7 +39,7 @@ public class RayMove : MonoBehaviour {
 		
 		vEndRight = new Vector3(end[0] - length, end[1], end[2]);
 		
-		distance = end[2] - begin[2];
+		distance = Mathf.Abs(end[2] - begin[2]);
 		
 		startTime = Time.time;
 	

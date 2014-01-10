@@ -3,16 +3,14 @@ using System.Collections;
 
 public class HealthBar : MonoBehaviour {
 	
-	GameObject lifeRoom;
+	GameObject lifeRoom, player;
 	
 	const int MAX_HEALTH = 99;
 	
-	public GameObject blood;
+	public GameObject blood, respawnPoint;
 	
 	public float TimeOut = 5.0f;
 	public float TimeOutDamage = 0.1f;
-	//public int textAnimation = 20;
-	//public float speedAnim = 0.1f;
 	public int normalTextSize = 100;
 	public int increasedTextSize = 120;
 	
@@ -39,6 +37,7 @@ public class HealthBar : MonoBehaviour {
 		normalColor = RenderSettings.ambientLight;
 		
 		lifeRoom = GameObject.Find("LifeRoom");
+		player = GameObject.Find ("RigidbodyController");
 	
 	}
 	
@@ -59,10 +58,7 @@ public class HealthBar : MonoBehaviour {
 			
 			if(TimerDamage >= TimeOutDamage){
 				TimerDamage = 0;
-				RenderSettings.ambientLight = normalColor;
-				blood.guiTexture.enabled = false;
-				damageOn = false;
-				guiText.fontSize = normalTextSize;
+				restoreNormalView();
 			}
 		}
 		
@@ -81,7 +77,10 @@ public class HealthBar : MonoBehaviour {
 		
 		if(healthPoints > 0){
 			
-			healthPoints -= 10;
+			if(healthPoints - 10 > 0)
+				healthPoints -= 10;
+			else
+				healthPoints = 0;
 			
 			guiText.text = healthPoints.ToString();
 			guiText.fontSize = increasedTextSize;
@@ -90,7 +89,18 @@ public class HealthBar : MonoBehaviour {
 			
 			blood.guiTexture.enabled = true;
 			
-			if(healthPoints < 10){
+			if(healthPoints <= 0){
+				
+				player.transform.position = new Vector3( respawnPoint.transform.position.x, 
+					respawnPoint.transform.position.y, respawnPoint.transform.position.z);
+				
+				healthPoints = MAX_HEALTH;
+				guiText.text = healthPoints.ToString();
+				restoreNormalView();
+				lifeRoom.GetComponent<HiddenDoor>().hideDoor();
+				
+			}else if(healthPoints < 10){
+				
 				lifeRoom.GetComponent<HiddenDoor>().showHiddenDoor();
 				
 			}else{
@@ -105,8 +115,15 @@ public class HealthBar : MonoBehaviour {
 		guiText.text = healthPoints.ToString();
 		
 		if(healthPoints > 10 && RenderSettings.ambientLight != normalColor){
-			RenderSettings.ambientLight = normalColor;
+			restoreNormalView();
 			lifeRoom.GetComponent<HiddenDoor>().hideDoor();
 		}
+	}
+	
+	private void restoreNormalView(){
+		RenderSettings.ambientLight = normalColor;
+		blood.guiTexture.enabled = false;
+		damageOn = false;
+		guiText.fontSize = normalTextSize;
 	}
 }

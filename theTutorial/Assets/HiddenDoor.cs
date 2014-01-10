@@ -18,10 +18,10 @@ public class HiddenDoor : MonoBehaviour {
 	}
 	
 	public void hideDoor(){
-		Instantiate(fakeWall);
+		fakeWall.SetActive(true);
 	}
 	
 	public void showHiddenDoor(){
-		Destroy (fakeWall);
+		fakeWall.SetActive(false);
 	}
 }
