@@ -7,6 +7,10 @@ public class GenerateRay : MonoBehaviour {
 	
 	public GameObject ray;
 	
+	public int MaxRays = 5;
+	
+    int counter = 0;
+	
 	float timer;
 
 	// Use this for initialization
@@ -20,8 +24,11 @@ public class GenerateRay : MonoBehaviour {
 		
 		timer += Time.deltaTime;
 		
-		if(timer >= deltaTime){
+		if(timer >= deltaTime && counter < MaxRays){
+			
 			Instantiate(ray);
+			counter++;
+			
 			timer = 0f;
 		}
 	

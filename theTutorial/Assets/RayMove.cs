@@ -59,7 +59,12 @@ public class RayMove : MonoBehaviour {
 		
 		rayCollider.setPosition(tempLeft, tempRight);
 		
-		//if(fracCovered >= 1)
-			//Destroy(gameObject);
+		if(fracCovered >= 1){
+			startTime = Time.time;
+			fracCovered = 0;
+			lineRenderer.SetPosition(LEFT, left);
+			lineRenderer.SetPosition(RIGHT, right);
+		}
+			
 	}
 }
