@@ -7,13 +7,22 @@ public class PlatformMovement : MonoBehaviour {
 	Vector3 end_position;
 
 	Transform platform;
+	Vector3 room_position;
 
-	public float distance = 10f;
-	public float speed = 0.5f;
+
+	public GameObject room;
+
+	float distance = 4.6f;
+	float speed = 1.5f;
 
 	int ID;
 	float weight;
 	bool active = false;
+
+
+	const float DELTA_Z = 151.98199f;
+	const float DELTA_X = 113.4889f;
+
 
 	const int MAX_X = 4;
 	const int MAX_Z = 4;
@@ -58,10 +67,12 @@ public class PlatformMovement : MonoBehaviour {
 					end_position.y = platform.position.y;
 					if (direction.z > 0){
 						if (updateMap(ID,0,1,dirType.DOWN)){
+							room.transform.Translate(Vector3.forward * DELTA_Z);
 							active = true;
 							end_position.z = platform.position.z + distance;
 						}
 					}else if (updateMap(ID,0,-1,dirType.UP)){
+						room.transform.Translate(Vector3.back * DELTA_Z);
 						active = true;
 						end_position.z = platform.position.z - distance;
 					}
@@ -71,10 +82,12 @@ public class PlatformMovement : MonoBehaviour {
 					end_position.z = platform.position.z;
 					if (direction.x > 0){
 						if (updateMap(ID,-1,0,dirType.LEFT)){
+							room.transform.Translate(Vector3.right * DELTA_X);
 							active = true;
 							end_position.x = platform.position.x + distance;
 						}
 					}else if (updateMap(ID,1,0,dirType.RIGHT)){
+						room.transform.Translate(Vector3.left * DELTA_X);
 						active = true;
 						end_position.x = platform.position.x - distance;
 					}
