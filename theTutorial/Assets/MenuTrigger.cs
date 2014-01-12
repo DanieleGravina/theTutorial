@@ -19,6 +19,8 @@ public class MenuTrigger : MonoBehaviour {
 	
 	GameObject managerCamera, menu, blueScreen, HUDMenu;
 	
+	public GameObject StateLevel;
+	
 	bool afterTrigger = false;
 
 	// Use this for initialization
@@ -37,8 +39,6 @@ public class MenuTrigger : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-		if(Globals.currentLevel == Level.MENU)
 			
 		 if (Input.GetKeyDown(KeyCode.Escape) && afterTrigger){
 			managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = false;
@@ -50,7 +50,7 @@ public class MenuTrigger : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		
-		Globals.currentLevel = Level.MENU;
+		StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.MENU;
 		
 		if(other.tag == "Player"){
 			afterTrigger = true;

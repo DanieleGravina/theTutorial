@@ -5,7 +5,10 @@ public class TakeObject : MonoBehaviour {
 	
 	RaycastHit hit;
 	GameObject inventory;
-
+	
+	public GameObject ObjectTakenSound;
+	public GameObject DoorToLife;
+	public GameObject StateLevel;
 	
 	public Texture2D[] hudInventory;
 
@@ -23,6 +26,7 @@ public class TakeObject : MonoBehaviour {
 		if(Input.GetKey("e") && Globals.numInventory <= 2){
 			
 			if(Physics.Raycast(transform.position, transform.forward, out hit, 3) && hit.collider.tag == "Key"){
+				ObjectTakenSound.audio.Play();
 				Destroy(hit.collider.gameObject);
 				setInventoryHUD();
 			}
@@ -44,8 +48,9 @@ public class TakeObject : MonoBehaviour {
 		
 		Globals.numInventory++;
 		
-		if(Globals.numInventory == 3)
-			Application.LoadLevel("InitialMenu");
+		if(Globals.numInventory == 3){
+			StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.LIFE;
+		}
 			
 	}
 	

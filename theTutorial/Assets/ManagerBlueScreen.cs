@@ -27,6 +27,10 @@ public class ManagerBlueScreen : MonoBehaviour {
 	
 	GameObject managerCamera, blueScreen, GUIdialog, HUDMenu, HUDInventory;
 	
+	public GameObject StateLevel;
+	
+	public GameObject SignalDoorToInventory;
+	
 	int textPosition = 0;
 	int cursorPosition = 0;
 	
@@ -90,7 +94,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if(Globals.currentLevel == Level.BLUESCREEN){
+		if(StateLevel.GetComponent<StateLevel>().CurrentLevel == Level.BLUESCREEN){
 			
 			if(begin){
 				writeBegin();
@@ -115,8 +119,9 @@ public class ManagerBlueScreen : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.Return)){
 				
 				if(tree.name == "root" && cursorPosition == 1){
-					Globals.currentLevel = Level.INVENTORY;
-					Debug.Log(Globals.currentLevel);
+					
+					StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.INVENTORY;
+					SignalDoorToInventory.GetComponent<SignalColorManager>().ChangeSignalColor();
 					writeEnd();
 					managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
 					managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;

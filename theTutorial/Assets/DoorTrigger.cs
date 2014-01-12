@@ -1,11 +1,20 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
+
+public enum doorDirection{
+	X,
+	Z
+}
 
 public class DoorTrigger : MonoBehaviour {
 	
 	public GameObject door;
 	
 	public Level levelDoor;
+	
+	public GameObject StateLevel;
+	
+	public doorDirection dirDoor = doorDirection.X;
 	
 	public float speed = 3.0F;
 	
@@ -22,8 +31,15 @@ public class DoorTrigger : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
+		float translateX = 0f, translateZ = 0f;
+		
+		if(dirDoor == doorDirection.X)
+			translateX = translate;
+		else
+			translateZ = translate;
+		
 		start = door.transform.position;
-		end = new Vector3(start.x + translate, start.y, start.z);
+		end = new Vector3(start.x + translateX, start.y, start.z + translateZ);
 		distance = -translate;
 	
 	}
@@ -40,10 +56,11 @@ public class DoorTrigger : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		if(other.tag == "Player"){
-			Debug.Log(Globals.currentLevel);
-			if(levelDoor == Globals.currentLevel){
+			Debug.Log(StateLevel.GetComponent<StateLevel>().CurrentLevel);
+			if(levelDoor == StateLevel.GetComponent<StateLevel>().CurrentLevel){
 				openDoor = true;
 				startTime = Time.time;
+				door.audio.Play();
 			}
 		}
 	}

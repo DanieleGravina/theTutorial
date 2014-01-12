@@ -33,6 +33,8 @@ public class Selector : MonoBehaviour {
 	
 	GameObject menu, GUIdialog, blueScreen, managerCamera;
 	
+	public GameObject StateLevel;
+	
 	public GameObject[] MenuOption;
 	
 	
@@ -108,7 +110,7 @@ public class Selector : MonoBehaviour {
 			}
 			
 			if(Input.GetKeyDown(KeyCode.Return) && position == 3){
-				Globals.currentLevel = Level.BLUESCREEN;
+				StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.BLUESCREEN;
 				managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = false;
 				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = true;
 			}

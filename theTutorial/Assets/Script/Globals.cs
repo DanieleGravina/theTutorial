@@ -1,12 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum Level{
-	MENU,
-	BLUESCREEN,
-	INVENTORY
-}
-
 public class Globals {
 	
 	#region STATIC VARIABLES
@@ -24,6 +18,8 @@ public class Globals {
 	public static Vector3 playerPositionLevel2 = new Vector3(-7f, 1.5f, 152f); 
 	
 	public static bool hasHUDInventory = false;
+	
+	public static bool CountDownOn = false;
 	
 	#endregion
 }

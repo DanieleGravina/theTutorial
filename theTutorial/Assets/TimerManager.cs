@@ -9,7 +9,7 @@ public class TimerManager : MonoBehaviour {
 	
 	public float timer;
 	
-	bool isCountDown = true;
+	bool isCountDown = false;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +26,10 @@ public class TimerManager : MonoBehaviour {
 			
 			if(PhysicalTimer.active){
 				PhysicalTimer.GetComponent<TextMesh>().text = (TimeOut - timer).ToString();
+			}
+			
+			if(TimeOut - timer <= 0) {
+				Application.LoadLevel("Level_2");
 			}
 		}
 	
