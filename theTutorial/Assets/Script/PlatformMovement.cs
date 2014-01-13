@@ -21,7 +21,7 @@ public class PlatformMovement : MonoBehaviour {
 
 
 	const float DELTA_Z = 151.98199f;
-	const float DELTA_X = 113.4889f;
+	const float DELTA_X = 113f;
 
 
 	const int MAX_X = 4;
