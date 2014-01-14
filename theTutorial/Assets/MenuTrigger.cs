@@ -17,9 +17,9 @@ public class MenuTrigger : MonoBehaviour {
 	
 	GameObject player;
 	
-	GameObject managerCamera, menu, blueScreen, HUDMenu;
+	GameObject managerCamera, menu, blueScreen;
 	
-	public GameObject StateLevel;
+	public GameObject StateLevel, GUIManager, HUDMenu;
 	
 	bool afterTrigger = false;
 
@@ -31,8 +31,6 @@ public class MenuTrigger : MonoBehaviour {
 		text[2] = menuExplanation2;
 		
 		managerCamera = GameObject.Find ("ManagerCamera");
-		
-		HUDMenu = GameObject.Find ("HUDMenu");
 	
 		GUIdialog = GameObject.Find("GUI Text");
 	}
@@ -43,7 +41,7 @@ public class MenuTrigger : MonoBehaviour {
 		 if (Input.GetKeyDown(KeyCode.Escape) && afterTrigger){
 			managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = false;
 			managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = true;
-			HUDMenu.guiTexture.enabled = false;
+			GUIManager.SetActive(false);
 		}
 	
 	}
@@ -52,9 +50,9 @@ public class MenuTrigger : MonoBehaviour {
 		
 		StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.MENU;
 		
-		if(other.tag == "Player"){
+		if(other.tag == "Player" && !afterTrigger){
 			afterTrigger = true;
-			HUDMenu.guiTexture.enabled = true;
+			HUDMenu.SetActive(true);
 			GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
 		}
 	}

@@ -31,6 +31,11 @@ public class TimerManager : MonoBehaviour {
 			if(TimeOut - timer <= 0) {
 				Application.LoadLevel("Level_2");
 			}
+			
+			if(TimeOut - timer < 10f){
+				guiText.color = Color.red;
+				guiText.fontSize += 1;
+			}
 		}
 	
 	}

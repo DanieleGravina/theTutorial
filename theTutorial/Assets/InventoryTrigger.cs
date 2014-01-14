@@ -57,9 +57,10 @@ public class InventoryTrigger : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		
-		if(other.tag == "Player"){
+		if(other.tag == "Player" && !afterTrigger){
 			afterTrigger = true;
 			Arrow.renderer.enabled = true;
+			Arrow.transform.GetChild(0).renderer.enabled = true;
 			Arrow.SendMessage("highLight");
 			GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
 		}

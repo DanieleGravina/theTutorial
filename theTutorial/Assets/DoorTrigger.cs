@@ -8,7 +8,16 @@ public enum doorDirection{
 
 public class DoorTrigger : MonoBehaviour {
 	
-	public GameObject door;
+	enum stateDoor{
+		OPEN,
+		CLOSED
+	}
+	
+	stateDoor state = stateDoor.CLOSED;
+	
+	public GameObject door, GUIdialog;
+	
+	public string[] text;
 	
 	public Level levelDoor;
 	
@@ -24,7 +33,7 @@ public class DoorTrigger : MonoBehaviour {
 	
 	float distance, distCovered, startTime, fracCovered;
 	
-	bool openDoor = false;
+	bool openDoor, closeDoor = false;
 	
 	
 
@@ -41,6 +50,8 @@ public class DoorTrigger : MonoBehaviour {
 		start = door.transform.position;
 		end = new Vector3(start.x + translateX, start.y, start.z + translateZ);
 		distance = -translate;
+		
+		GUIdialog = GameObject.Find("GUI Text");
 	
 	}
 	
@@ -51,17 +62,43 @@ public class DoorTrigger : MonoBehaviour {
 			distCovered = (Time.time - startTime) * speed;
 			fracCovered = distCovered / distance;
 			door.transform.position = Vector3.Lerp(start, end, fracCovered);
+			
+			if(door.transform.position == end)
+				openDoor = false;
+		}
+		
+		if(closeDoor){
+			distCovered = (Time.time - startTime) * speed;
+			fracCovered = distCovered / distance;
+			door.transform.position = Vector3.Lerp(end, start, fracCovered);
+			
+			if(door.transform.position == start)
+				closeDoor = false;
 		}
 	}
 	
 	void OnTriggerEnter(Collider other){
-		if(other.tag == "Player"){
+		if(other.tag == "Player" && state == stateDoor.CLOSED){
 			Debug.Log(StateLevel.GetComponent<StateLevel>().CurrentLevel);
-			if(levelDoor == StateLevel.GetComponent<StateLevel>().CurrentLevel){
+			if(levelDoor == StateLevel.GetComponent<StateLevel>().CurrentLevel || 
+				levelDoor == Level.ALL){
+				state = stateDoor.OPEN;
 				openDoor = true;
 				startTime = Time.time;
 				door.audio.Play();
 			}
+			else{
+				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
+			}
+		}
+	}
+	
+	void OnTriggerExit(Collider other){
+		if(other.tag == "Player" && state == stateDoor.OPEN){
+			state = stateDoor.CLOSED;
+			closeDoor = true;
+			startTime = Time.time;
+			door.audio.Play();
 		}
 	}
 }

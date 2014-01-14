@@ -31,6 +31,8 @@ public class ManagerBlueScreen : MonoBehaviour {
 	
 	public GameObject SignalDoorToInventory;
 	
+	public GameObject GUIManager;
+	
 	int textPosition = 0;
 	int cursorPosition = 0;
 	
@@ -125,10 +127,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 					writeEnd();
 					managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
 					managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
-					HUDMenu.guiTexture.enabled = true;
-					
-					if(Globals.hasHUDInventory)
-						HUDInventory.guiTexture.enabled = true;
+					GUIManager.SetActive(true);
 				}
 				else{
 				

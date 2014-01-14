@@ -7,7 +7,8 @@ public enum Level{
 	INVENTORY,
 	LIFE,
 	MAP,
-	TIMER
+	TIMER,
+	ALL
 }
 
 public class StateLevel : MonoBehaviour {
@@ -28,7 +29,7 @@ public class StateLevel : MonoBehaviour {
 			Player.transform.position = new Vector3(TimerRespawnPoint.transform.position.x, 
 					TimerRespawnPoint.transform.position.y, TimerRespawnPoint.transform.position.z);
 			
-			GuiTimer.guiText.enabled = true;
+			GuiTimer.SetActive(true);
 			
 			GuiTimer.GetComponent<TimerManager>().beginCountDown();
 		}

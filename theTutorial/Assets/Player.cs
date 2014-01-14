@@ -11,6 +11,8 @@ public class Player : MonoBehaviour {
 	void Start () {
 		
 		Arrow = GameObject.Find("Arrow");
+		
+		Screen.showCursor = false;
 	}
 	
 	// Update is called once per frame
@@ -18,6 +20,7 @@ public class Player : MonoBehaviour {
 		
 		if(!initialized){
 			if(Arrow.renderer.enabled == true)
+				Arrow.transform.GetChild(0).renderer.enabled = false;
 				Arrow.renderer.enabled = false;
 			
 			initialized = true;

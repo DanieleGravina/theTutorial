@@ -7,7 +7,7 @@ public class RayCollider : MonoBehaviour {
 	
 	public float LineWidth; // use the same as you set in the line renderer.
 	
-	GameObject healthBar;
+    GameObject healthBar;
 
 	// Use this for initialization
 	void Start () {
@@ -28,7 +28,6 @@ public class RayCollider : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		Debug.Log ("touch player");
 		if(other.tag == "Player"){
-			Debug.Log ("touch player");
 			healthBar.GetComponent<HealthBar>().decreaseLife();
 		}
 	}

@@ -4,18 +4,20 @@ using System.Collections;
 public class TakeObject : MonoBehaviour {
 	
 	RaycastHit hit;
-	GameObject inventory;
 	
+	public GameObject inventory;
 	public GameObject ObjectTakenSound;
-	public GameObject DoorToLife;
+	public GameObject SignalDoorToLife;
 	public GameObject StateLevel;
+	
+	GameObject arrow;
 	
 	public Texture2D[] hudInventory;
 
 	// Use this for initialization
 	void Start () {
 		
-		inventory = GameObject.Find("Inventory");
+		arrow = GameObject.Find("Arrow");
 		Globals.numInventory = 0;
 	
 	}
@@ -42,7 +44,7 @@ public class TakeObject : MonoBehaviour {
 	void setInventoryHUD(){
 		
 		if(Globals.numInventory == 0)
-			inventory.guiTexture.enabled = true;
+			inventory.SetActive(true);
 		
 		inventory.guiTexture.texture = hudInventory[Globals.numInventory];
 		
@@ -50,6 +52,9 @@ public class TakeObject : MonoBehaviour {
 		
 		if(Globals.numInventory == 3){
 			StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.LIFE;
+			arrow.renderer.enabled = false;
+			arrow.transform.GetChild(0).renderer.enabled = false;
+			SignalDoorToLife.GetComponent<SignalColorManager>().ChangeSignalColor();
 		}
 			
 	}
