@@ -230,8 +230,8 @@ public class PlatformMovement : MonoBehaviour {
 						Debug.Log("Map: right door open");
 						Debug.Log("Menu: left door open");
 					}else{
-					Debug.Log("Map: right door close");
-					Debug.Log("Menu: left door close");
+						Debug.Log("Map: right door close");
+						Debug.Log("Menu: left door close");
 					}
 				}
 				
