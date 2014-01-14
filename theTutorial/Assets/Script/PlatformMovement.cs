@@ -19,7 +19,7 @@ public class PlatformMovement : MonoBehaviour {
 	GameObject near_door2;
 
 	float distance = 4.6f;
-	float speed = 1.5f;
+	float speed = 1f;
 
 	int ID;
 	float weight;
