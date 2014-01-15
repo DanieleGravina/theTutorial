@@ -11,12 +11,16 @@ public class PlatformMovement : MonoBehaviour {
 	Transform platform;
 	Vector3 room_position;
 
-
+	public Material completeMaterial;
+	public Material uncompleteMaterial;
 	public GameObject room;
+
 	GameObject my_door1;
 	GameObject my_door2;
 	GameObject near_door1;
 	GameObject near_door2;
+	GameObject[] platforms;
+	GameObject doorSignal;
 
 	float distance = 4.6f;
 	float speed = 1f;
@@ -25,13 +29,13 @@ public class PlatformMovement : MonoBehaviour {
 	float weight;
 	bool active = false;
 
-
 	const float DELTA_Z = 151.98199f;
 	const float DELTA_X = 113f;
 
-
 	const int MAX_X = 4;
 	const int MAX_Z = 4;
+	
+	public static int[,] solution = new int[MAX_Z,MAX_X] {{0,0,0,0},{0,1,2,0},{3,4,2,5},{0,0,0,0}};
 
 	public enum dirType{
 		UP,
@@ -45,9 +49,12 @@ public class PlatformMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		doorSignal = GameObject.Find("SignalExitDoorMap");
 		platform = this.transform.parent;
 		ID = int.Parse(platform.name[0].ToString());
 		end_position = platform.position;
+		platforms = GameObject.FindGameObjectsWithTag("platform");
+		mapComplete();
 	}
 	
 	// Update is called once per frame
@@ -101,7 +108,7 @@ public class PlatformMovement : MonoBehaviour {
 						end_position.x = platform.position.x - distance;
 					}
 				}
-				controlPort(ID);
+				mapComplete();
 			}
 		}
 	}
@@ -164,110 +171,34 @@ public class PlatformMovement : MonoBehaviour {
 				if(Globals.map[i,j] == ID){
 					return new MyVector2(i,j);
 				}
-				
 			}
 		}
 		
 		return new MyVector2(0,0);
 	}
 
-//funzione per gestire l'apertura e la chiusura delle porte in caso di spostamento delle stanze
-	void controlPort(int ID){
-		pos = findPos(ID);
-		switch(ID) {
-			case 1:
-				if (validPosition(pos,1,1)){
-					if (Globals.map[pos.z,pos.x + 1] == 2 && Globals.map[pos.z + 1,pos.x + 1] == 2){
-						Debug.Log("Inventory: Right door open");
-						Debug.Log("Life: Left door open");
-					}else{
-						Debug.Log("Inventory: Right door close");
-						Debug.Log("Life: Left door close");
+//funzione per controllare se le piattaforme sono state posizionate nella posizione corretta
+	bool mapComplete(){
+		for(int i = 0; i < MAX_Z; i++){
+			for(int j = 0; j < MAX_X; j++){
+				
+				if(Globals.map[i,j] != solution[i,j] ){
+					foreach (GameObject temp in platforms)
+					{
+						temp.renderer.material = uncompleteMaterial;
 					}
-				}
-				if (validPosition(pos,0,1)){
-					if (Globals.map[pos.z + 1,pos.x] == 4){
-						Debug.Log("Inventory: down door open");
-						Debug.Log("Menù: up door open");
-					}else{
-						Debug.Log("Inventory: down door close");
-						Debug.Log("Menù: up door close");
-					}
-				}
-				break;
-			case 2:
-				if (validPosition(pos,-1,0)){
-					if (Globals.map[pos.z,pos.x - 1] == 1){
-						Debug.Log("Life: left door open");
-						Debug.Log("Inventory: right door open");
-					}else{
-						Debug.Log("Life: left door close");
-						Debug.Log("Inventory: right door close");
-					}
-				}
-				if (validPosition(pos,1,1)){
-					if (Globals.map[pos.z + 1,pos.x + 1] == 3){
-						Debug.Log("Life: right door open");
-						Debug.Log("Map: left door open");
-					}else{
-						Debug.Log("Life: right door close");
-						Debug.Log("Map: left door close");
-					}
-				}
-				break;
-			case 3:
-				if (validPosition(pos,-1,-1)){
-					if (Globals.map[pos.z,pos.x - 1] == 2 && Globals.map[pos.z - 1,pos.x -1] == 2){
-						Debug.Log("Map: left door open");
-						Debug.Log("Life: right door open");
-					}else{
-						Debug.Log("Map: left door close");
-						Debug.Log("Life: right door close");
-					}
-				}
-				if (validPosition(pos,1,0)){
-					if (Globals.map[pos.z,pos.x + 1] == 4){
-						Debug.Log("Map: right door open");
-						Debug.Log("Menu: left door open");
-					}else{
-						Debug.Log("Map: right door close");
-						Debug.Log("Menu: left door close");
-					}
+					doorSignal.renderer.material = uncompleteMaterial;
+					return false;
 				}
 				
-				break;
-			case 4:
-				if (validPosition(pos,-1,0)){
-					if (Globals.map[pos.z,pos.x -1] == 3){
-						Debug.Log("Menù: left door open");
-						Debug.Log("Map: right door open");
-					}else{
-						Debug.Log("Menù: left door close");
-						Debug.Log("Map: right door close");
-					}
-				}
-				if (validPosition(pos,0,-1)){
-					if (Globals.map[pos.z - 1,pos.x] == 1){
-						Debug.Log("Menù: up door open");
-						Debug.Log("Inventory: down door open");
-					}else{
-						Debug.Log("Menù: up door close");
-						Debug.Log("Inventory: down door close");
-					}
-				}
-				break;
-			case 5:
-				if (validPosition(pos,-1,-1)){
-					if (Globals.map[pos.z,pos.x - 1] == 2 && Globals.map[pos.z - 1,pos.x - 1] == 2 ){
-						Debug.Log("Timer: left door open");
-						Debug.Log("Life: right door open");
-					}else{
-						Debug.Log("Timer: left door close");
-						Debug.Log("Life: right door close");
-					}
-				}
-				break;
+			}
 		}
+		foreach (GameObject temp in platforms)
+		{
+			temp.renderer.material = completeMaterial;
+		}
+		doorSignal.renderer.material = completeMaterial;
+		return true;
 
 	}
 	
