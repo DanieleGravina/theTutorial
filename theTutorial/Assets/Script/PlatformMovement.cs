@@ -35,7 +35,7 @@ public class PlatformMovement : MonoBehaviour {
 	const int MAX_X = 4;
 	const int MAX_Z = 4;
 	
-	public static int[,] solution = new int[MAX_Z,MAX_X] {{0,0,0,0},{0,1,2,0},{3,4,2,5},{0,0,0,0}};
+	public static int[,] solution = new int[MAX_Z,MAX_X] {{0,0,0,0},{0,0,0,0},{0,1,2,0},{3,4,2,5}};
 
 	public enum dirType{
 		UP,
@@ -54,7 +54,7 @@ public class PlatformMovement : MonoBehaviour {
 		ID = int.Parse(platform.name[0].ToString());
 		end_position = platform.position;
 		platforms = GameObject.FindGameObjectsWithTag("platform");
-		mapComplete();
+		correctPlatformPosition(ID);
 	}
 	
 	// Update is called once per frame
@@ -109,6 +109,7 @@ public class PlatformMovement : MonoBehaviour {
 					}
 				}
 				mapComplete();
+				correctPlatformPosition(ID);
 			}
 		}
 	}
@@ -183,23 +184,66 @@ public class PlatformMovement : MonoBehaviour {
 			for(int j = 0; j < MAX_X; j++){
 				
 				if(Globals.map[i,j] != solution[i,j] ){
-					foreach (GameObject temp in platforms)
+				/*	foreach (GameObject temp in platforms)
 					{
 						temp.renderer.material = uncompleteMaterial;
 					}
+ 				*/
 					doorSignal.renderer.material = uncompleteMaterial;
 					return false;
-				}
-				
+				}		
 			}
 		}
-		foreach (GameObject temp in platforms)
+	/*	foreach (GameObject temp in platforms)
 		{
 			temp.renderer.material = completeMaterial;
 		}
+	*/
 		doorSignal.renderer.material = completeMaterial;
 		return true;
 
+	}
+
+	void correctPlatformPosition(int ID){
+		pos = findPos(ID);
+		switch (ID){
+			case 1:
+				if (pos.z == 2 && pos.x == 1){
+					platform.gameObject.renderer.material = completeMaterial;
+				}else{
+					platform.gameObject.renderer.material = uncompleteMaterial;
+				}
+				break;
+			case 2:
+				if (pos.z == 2 && pos.x == 2 && Globals.map[pos.z + 1,pos.x] == 2){
+					platform.gameObject.renderer.material = completeMaterial;
+				}
+				else{
+					platform.gameObject.renderer.material = uncompleteMaterial;
+				}
+				break;
+			case 3:
+				if (pos.z == 3 && pos.x == 0){
+					platform.gameObject.renderer.material = completeMaterial;
+				}else{
+					platform.gameObject.renderer.material = uncompleteMaterial;
+				}
+				break;
+			case 4:
+				if (pos.z == 3 && pos.x == 1){
+					platform.gameObject.renderer.material = completeMaterial;
+				}else{
+					platform.gameObject.renderer.material = uncompleteMaterial;
+				}
+				break;
+			case 5:
+				if (pos.z == 3 && pos.x == 3){
+					platform.gameObject.renderer.material = completeMaterial;
+				}else{
+					platform.gameObject.renderer.material = uncompleteMaterial;
+				}
+				break;
+		}
 	}
 	
 	//don't ask
