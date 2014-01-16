@@ -22,22 +22,23 @@ public class PlatformMovement : MonoBehaviour {
 	GameObject[] platforms;
 	GameObject doorSignal;
 
-	float distance = 4.6f;
+	float distance = 4.6f/2;
 	float speed = 1f;
 
 	int ID;
 	float weight;
 	bool active = false;
 
-	int contatore = 1;
+	int contx = 0;
+	int contz = 0;
 
-	const float DELTA_Z = 151.98199f;
-	const float DELTA_X = 113f;
+	const float DELTA_Z = 151.98199f/2;
+	const float DELTA_X = 113f/2;
 
 	const int MAX_X = 4;
 	const int MAX_Z = 4;
 	
-	public static int[,] solution = new int[MAX_Z,MAX_X] {{0,0,0,0},{0,1,2,0},{3,4,2,5},{0,0,0,0}};
+	public static int[,] solution = new int[MAX_Z,MAX_X] {{0,0,0,0},{0,0,0,0},{0,1,2,0},{3,4,2,5}};
 
 	public enum dirType{
 		UP,
@@ -86,13 +87,32 @@ public class PlatformMovement : MonoBehaviour {
 					end_position.x =platform.position.x;
 					end_position.y = platform.position.y;
 					if (direction.z > 0){
+						if (System.Math.Abs(contx) != 1 && validPosition(pos,0,1) && updateMap(ID,0,1,dirType.DOWN)){
+							contz++;
+						}
+						if (contz == -1){
+							contz++;
+							room.transform.Translate(Vector3.forward * DELTA_Z);
+							active = true;
+							end_position.z = platform.position.z + distance;
+						}
 						if (updateMap(ID,0,1,dirType.DOWN)){
 							room.transform.Translate(Vector3.forward * DELTA_Z);
 							active = true;
 							end_position.z = platform.position.z + distance;
 						}
 					}else{
+						if (System.Math.Abs(contx) != 1 && validPosition(pos,0,-1) && updateMap(ID,0,-1,dirType.UP)){
+							contz--;
+						}
+						if (contz == 1){
+							contz--;
+							room.transform.Translate(Vector3.back * DELTA_Z);
+							active = true;
+							end_position.z = platform.position.z - distance;
+						}
 						if (updateMap(ID,0,-1,dirType.UP)){
+		
 							room.transform.Translate(Vector3.back * DELTA_Z);
 							active = true;
 							end_position.z = platform.position.z - distance;
@@ -103,12 +123,30 @@ public class PlatformMovement : MonoBehaviour {
 					end_position.y = platform.position.y;
 					end_position.z = platform.position.z;
 					if (direction.x > 0){
+						if (System.Math.Abs(contz) != 1 && validPosition(pos,-1,0) && updateMap(ID,-1,0,dirType.LEFT)){
+							contx--;
+						}
+						if (contx == 1){
+							contx--;
+							room.transform.Translate(Vector3.right * DELTA_X);
+							active = true;
+							end_position.x = platform.position.x + distance;
+						}
 						if (updateMap(ID,-1,0,dirType.LEFT)){
 							room.transform.Translate(Vector3.right * DELTA_X);
 							active = true;
 							end_position.x = platform.position.x + distance;
 						}
 					}else{
+						if (System.Math.Abs(contz) != 1 && validPosition(pos,1,0) && updateMap(ID,1,0,dirType.RIGHT)){
+							contx++;
+						}
+						if (contx == -1){
+							contx++;
+							room.transform.Translate(Vector3.left * DELTA_X);
+							active = true;
+							end_position.x = platform.position.x - distance;
+						}
 						if (updateMap(ID,1,0,dirType.RIGHT)){
 							room.transform.Translate(Vector3.left * DELTA_X);
 							active = true;
@@ -125,33 +163,52 @@ public class PlatformMovement : MonoBehaviour {
 
 //funzione per andare ad aggiornare la matrice delle stanze a seconda di quale spostamento è avvenuto
 	bool updateMap(int ID, int delta_x, int delta_z, dirType dir){
-		
 		pos = findPos(ID);		
 		if (ID == 2){
 			if (dir == dirType.DOWN){
 				pos.z = pos.z + 1;
 			}else if (dir == dirType.LEFT || dir == dirType.RIGHT){
 				for (int i=0; i<2; i++) {
-					if (!(validPosition(pos,delta_x,delta_z + i) && Globals.map[pos.z + delta_z + i,pos.x  + delta_x] == 0)){
+					pos.z = pos.z + i;
+					if (!(validPosition(pos,delta_x,delta_z) && Globals.map[pos.z + delta_z,pos.x  + delta_x] == 0)){
 						return false;
 					}
 				}
+				pos.z = pos.z - 1;
 			}
 		}
 		
 		if (validPosition(pos, delta_x, delta_z) && Globals.map[pos.z + delta_z,pos.x  + delta_x] == 0){
+			if (System.Math.Abs(contx) == 2 || System.Math.Abs(contz) == 2){
 				Globals.map[pos.z + delta_z,pos.x + delta_x] = ID;
+			}
 			if (ID == 2 && dir == dirType.DOWN){
+				if (System.Math.Abs(contx) == 2 || System.Math.Abs(contz) == 2){
 					Globals.map[ pos.z - 1,pos.x] = 0;
+					contx = 0;
+					contz = 0;
+				}
 			}else if (ID == 2 && dir == dirType.UP){
+				if (System.Math.Abs(contx) == 2 || System.Math.Abs(contz) == 2){
 					Globals.map[ pos.z + 1,pos.x] = 0;
+					contx = 0;
+					contz = 0;
+				}
 			}else if ( ID == 2 && (dir == dirType.LEFT || dir == dirType.RIGHT)){
+				if (System.Math.Abs(contx) == 2 || System.Math.Abs(contz) == 2){
 					for (int i=0;i<2;i++){
 						Globals.map[pos.z + delta_z + i,pos.x + delta_x] = ID;
 						Globals.map[pos.z + i,pos.x] = 0;
 					}
+					contx = 0;
+					contz = 0;
+				}
 			}else{
+				if (System.Math.Abs(contx) == 2 || System.Math.Abs(contz) == 2){
 					Globals.map[pos.z, pos.x] = 0;
+					contx = 0;
+					contz = 0;
+				}
 			}
 			return true;
 		}
@@ -159,7 +216,12 @@ public class PlatformMovement : MonoBehaviour {
 	}
 //funzione che va a controllare se i valori dello spostamento siano possibili
 	bool validPosition(MyVector2 pos, int delta_x, int delta_z){
-		
+
+		if (System.Math.Abs(contx) == 1 && System.Math.Abs(delta_z) == 1){
+			return false;
+		}else if (System.Math.Abs(contz) == 1 && System.Math.Abs(delta_x) == 1){
+			return false;
+		}
 		int new_x = pos.x + delta_x;
 		int new_z = pos.z + delta_z;
 		
@@ -189,25 +251,18 @@ public class PlatformMovement : MonoBehaviour {
 	bool mapComplete(){
 		for(int i = 0; i < MAX_Z; i++){
 			for(int j = 0; j < MAX_X; j++){
-				
 				if(Globals.map[i,j] != solution[i,j] ){
-				/*	foreach (GameObject temp in platforms)
-					{
-						temp.renderer.material = uncompleteMaterial;
-					}
- 				*/
 					doorSignal.renderer.material = uncompleteMaterial;
 					return false;
 				}		
 			}
 		}
-	/*	foreach (GameObject temp in platforms)
-		{
-			temp.renderer.material = completeMaterial;
+		if (System.Math.Abs(contx) != 1 && System.Math.Abs(contz) != 1){
+			doorSignal.renderer.material = completeMaterial;
+			return true;
 		}
-	*/
-		doorSignal.renderer.material = completeMaterial;
-		return true;
+		doorSignal.renderer.material = uncompleteMaterial;
+		return false;
 
 	}
 
@@ -227,6 +282,9 @@ public class PlatformMovement : MonoBehaviour {
 				}else{
 					platform.gameObject.renderer.material = uncompleteMaterial;
 				}
+			if ((System.Math.Abs(contx) == 1 || System.Math.Abs(contz) == 1) && platform.gameObject.renderer.material.name == "yellow (Instance)"){
+					platform.gameObject.renderer.material = uncompleteMaterial;
+				}
 				break;
 			case 2:
 				if (pos.z == 2 && pos.x == 2 && Globals.map[pos.z + 1,pos.x] == 2){
@@ -235,11 +293,17 @@ public class PlatformMovement : MonoBehaviour {
 				else{
 					platform.gameObject.renderer.material = uncompleteMaterial;
 				}
+			if ((System.Math.Abs(contx) == 1 || System.Math.Abs(contz) == 1) && platform.gameObject.renderer.material.name == "yellow (Instance)"){
+					platform.gameObject.renderer.material = uncompleteMaterial;
+			}
 				break;
 			case 3:
 				if (pos.z == 3 && pos.x == 0){
 					platform.gameObject.renderer.material = completeMaterial;
 				}else{
+					platform.gameObject.renderer.material = uncompleteMaterial;
+				}
+			if ((System.Math.Abs(contx) == 1 || System.Math.Abs(contz) == 1) && platform.gameObject.renderer.material.name == "yellow (Instance)"){
 					platform.gameObject.renderer.material = uncompleteMaterial;
 				}
 				break;
@@ -249,11 +313,17 @@ public class PlatformMovement : MonoBehaviour {
 				}else{
 					platform.gameObject.renderer.material = uncompleteMaterial;
 				}
+			if ((System.Math.Abs(contx) == 1 || System.Math.Abs(contz) == 1) && platform.gameObject.renderer.material.name == "yellow (Instance)"){
+					platform.gameObject.renderer.material = uncompleteMaterial;
+				}
 				break;
 			case 5:
 				if (pos.z == 3 && pos.x == 3){
 					platform.gameObject.renderer.material = completeMaterial;
 				}else{
+					platform.gameObject.renderer.material = uncompleteMaterial;
+				}
+			if ((System.Math.Abs(contx) == 1 || System.Math.Abs(contz) == 1) && platform.gameObject.renderer.material.name == "yellow (Instance)"){
 					platform.gameObject.renderer.material = uncompleteMaterial;
 				}
 				break;
