@@ -46,7 +46,7 @@ public class GUITextManager : MonoBehaviour {
 				}
 		}
 		
-		if(beginWrite && guiText != null && buffer != null && buffer[textPos] != null){
+/*		if(beginWrite && guiText != null && buffer != null && buffer[textPos] != null){
 			timer += Time.deltaTime;
 			
 			if(timer >= actualDelay){
@@ -68,7 +68,7 @@ public class GUITextManager : MonoBehaviour {
 				}
 				
 			}
-		}
+		}*/
 	
 	}
 	

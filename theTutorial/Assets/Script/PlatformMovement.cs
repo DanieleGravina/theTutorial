@@ -29,19 +29,22 @@ public class PlatformMovement : MonoBehaviour {
 	float weight;
 	bool active = false;
 
+	int contatore = 1;
+
 	const float DELTA_Z = 151.98199f;
 	const float DELTA_X = 113f;
 
 	const int MAX_X = 4;
 	const int MAX_Z = 4;
 	
-	public static int[,] solution = new int[MAX_Z,MAX_X] {{0,0,0,0},{0,0,0,0},{0,1,2,0},{3,4,2,5}};
+	public static int[,] solution = new int[MAX_Z,MAX_X] {{0,0,0,0},{0,1,2,0},{3,4,2,5},{0,0,0,0}};
 
 	public enum dirType{
 		UP,
 		RIGHT,
 		LEFT,
-		DOWN,	
+		DOWN,
+		NULL
 	}
 
 	dirType dir;
@@ -74,6 +77,7 @@ public class PlatformMovement : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player"){
 			if (active == false){
+				pos = findPos(ID);
 				weight=0;
 				direction =platform.position - other.transform.position;
 				direction.Normalize();
@@ -87,10 +91,12 @@ public class PlatformMovement : MonoBehaviour {
 							active = true;
 							end_position.z = platform.position.z + distance;
 						}
-					}else if (updateMap(ID,0,-1,dirType.UP)){
-						room.transform.Translate(Vector3.back * DELTA_Z);
-						active = true;
-						end_position.z = platform.position.z - distance;
+					}else{
+						if (updateMap(ID,0,-1,dirType.UP)){
+							room.transform.Translate(Vector3.back * DELTA_Z);
+							active = true;
+							end_position.z = platform.position.z - distance;
+						}
 					}
 				}else{
 					platform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
@@ -102,10 +108,12 @@ public class PlatformMovement : MonoBehaviour {
 							active = true;
 							end_position.x = platform.position.x + distance;
 						}
-					}else if (updateMap(ID,1,0,dirType.RIGHT)){
-						room.transform.Translate(Vector3.left * DELTA_X);
-						active = true;
-						end_position.x = platform.position.x - distance;
+					}else{
+						if (updateMap(ID,1,0,dirType.RIGHT)){
+							room.transform.Translate(Vector3.left * DELTA_X);
+							active = true;
+							end_position.x = platform.position.x - distance;
+						}
 					}
 				}
 				mapComplete();
@@ -118,8 +126,7 @@ public class PlatformMovement : MonoBehaviour {
 //funzione per andare ad aggiornare la matrice delle stanze a seconda di quale spostamento è avvenuto
 	bool updateMap(int ID, int delta_x, int delta_z, dirType dir){
 		
-		pos = findPos(ID);
-		
+		pos = findPos(ID);		
 		if (ID == 2){
 			if (dir == dirType.DOWN){
 				pos.z = pos.z + 1;
@@ -133,18 +140,18 @@ public class PlatformMovement : MonoBehaviour {
 		}
 		
 		if (validPosition(pos, delta_x, delta_z) && Globals.map[pos.z + delta_z,pos.x  + delta_x] == 0){
-			Globals.map[pos.z + delta_z,pos.x + delta_x] = ID;
+				Globals.map[pos.z + delta_z,pos.x + delta_x] = ID;
 			if (ID == 2 && dir == dirType.DOWN){
-				Globals.map[ pos.z - 1,pos.x] = 0;
+					Globals.map[ pos.z - 1,pos.x] = 0;
 			}else if (ID == 2 && dir == dirType.UP){
-				Globals.map[ pos.z + 1,pos.x] = 0;
+					Globals.map[ pos.z + 1,pos.x] = 0;
 			}else if ( ID == 2 && (dir == dirType.LEFT || dir == dirType.RIGHT)){
-				for (int i=0;i<2;i++){
-					Globals.map[pos.z + delta_z + i,pos.x + delta_x] = ID;
-					Globals.map[pos.z + i,pos.x] = 0;
-				}
+					for (int i=0;i<2;i++){
+						Globals.map[pos.z + delta_z + i,pos.x + delta_x] = ID;
+						Globals.map[pos.z + i,pos.x] = 0;
+					}
 			}else{
-				Globals.map[pos.z, pos.x] = 0;
+					Globals.map[pos.z, pos.x] = 0;
 			}
 			return true;
 		}
@@ -204,6 +211,13 @@ public class PlatformMovement : MonoBehaviour {
 
 	}
 
+//funzione per cambiare colore alle piattaforme che si trovano nella corretta posizione
+/*
+0,0,0,0
+0,0,0,0
+0,1,2,0
+3,4,2,5
+0,0,0,0*/
 	void correctPlatformPosition(int ID){
 		pos = findPos(ID);
 		switch (ID){
