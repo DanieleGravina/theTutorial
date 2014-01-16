@@ -5,11 +5,12 @@ public class PlatformMovement : MonoBehaviour {
 
 	Vector3 direction;
 	Vector3 end_position;
+	Vector3 tempPlatformPos;
+	Vector3 tempRoomPos;
 
 	MyVector2 pos;
 
 	Transform platform;
-	Vector3 room_position;
 
 	public Material completeMaterial;
 	public Material uncompleteMaterial;
@@ -20,6 +21,10 @@ public class PlatformMovement : MonoBehaviour {
 	GameObject near_door1;
 	GameObject near_door2;
 	GameObject[] platforms;
+	GameObject[] platformsPosition;
+	GameObject[] roomsPosition;
+
+
 	GameObject doorSignal;
 
 	float distance = 4.6f/2;
@@ -58,6 +63,8 @@ public class PlatformMovement : MonoBehaviour {
 		ID = int.Parse(platform.name[0].ToString());
 		end_position = platform.position;
 		platforms = GameObject.FindGameObjectsWithTag("platform");
+		platformsPosition = GameObject.FindGameObjectsWithTag("platformPosition");
+		roomsPosition = GameObject.FindGameObjectsWithTag("roomPosition");
 		correctPlatformPosition(ID);
 	}
 	
@@ -69,6 +76,53 @@ public class PlatformMovement : MonoBehaviour {
 				active = false;
 			}
 			platform.position = Vector3.Lerp(platform.position,end_position,weight/distance);
+		}
+
+		if (Input.GetKey(KeyCode.R)){
+				switch(ID){
+				case 1:
+					tempPlatformPos.x = platformsPosition[4].transform.position.x;
+					tempPlatformPos.y = platformsPosition[4].transform.position.y;
+					tempPlatformPos.z = platformsPosition[4].transform.position.z;
+					tempRoomPos.x = roomsPosition[3].transform.position.x;
+					tempRoomPos.y = roomsPosition[3].transform.position.y;
+					tempRoomPos.z = roomsPosition[3].transform.position.z;
+					break;
+				case 2: 
+					tempPlatformPos.x = platformsPosition[3].transform.position.x;
+					tempPlatformPos.y = platformsPosition[3].transform.position.y;
+					tempPlatformPos.z = platformsPosition[3].transform.position.z;
+					tempRoomPos.x = roomsPosition[4].transform.position.x;
+					tempRoomPos.y = roomsPosition[4].transform.position.y;
+					tempRoomPos.z = roomsPosition[4].transform.position.z;
+					break;
+				case 3:
+					tempPlatformPos.x = platformsPosition[2].transform.position.x;
+					tempPlatformPos.y = platformsPosition[2].transform.position.y;
+					tempPlatformPos.z = platformsPosition[2].transform.position.z;
+					tempRoomPos.x = roomsPosition[2].transform.position.x;
+					tempRoomPos.y = roomsPosition[2].transform.position.y;
+					tempRoomPos.z = roomsPosition[2].transform.position.z;
+					break;
+				case 4: 
+					tempPlatformPos.x = platformsPosition[1].transform.position.x;
+					tempPlatformPos.y = platformsPosition[1].transform.position.y;
+					tempPlatformPos.z = platformsPosition[1].transform.position.z;
+					tempRoomPos.x = roomsPosition[1].transform.position.x;
+					tempRoomPos.y = roomsPosition[1].transform.position.y;
+					tempRoomPos.z = roomsPosition[1].transform.position.z;
+					break;
+				case 5:
+					tempPlatformPos.x = platformsPosition[0].transform.position.x;
+					tempPlatformPos.y = platformsPosition[0].transform.position.y;
+					tempPlatformPos.z = platformsPosition[0].transform.position.z;
+					tempRoomPos.x = roomsPosition[0].transform.position.x;
+					tempRoomPos.y = roomsPosition[0].transform.position.y;
+					tempRoomPos.z = roomsPosition[0].transform.position.z;
+					break;
+				}
+				platform.transform.position = tempPlatformPos;
+				room.transform.position = tempRoomPos;
 		}
 	}
 
