@@ -57,7 +57,7 @@ using System;
 			if(name == "scare"){
 				if(state == textState.DRESS) index = 1;
 				if(state == textState.DRUNK) index = 2;
-			    if(state == textState.DRUNK_ELPHANT) index = 3;
+			    if(state == textState.SCARE_CHILDREN) index = 3;
 			}
 				
 			return outputs[index];
@@ -90,6 +90,13 @@ using System;
 					return parent;
 				else 
 					return null;
+		}
+	
+		public Node getParent(){
+			if(parent != null)
+				return parent;
+			else
+				return null;
 		}
 }
 

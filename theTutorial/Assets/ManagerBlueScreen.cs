@@ -7,6 +7,7 @@ public enum textState{
 		DRUNK, 
 		DRESS, 
 		DRUNK_ELPHANT,
+		SCARE_CHILDREN,
 		CAKE
 	}
 	
@@ -24,6 +25,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 	string[] text, textGUI;
 	
 	bool begin = true;
+	bool finish = false;
 	
 	GameObject managerCamera, blueScreen, GUIdialog, HUDMenu, HUDInventory;
 	
@@ -103,7 +105,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 				begin = false;
 			}
 			
-			if(text[textPosition]!= null){
+			if(!finish &&  text[textPosition]!= null){
 				
 				Timer += Time.deltaTime;
 				if(Timer >= actualDelay){
@@ -120,7 +122,8 @@ public class ManagerBlueScreen : MonoBehaviour {
 			
 			if(Input.GetKeyDown(KeyCode.E)){
 				
-				if(tree.name == "root" && cursorPosition == 1){
+				if((tree.name == "root" && cursorPosition == 1) 
+					|| (tree.name == "exit" && cursorPosition == 0)){
 					exit ();
 				}
 				else{
@@ -298,14 +301,17 @@ public class ManagerBlueScreen : MonoBehaviour {
 		if(myState == textState.DRUNK && tree.name == "costume")
 			myState = textState.DRUNK_ELPHANT;
 		
-		if(myState == textState.DRUNK_ELPHANT && tree.name == "cake")
+		if(myState == textState.DRUNK_ELPHANT && tree.name == "scare")
+			myState = textState.SCARE_CHILDREN;
+		
+		if(myState == textState.SCARE_CHILDREN && tree.name == "cake")
 			myState = textState.CAKE;
 	}
 	
 	void checkCake(){
 		if(myState == textState.CAKE){
 			GameObject.Find("Key3").renderer.enabled = true;
-			Invoke("exit", actualDelay*5);
+			showOnlyExit();
 		}
 	}
 	
@@ -316,5 +322,17 @@ public class ManagerBlueScreen : MonoBehaviour {
 		managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
 		managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
 		GUIManager.SetActive(true);
+	}
+	
+	void showOnlyExit(){
+		
+		Node exit = new Node("exit");
+		
+		exit.insertNumber(1);
+		
+		foreach(string s in tree.getOutput(textState.CAKE))
+			exit.insertOutput(s);
+		
+		tree = exit;
 	}
 }

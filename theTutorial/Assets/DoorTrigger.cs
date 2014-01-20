@@ -102,6 +102,7 @@ public class DoorTrigger : MonoBehaviour {
 				openDoor = true;
 				startTime = Time.time;
 				door.audio.Play();
+				levelDoor = Level.ALL;
 			}
 			else{
 				if(text.Length != 0)
