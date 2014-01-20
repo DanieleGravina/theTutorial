@@ -4,10 +4,16 @@ using System.Collections;
 public class Globals {
 	
 	#region STATIC VARIABLES
-	
+
+	public enum LoadType{
+		LEVEL_1,
+		LEVEL_2,
+		LEVEL_3
+	}
+
 	public static bool cakeTaken = false;
 
-	public static bool levelOne = false;
+	public static LoadType level = LoadType.LEVEL_1;
 	
 	public static Level currentLevel = Level.MENU;
 	

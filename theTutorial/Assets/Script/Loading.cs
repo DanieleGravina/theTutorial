@@ -10,14 +10,22 @@ public class Loading : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Globals.levelOne){
-			if(Application.GetStreamProgressForLevel("FirstLevel") == 1){
-				Application.LoadLevel("FirstLevel");
-			}
-		}else{
-			if(Application.GetStreamProgressForLevel("Level_2") == 1){
-				Application.LoadLevel("Level_2");
-			}
+		switch (Globals.level){
+			case Globals.LoadType.LEVEL_1:
+				if(Application.GetStreamProgressForLevel("FirstLevel") == 1){
+					Application.LoadLevel("FirstLevel");
+				}
+				break;
+			case Globals.LoadType.LEVEL_2:
+				if(Application.GetStreamProgressForLevel("Level_2") == 1){
+					Application.LoadLevel("Level_2");
+				}
+				break;
+			case Globals.LoadType.LEVEL_3:
+				if(Application.GetStreamProgressForLevel("FinalLevel") == 1){
+					Application.LoadLevel("FinalLevel");
+				}
+				break;
 		}
 	}
 }

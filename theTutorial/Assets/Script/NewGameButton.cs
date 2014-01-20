@@ -12,6 +12,7 @@ public class NewGameButton : MonoBehaviour {
 	}
 	
 	void Load() {
-		Application.LoadLevel("FinalLevel");
+		Globals.level = Globals.LoadType.LEVEL_3;
+		Application.LoadLevel("Loading");
 	}
 }

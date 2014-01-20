@@ -12,7 +12,7 @@ public class ContinueButton : MonoBehaviour {
 	}
 	
 	void Load() {
-		Globals.levelOne = false;
+		Globals.level = Globals.LoadType.LEVEL_2;
 		Application.LoadLevel("Loading");
 	}
 }
