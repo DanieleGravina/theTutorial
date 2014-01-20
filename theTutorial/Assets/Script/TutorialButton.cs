@@ -13,6 +13,7 @@ public class TutorialButton : MonoBehaviour {
 	}
 	
 	void Load() {
-		Application.LoadLevel("FirstLevel");
+		Globals.levelOne = true;
+		Application.LoadLevel("Loading");
 	}
 }

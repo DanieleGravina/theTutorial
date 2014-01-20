@@ -6,6 +6,8 @@ public class Globals {
 	#region STATIC VARIABLES
 	
 	public static bool cakeTaken = false;
+
+	public static bool levelOne = false;
 	
 	public static Level currentLevel = Level.MENU;
 	
