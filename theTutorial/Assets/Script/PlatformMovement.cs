@@ -81,52 +81,27 @@ public class PlatformMovement : MonoBehaviour {
 			platform.position = Vector3.Lerp(start_position,end_position,weight);
 		}
 
-		if (Input.GetKey(KeyCode.R) && enable == true){
-				switch(ID){
-				case 1:
-					tempPlatformPos.x = platformsPosition[4].transform.position.x;
-					tempPlatformPos.y = platformsPosition[4].transform.position.y;
-					tempPlatformPos.z = platformsPosition[4].transform.position.z;
-					tempRoomPos.x = roomsPosition[3].transform.position.x;
-					tempRoomPos.y = roomsPosition[3].transform.position.y;
-					tempRoomPos.z = roomsPosition[3].transform.position.z;
-					break;
-				case 2: 
-					tempPlatformPos.x = platformsPosition[3].transform.position.x;
-					tempPlatformPos.y = platformsPosition[3].transform.position.y;
-					tempPlatformPos.z = platformsPosition[3].transform.position.z;
-					tempRoomPos.x = roomsPosition[4].transform.position.x;
-					tempRoomPos.y = roomsPosition[4].transform.position.y;
-					tempRoomPos.z = roomsPosition[4].transform.position.z;
-					break;
-				case 3:
-					tempPlatformPos.x = platformsPosition[2].transform.position.x;
-					tempPlatformPos.y = platformsPosition[2].transform.position.y;
-					tempPlatformPos.z = platformsPosition[2].transform.position.z;
-					tempRoomPos.x = roomsPosition[2].transform.position.x;
-					tempRoomPos.y = roomsPosition[2].transform.position.y;
-					tempRoomPos.z = roomsPosition[2].transform.position.z;
-					break;
-				case 4: 
-					tempPlatformPos.x = platformsPosition[1].transform.position.x;
-					tempPlatformPos.y = platformsPosition[1].transform.position.y;
-					tempPlatformPos.z = platformsPosition[1].transform.position.z;
-					tempRoomPos.x = roomsPosition[1].transform.position.x;
-					tempRoomPos.y = roomsPosition[1].transform.position.y;
-					tempRoomPos.z = roomsPosition[1].transform.position.z;
-					break;
-				case 5:
-					tempPlatformPos.x = platformsPosition[0].transform.position.x;
-					tempPlatformPos.y = platformsPosition[0].transform.position.y;
-					tempPlatformPos.z = platformsPosition[0].transform.position.z;
-					tempRoomPos.x = roomsPosition[0].transform.position.x;
-					tempRoomPos.y = roomsPosition[0].transform.position.y;
-					tempRoomPos.z = roomsPosition[0].transform.position.z;
+		/*if (Input.GetKey(KeyCode.R) && enable == true){
+			Globals.map =  new int[MAX_Z,MAX_X] {{0,0,0,0},{0,1,2,0},{5,4,2,3},{0,0,0,0}};
+			foreach (GameObject obj in platformsPosition){
+				if (int.Parse(obj.name[0].ToString()) == ID){
+					tempPlatformPos.x = obj.transform.position.x;
+					tempPlatformPos.y = obj.transform.position.y;
+					tempPlatformPos.z = obj.transform.position.z;
 					break;
 				}
+			}
+			foreach (GameObject obj in roomsPosition){
+				if (int.Parse(obj.name[0].ToString()) == ID){
+					tempRoomPos.x = obj.transform.position.x;
+					tempRoomPos.y = obj.transform.position.y;
+					tempRoomPos.z = obj.transform.position.z;
+					break;
+				}
+			}
 				platform.transform.position = tempPlatformPos;
 				room.transform.position = tempRoomPos;
-		}
+		} */
 	}
 
 //funzione che serve per andare a verificare il player da che parte spinge la piattaforma e andare a spostare
