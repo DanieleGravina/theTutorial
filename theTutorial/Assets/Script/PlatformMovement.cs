@@ -5,6 +5,7 @@ public class PlatformMovement : MonoBehaviour {
 
 	Vector3 direction;
 	Vector3 end_position;
+	Vector3 start_position;
 	Vector3 tempPlatformPos;
 	Vector3 tempRoomPos;
 
@@ -29,7 +30,7 @@ public class PlatformMovement : MonoBehaviour {
 	public GameObject StateLevel;
 
 	float distance = 4.6f/2;
-	float speed = 1f;
+	float speed = 2f;
 
 	int ID;
 	float weight;
@@ -60,7 +61,8 @@ public class PlatformMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		platform = this.transform.parent;
+		Globals.map =  new int[MAX_Z,MAX_X] {{0,0,0,0},{0,1,2,0},{5,4,2,3},{0,0,0,0}};
+		platform = this.transform;
 		ID = int.Parse(platform.name[0].ToString());
 		end_position = platform.position;
 		platforms = GameObject.FindGameObjectsWithTag("platform");
@@ -76,7 +78,7 @@ public class PlatformMovement : MonoBehaviour {
 			if (weight > 1) {
 				active = false;
 			}
-			platform.position = Vector3.Lerp(platform.position,end_position,weight/distance);
+			platform.position = Vector3.Lerp(start_position,end_position,weight);
 		}
 
 		if (Input.GetKey(KeyCode.R) && enable == true){
@@ -130,12 +132,12 @@ public class PlatformMovement : MonoBehaviour {
 //funzione che serve per andare a verificare il player da che parte spinge la piattaforma e andare a spostare
 //la relativa stanza andando a settare la variabile active per non permettere ulteriori spinte mentre la piattaforma
 //è in movimento
-	void OnTriggerEnter(Collider other){
-		if (other.tag == "Player"){
+	void OnCollisionEnter(Collision collision) {
+		if (collision.collider.tag == "Player"){
 			if (active == false){
 				pos = findPos(ID);
 				weight=0;
-				direction =platform.position - other.transform.position;
+				direction =platform.position - collision.collider.transform.position;
 				direction.Normalize();
 				if (Mathf.Abs(direction.x) <= 0.5) {
 					platform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
@@ -148,11 +150,13 @@ public class PlatformMovement : MonoBehaviour {
 						if (contz == -1){
 							contz++;
 							room.transform.Translate(Vector3.forward * DELTA_Z);
+							start_position = platform.position;
 							active = true;
 							end_position.z = platform.position.z + distance;
 						}
 						if (updateMap(ID,0,1,dirType.DOWN)){
 							room.transform.Translate(Vector3.forward * DELTA_Z);
+							start_position = platform.position;
 							active = true;
 							end_position.z = platform.position.z + distance;
 						}
@@ -163,12 +167,14 @@ public class PlatformMovement : MonoBehaviour {
 						if (contz == 1){
 							contz--;
 							room.transform.Translate(Vector3.back * DELTA_Z);
+							start_position = platform.position;
 							active = true;
 							end_position.z = platform.position.z - distance;
 						}
 						if (updateMap(ID,0,-1,dirType.UP)){
 		
 							room.transform.Translate(Vector3.back * DELTA_Z);
+							start_position = platform.position;
 							active = true;
 							end_position.z = platform.position.z - distance;
 						}
@@ -184,11 +190,13 @@ public class PlatformMovement : MonoBehaviour {
 						if (contx == 1){
 							contx--;
 							room.transform.Translate(Vector3.right * DELTA_X);
+							start_position = platform.position;
 							active = true;
 							end_position.x = platform.position.x + distance;
 						}
 						if (updateMap(ID,-1,0,dirType.LEFT)){
 							room.transform.Translate(Vector3.right * DELTA_X);
+							start_position = platform.position;
 							active = true;
 							end_position.x = platform.position.x + distance;
 						}
@@ -199,11 +207,13 @@ public class PlatformMovement : MonoBehaviour {
 						if (contx == -1){
 							contx++;
 							room.transform.Translate(Vector3.left * DELTA_X);
+							start_position = platform.position;
 							active = true;
 							end_position.x = platform.position.x - distance;
 						}
 						if (updateMap(ID,1,0,dirType.RIGHT)){
 							room.transform.Translate(Vector3.left * DELTA_X);
+							start_position = platform.position;
 							active = true;
 							end_position.x = platform.position.x - distance;
 						}
