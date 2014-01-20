@@ -61,16 +61,6 @@ public class HealthBar : MonoBehaviour {
 				restoreNormalView();
 			}
 		}
-		
-		/*if(animationText){
-			animTimer += Time.deltaTime*speedAnim;
-			guiText.fontSize = Mathf.CeilToInt(Mathf.Lerp(normalTextSize, 
-				normalTextSize + textAnimation, animTimer));
-			
-			if(guiText.fontSize >= normalTextSize + textAnimation)
-				animationText = false;
-			
-		}*/
 	}
 	
 	public void decreaseLife(){

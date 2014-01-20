@@ -10,7 +10,14 @@ public class TakeObject : MonoBehaviour {
 	public GameObject SignalDoorToLife;
 	public GameObject StateLevel;
 	
+	public float FadeOutTimeOut = 1.0f;
+	
 	GameObject arrow;
+	
+	bool fadeOutArrow = false;
+	float alphaArrow;
+	Color colorArrow;
+	float Timer = 0.0f;
 	
 	public Texture2D[] hudInventory;
 
@@ -38,6 +45,22 @@ public class TakeObject : MonoBehaviour {
 		if(Input.GetKey("g")){
 			Application.LoadLevel("HUD_Level");
 		}
+		
+		if(fadeOutArrow){
+			Timer += Time.deltaTime;
+			if(Timer >= FadeOutTimeOut){
+				Debug.Log(alphaArrow);
+				alphaArrow -= 0.1f;
+				Timer = 0;
+			}
+			colorArrow.a = alphaArrow;
+			arrow.renderer.material.SetColor("_TintColor", colorArrow);
+			arrow.transform.GetChild(0).renderer.material.SetColor("_TintColor", colorArrow);
+			if(colorArrow.a <= 0f){
+				Destroy(arrow);
+				fadeOutArrow = false;
+			}
+		}
 	
 	}
 	
@@ -52,8 +75,12 @@ public class TakeObject : MonoBehaviour {
 		
 		if(Globals.numInventory == 3){
 			StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.LIFE;
-			arrow.renderer.enabled = false;
-			arrow.transform.GetChild(0).renderer.enabled = false;
+			//arrow.renderer.enabled = false;
+			fadeOutArrow = true;
+			Timer = 0;
+			alphaArrow = arrow.renderer.material.GetColor("_TintColor").a;
+			colorArrow = arrow.renderer.material.GetColor("_TintColor");
+			//arrow.transform.GetChild(0).renderer.enabled = false;
 			SignalDoorToLife.GetComponent<SignalColorManager>().ChangeSignalColor();
 		}
 			

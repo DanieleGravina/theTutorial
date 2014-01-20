@@ -3,9 +3,9 @@ using System.Collections;
 
 public class Hallway_Two : MonoBehaviour
 {
-    public float rotation;
+    public static float rotation;
     public bool rot = false;
-    float total_rot = 0;
+    public static float total_rot = 0;
     // Use this for initialization
     void Start()
     {
@@ -19,8 +19,8 @@ public class Hallway_Two : MonoBehaviour
         {
             rotation = 0;
     
-            if (Input.GetAxis("Mouse ScrollWheel") > 0) { rotation = 4f; total_rot += 4f; }
-            else  if (Input.GetAxis("Mouse ScrollWheel") < 0) { rotation = -4f; total_rot -= 4f; }
+            if (Input.GetAxis("Mouse ScrollWheel") > 0 || Character.turn == 1) { rotation = 4f; total_rot += 4f; }
+            else  if (Input.GetAxis("Mouse ScrollWheel") < 0 || Character.turn == -1) { rotation = -4f; total_rot -= 4f; }
             transform.Rotate(0, 0, rotation);
         }
 

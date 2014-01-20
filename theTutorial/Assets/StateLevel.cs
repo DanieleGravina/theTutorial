@@ -20,6 +20,8 @@ public class StateLevel : MonoBehaviour {
 	public GameObject TimerRespawnPoint;
 	
 	public Level CurrentLevel = Level.MENU;
+	
+	public GameObject[] doors;
 
 	// Use this for initialization
 	void Start () {
@@ -39,5 +41,12 @@ public class StateLevel : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
+	}
+	
+	public void openAllDoor(){
+		
+		foreach(GameObject door in doors){
+			door.GetComponent<DoorTrigger>().levelDoor = Level.ALL;
+		}
 	}
 }

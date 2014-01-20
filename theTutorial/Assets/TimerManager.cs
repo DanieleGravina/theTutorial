@@ -43,4 +43,8 @@ public class TimerManager : MonoBehaviour {
 	public void beginCountDown(){
 		isCountDown = true;
 	}
+	
+	public void Restart(){
+		timer = 0;
+	}
 }

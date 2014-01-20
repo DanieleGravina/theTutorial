@@ -10,6 +10,7 @@ public class EnterMapDoor : MonoBehaviour {
 	public GameObject map;
 	
 	GameObject GUIdialog;
+	public GameObject doorTrigger;
 
 	// Use this for initialization
 	void Start () {
@@ -25,11 +26,12 @@ public class EnterMapDoor : MonoBehaviour {
 	void OnTriggerExit(Collider other){
 		if(other.tag == "Player" && !afterTrigger){
 			afterTrigger = true;
+			PlatformMovement.enable = true;
+			this.enabled = false;
+			doorTrigger.SetActive(false);
 			GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
-			rigidbodyController.transform.parent = this.transform.parent.transform.parent.transform;
-			//map.GetComponent<Camera>().enabled = true;
+			rigidbodyController.transform.parent = this.transform.parent.transform;
 			map.SetActive(true);
-			this.GetComponent<DoorTrigger>().enabled = false;
 
 
 		}

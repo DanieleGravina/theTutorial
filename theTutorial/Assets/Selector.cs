@@ -109,7 +109,7 @@ public class Selector : MonoBehaviour {
 				getInput("RIGHT");
 			}
 			
-			if(Input.GetKeyDown(KeyCode.Return) && position == 3){
+			if(Input.GetKeyDown(KeyCode.E) && position == 3){
 				StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.BLUESCREEN;
 				managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = false;
 				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = true;

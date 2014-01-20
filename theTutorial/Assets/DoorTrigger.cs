@@ -63,7 +63,7 @@ public class DoorTrigger : MonoBehaviour {
 			fracCovered = distCovered / distance;
 			door.transform.position = Vector3.Lerp(start, end, fracCovered);
 			
-			if(door.transform.position == end)
+			if(fracCovered >= 1f)
 				openDoor = false;
 		}
 		
@@ -72,14 +72,27 @@ public class DoorTrigger : MonoBehaviour {
 			fracCovered = distCovered / distance;
 			door.transform.position = Vector3.Lerp(end, start, fracCovered);
 			
-			if(door.transform.position == start)
+			if(fracCovered >= 1f)
 				closeDoor = false;
 		}
 	}
 	
 	void OnTriggerEnter(Collider other){
 		if(other.tag == "Player" && state == stateDoor.CLOSED){
-			Debug.Log(StateLevel.GetComponent<StateLevel>().CurrentLevel);
+			
+			float translateX = 0f, translateZ = 0f;
+			
+			if(start != door.transform.position){
+		
+				if(dirDoor == doorDirection.X)
+					translateX = translate;
+				else
+					translateZ = translate;
+				
+				start = door.transform.position;
+				end = new Vector3(start.x + translateX, start.y, start.z + translateZ);
+			}
+			
 			if(levelDoor == StateLevel.GetComponent<StateLevel>().CurrentLevel || 
 				levelDoor == Level.ALL){
 				state = stateDoor.OPEN;

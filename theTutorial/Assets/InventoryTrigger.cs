@@ -5,7 +5,7 @@ public class InventoryTrigger : MonoBehaviour {
 	
 	string inventoryExplanation = "Now i will show how the inventory works: ";
 	
-	string inventoryExplanation2 = "Find the three cakes.";
+	string inventoryExplanation2 = "Find the three hidden cubes.";
 	
 	string arrow = "This arrow will help you to find the way";
 	

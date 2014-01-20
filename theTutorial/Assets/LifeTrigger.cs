@@ -4,6 +4,7 @@ using System.Collections;
 public class LifeTrigger : MonoBehaviour {
 	
 	public string[] text;
+	//public GameObject[] assetToDisable;
 	public GameObject LifeGui;
 	
 	bool afterTrigger = false;
@@ -25,6 +26,11 @@ public class LifeTrigger : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		
 		if(other.tag == "Player" && !afterTrigger){
+			
+			/*foreach(GameObject asset in assetToDisable){
+				asset.SetActive(false);
+			}*/
+			
 			afterTrigger = true;
 			GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
 			LifeGui.guiText.enabled = true;

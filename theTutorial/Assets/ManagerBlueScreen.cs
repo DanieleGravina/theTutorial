@@ -14,7 +14,7 @@ public enum textState{
 public class ManagerBlueScreen : MonoBehaviour {
 	
 	
-	string angry = "I SAID TO NOT PRESS ESC, YOU &%$%&";
+	string angry = "I SAID TO NOT SELECT EXIT, YOU &%$%&";
 	string textGame1 = "Now i have to fix this mess.";
 	string textGame2 = "In the while, play this textual game";
 	string textGame3 = "Beware to not break anything, ok?";
@@ -118,7 +118,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 				}
 			}
 			
-			if(Input.GetKeyDown(KeyCode.Return)){
+			if(Input.GetKeyDown(KeyCode.E)){
 				
 				if(tree.name == "root" && cursorPosition == 1){
 					

@@ -1,0 +1,137 @@
+fileFormatVersion: 2
+guid: a8b20971173a5d54ca6a471847326526
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: be_l_piedeEND01
+    100002: be_pinnaEND01
+    100004: be_pinnaEND02
+    100006: be_r_piedeEND01
+    100008: be_spineEND01
+    100010: be_testaEND01
+    100012: be_zampineEND01
+    100014: bn_cauda01
+    100016: bn_colloA01
+    100018: bn_colloB01
+    100020: bn_colloC01
+    100022: bn_colloD01
+    100024: bn_l_zampaAntA01
+    100026: bn_l_zampaAntB01
+    100028: bn_l_zampaAntC01
+    100030: bn_l_zampaANTD01
+    100032: bn_PETTO01
+    100034: bn_pinnaA01
+    100036: bn_pinnaA02
+    100038: bn_pinnaB01
+    100040: bn_pinnaB02
+    100042: bn_r_zampaAntA01
+    100044: bn_r_zampaAntB01
+    100046: bn_r_zampaAntC01
+    100048: bn_r_zampaAntD01
+    100050: bn_spineA01
+    100052: bn_spineB01
+    100054: bn_spineC01
+    100056: bn_testaA01
+    100058: bn_zampineA01
+    100060: bn_zampineB01
+    100062: bn_zampineC01
+    100064: //RootNode
+    100066: MASTER_BONE
+    100068: MASTER_MESH
+    100070: Skin
+    100072: Skin_2
+    100074: TheTutorialDragon_001
+    400000: be_l_piedeEND01
+    400002: be_pinnaEND01
+    400004: be_pinnaEND02
+    400006: be_r_piedeEND01
+    400008: be_spineEND01
+    400010: be_testaEND01
+    400012: be_zampineEND01
+    400014: bn_cauda01
+    400016: bn_colloA01
+    400018: bn_colloB01
+    400020: bn_colloC01
+    400022: bn_colloD01
+    400024: bn_l_zampaAntA01
+    400026: bn_l_zampaAntB01
+    400028: bn_l_zampaAntC01
+    400030: bn_l_zampaANTD01
+    400032: bn_PETTO01
+    400034: bn_pinnaA01
+    400036: bn_pinnaA02
+    400038: bn_pinnaB01
+    400040: bn_pinnaB02
+    400042: bn_r_zampaAntA01
+    400044: bn_r_zampaAntB01
+    400046: bn_r_zampaAntC01
+    400048: bn_r_zampaAntD01
+    400050: bn_spineA01
+    400052: bn_spineB01
+    400054: bn_spineC01
+    400056: bn_testaA01
+    400058: bn_zampineA01
+    400060: bn_zampineB01
+    400062: bn_zampineC01
+    400064: //RootNode
+    400066: MASTER_BONE
+    400068: MASTER_MESH
+    400070: Skin
+    400072: Skin_2
+    400074: TheTutorialDragon_001
+    4300000: TheTutorialDragon_001
+    7400000: C4D Animation Take
+    9500000: //RootNode
+    13700000: TheTutorialDragon_001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  userData: 

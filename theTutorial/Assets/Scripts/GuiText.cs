@@ -1,130 +1,167 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+
 
 public class GuiText : MonoBehaviour
 {
-
-  
     public static string[] livello_uno = {
-		"Hi there, I'm IA, and I will guide you through this tutorial. Choose the door you prefer." ,                                       //0
-		"I see, you are a coward. My first impression about you was right. Ok crybaby, let's start!",             //1
-		"Oh, you chose medium...sooo mainstream. You must be a boring person. Ok, let's start!",                         //2
-        "Watch out! We got a badass over here! Ok Mr.Courage, let's start!",              //3
-		"I will teach you the controls first, because I think you are an idiot. No offense.",                                   //4
+	
+	"Good morning, my dear! Welcome to the tutorial. Feel free to choose the door you prefer." ,                                       //0
+	
+	"Oh my! You are not so brave, aren't you? Well, let's start anyway!",             //1
+		
+	"You are quite a boring person, aren't you? I do appreciate that! Now, please, go on.",                         //2
+  
+        "Oh! What a brave lad we got here! I won't stop you, please go on.",              //3
+	
+	"Ok son, I will teach you how to move first. Use WASD to move around. ",                                   //4
         "Press WASD to move. On the keyboard. With your fingers. Yes, those.",                                     //5
-        "What the hell are you doing? Are you normal?",                           //6
-        "Control your legs! It's easy!",                          //7 
-        "You just have two of them, you are not Rocco Siffredi!",                   //8
-        "Oh, finally, you were terrible in there, it was like watching a drunken elephant.",                         //9
-        "Ok, now I will teach you the camera, move your mouse to look around.",              //10
-        "See you at the end of this simple labirint!",            //11
-        "What are you doing with your head? Are you ok?",                                             //12
-        "Did your father beated you when you were a child?",                         //13
-        "Are you on drugs? That would explain a lot. Also, you have some?",                //14
-        "Oh! Sorry! It was my fault! I dropped the camera on the floor! ",                                             //15
-        "As you can imagine, I'm terribly sorry!",                                   //16
-        "Now i'm gonna teach you the jump. Press the Space Bar." ,        //17
-         "NOT NOW, YOU IDIOT!",                         //18
-        "Got your noooose!",              //19
-        "You pissed the karma off, do not complain.",            //20
-        "You wish you have a portal gun, eh?",                                             //21
-        "You should lose some weight...no offense fatty!",                         //22
-        "Error 708: Your face crashed",                //23
-        "You cheater! And I've always been so honest with you...",                                             //24
-        "Whops, so close!",                                   //25
-        "You had fun jumpin around? I bet you did you special boy! Here, take a candy!",         //26                
-        "Now let's try an higher jump, reach the that hole." ,       //27    
-           "Mmm...too hard? Free your mind, clear your thoughts, bend some spoons and try again!",                         //28
-        "If only you could rotate the room...but how?? Open your stupid mind!",              //29
-        "Oh, look, an hamster! Please, don't stop, I need electricity!",            //30
-        "Now proceed to the final room. Only one exit is the right one, choose carefully.",                                             //31
-        "Today I feel gentle, choose again.",                         //32
-        "Ops, another room.",                //33
-        "Try again, you'll be more lucky.",                                             //34
-        "You have been there for ages! Mankind landed on Mars and Half Life 3 went out!",                                   //35
-        "Hey! Don't ruin my home!",         //36                
-        "Stop it!",        //37    
-        "It seems like you lost hours of you life for nothing. Thank god your life is worthless!",                                   //38
-        "See you in the next part of this tutorial!",         //39                
-        "PS: You Suck."  //40
-                                         };                          
-    public static string[] livello_due = { "sono il secondo livello", "prova prova prova", "FRASE 3 asdfqasdfasdfasdf", "E FRASE 4", "frase 5 " };
-    int start, end, liv;
-    protected bool lapse = false;
-    bool ok = false;
-    GameObject motor;
+        "Oh, what's happening? It is something wrong with you, young man?",                           //6
+        "You remind me of a drunken elephant I saw in India when I was young.",                          //7 
+        "I shot at him. I was quite a hunter when I was a young lord.",                   //8
+        "Oh, you did it indeed! I wasn't quite sure because you look so...poor and red-blooded.",                         //9
+        "Oh, sorry, don't listen to the opinions of an old man. Now I will teach you the camera. ",              //10
+        "Look around with your mouse. I will wait for you at the end of these rooms, drinking some tea",            //11
+        "What are you doing with your head? Are you fine?",                                             //12
+        "You must have had a difficult childhood...no money, no servants...look at you now!",                         //13
+        "Oh, it's five o'clock! Take your time, i'm not going anywhere, my dear.",                //14
+        "Oh my! It was my own fault! I dropped the camera on my shining marble floor! ",                                             //15
+        "I'm terribly sorry, I owe you my sincerest apologies.",                                   //16
+        "Now I will teach you how to jump. Press the space bar." ,        //17
+        "Not now, you peasant",                         //18
+        "Well, try another time, I bid you a good luck!",              //19
+        "Try again my dear, take your time",            //20
+        "What happened? You hit something, didn't you?",                                             //21
+        "What was that? Let me see better through my monocle...",                         //22
+        "Ops, I guess you are not good at jumping! Back in my days I had a slave for that! Oh oh oh",                //23
+        "Well I'll be damned! You are quite full of resources, aren't you young man?",                                             //24
+        "Oh Dear Lord! You were so close!",                                   //25
+        "You did it! I must say, I am impressed, my dear!",         //26                
+        "It is time to try something more difficult...try to jump up there, into that hole." ,       //27    
+           "Well that seems to be very hard...try harder, if you will.",                         //28
+        "If only you could rotate the room...think about it.",              //29
+        "Oh my, that's brilliant! Congratulation son! You look exactly like my little hamster Betty ",            //30
+        "Well, you reached the last room, my dear, go in there and choose a door!",                                             //31
+        "Oh well, choose again",                         //32
+        "Mmm...peculiar...another identic room...this is delightfully intriguing",                //33
+        "This is incredibly odd, I'm amused",                                             //34
+        "Well, since you are still stuck in there, I suppose I'm gonna make some more tea. ",                                   //35
+        "Oh Dear! That's utterly unexpected!",         //36                
+        "Good thinking son, maybe you are better then a simple peasant",        //37    
+        "Oh! That is exactly where you started! Life is curious sometimes, isn't it?",                                   //38
+        "Farewell my son, it was a pleasure to meet you. Although...",         //39                
+        "...I still have to teach you the user interface...Very well then, see you later!"  //40
+                                         };             
+    bool onWriting = true;
+    GameObject player;
+
+    bool beginWrite = false;
+
+    public float delay = 0.07f;
+    float actualDelay;
+
+    string[] buffer;
+    int textPos, index = 0;
+
+    float timer;
 
     // Use this for initialization
     void Start()
     {
-        motor = GameObject.Find("First Person Controller");
-        
+
+        player = GameObject.Find("First Person Controller");
         TypeOut(0, 0, 0);
-      
+        actualDelay = delay;
+
+        timer = 0;
+
+        index = 0;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if (Input.GetMouseButtonUp(0) || lapse)
+        
+        if (Input.GetKeyDown(KeyCode.P)) TypeOut(0,1,2);
+        if (Input.GetMouseButtonUp(0))
         {
-            lapse = false;
 
-
-            if (ok)
+            if (onWriting)
             {
-                guiText.text = " ";
-                if (start <= end)
-                {
-                    ok = false;
-                   
-                    TypeOut(liv, start, end);
-
-
-                }
-                else
-                    motor.GetComponent<CharacterMotor>().canControl = true;
+                actualDelay = 0;
             }
+            else
+                if (buffer != null && textPos < (buffer.Length - 1))
+                {
+                    guiText.text = "";
+                    actualDelay = delay;
+                    textPos++;
+                    index = 0;
+                  
+                        onWriting = true;
+                        beginWrite = true;
+                }  
+                else  if (buffer != null && textPos >= (buffer.Length - 1))
+                
+                    {
+                        player.GetComponent<CharacterMotor>().canControl = true;
+                        onWriting = false;
+                        beginWrite = false;
+                        guiText.text = "";
+                    }
+                  
+                
+
           
         }
 
-
-    }
-
-
-    IEnumerator PokeText(string t, int a, int b)
-    {
-        start = a;
-        end = b;
-        ok = false;
-        char c;
-        int i;
-        for (i = 0; i < t.Length; i++)
+        if (beginWrite && guiText != null && buffer != null)
         {
-            c = t.ToCharArray()[i];
+            timer += Time.deltaTime;
 
-            guiText.text += c;
+            if (timer >= actualDelay)
+            {
 
-          yield return new WaitForSeconds(0);
+                guiText.text += buffer[textPos].ToCharArray()[index];
+                timer = 0;
+                index++;
+
+                if (index == buffer[textPos].Length)
+                {
+                    beginWrite = false;
+                  
+                    index = 0;
+                    onWriting = false;
+                }
+
+                if (textPos == buffer.Length)
+                {
+
+                  
+                    beginWrite = false;
+                    index = 0;
+                  
+                    onWriting = false;
+                }
+
+            }
         }
-       
 
-        start++;
-        ok = true;
-        yield return new WaitForSeconds(4);
-        lapse = true;
     }
 
-    public void TypeOut(int i, int s, int f)
+    public void TypeOut(int temp, int i, int j)
     {
+
+        buffer = new string[j - i + 1];
+        Array.Copy(livello_uno, i, buffer, 0, j - i + 1);
+        textPos = 0;
+        index = 0;
         guiText.text = "";
-        liv = i ;
-        switch (liv)
-        {
-            case 0: StartCoroutine(PokeText(livello_uno[s], s, f)); break;
-            case 1: StartCoroutine(PokeText(livello_due[s], s, f)); break;
-        }
+        onWriting = true;
+        actualDelay = delay;
+        beginWrite = true;
     }
+
 }
