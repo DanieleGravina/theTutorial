@@ -80,10 +80,10 @@ public class Selector : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		if(managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active){
+		if(StateLevel.GetComponent<StateLevel>().CurrentLevel == Level.MENUSCREEN){
 			
 			
-			timer += Time.deltaTime;
+			//timer += Time.deltaTime;
 			
 			if(begin){
 				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
@@ -115,14 +115,14 @@ public class Selector : MonoBehaviour {
 				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = true;
 			}
 			
-			if(timer >= TIMEOUT){
+			/*if(timer >= TIMEOUT){
 				
 				text = new string[1];
 				text[0] = joke;
 				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
 				myState = state.JOKE;
 				timer = 0.0f;
-			}
+			}*/
 			
 		}
 		

@@ -9,11 +9,14 @@ public class TimerManager : MonoBehaviour {
 	
 	public float timer;
 	
+	int normalSize;
+	
 	bool isCountDown = false;
 
 	// Use this for initialization
 	void Start () {
 		timer = 0;
+		normalSize = guiText.fontSize;
 	}
 	
 	// Update is called once per frame
@@ -46,5 +49,6 @@ public class TimerManager : MonoBehaviour {
 	
 	public void Restart(){
 		timer = 0;
+		guiText.fontSize = normalSize;
 	}
 }

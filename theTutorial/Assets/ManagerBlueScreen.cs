@@ -121,13 +121,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 			if(Input.GetKeyDown(KeyCode.E)){
 				
 				if(tree.name == "root" && cursorPosition == 1){
-					
-					StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.INVENTORY;
-					SignalDoorToInventory.GetComponent<SignalColorManager>().ChangeSignalColor();
-					writeEnd();
-					managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
-					managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
-					GUIManager.SetActive(true);
+					exit ();
 				}
 				else{
 				
@@ -282,9 +276,10 @@ public class ManagerBlueScreen : MonoBehaviour {
 	}
 	
 	void writeEnd(){
-		textGUI = new string[2];
-		textGUI[0] = "Ok, i've fix it";
-		textGUI[1] = "Now i will continue with your tutorial";
+		textGUI = new string[3];
+		textGUI[0] = "Sir, i've fix the problem";
+		textGUI[1] = "Be more cautious the next time";
+		textGUI[2] = " ";
 		GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(textGUI);
 	}
 	
@@ -310,6 +305,16 @@ public class ManagerBlueScreen : MonoBehaviour {
 	void checkCake(){
 		if(myState == textState.CAKE){
 			GameObject.Find("Key3").renderer.enabled = true;
+			Invoke("exit", actualDelay*5);
 		}
+	}
+	
+	void exit(){
+		StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.INVENTORY;
+		SignalDoorToInventory.GetComponent<SignalColorManager>().ChangeSignalColor();
+		writeEnd();
+		managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = false;
+		managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
+		GUIManager.SetActive(true);
 	}
 }

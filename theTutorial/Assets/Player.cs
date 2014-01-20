@@ -6,6 +6,10 @@ public class Player : MonoBehaviour {
 	bool initialized = false;
 	
 	GameObject Arrow;
+	
+	MouseLook mouseLook;
+	
+	RigidbodyFPSController controller;
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +17,9 @@ public class Player : MonoBehaviour {
 		Arrow = GameObject.Find("Arrow");
 		
 		Screen.showCursor = false;
+		
+		mouseLook = GetComponent<MouseLook>();
+		controller = GetComponent<RigidbodyFPSController>();
 	}
 	
 	// Update is called once per frame
@@ -26,6 +33,21 @@ public class Player : MonoBehaviour {
 			initialized = true;
 		}
 			
+	}
+	
+	public void BlockPlayer(){
+		
+		rigidbody.constraints = RigidbodyConstraints.FreezePosition;
+		controller.enabled = false;
+		
+	}
+	
+	public void FreePlayer() {
+		
+		rigidbody.constraints = RigidbodyConstraints.None;
+		rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+		controller.enabled = true;
+		
 	}
 		
 }

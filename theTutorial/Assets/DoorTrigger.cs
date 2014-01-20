@@ -80,6 +80,8 @@ public class DoorTrigger : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if(other.tag == "Player" && state == stateDoor.CLOSED){
 			
+			Debug.Log(StateLevel.GetComponent<StateLevel>().CurrentLevel);
+			
 			float translateX = 0f, translateZ = 0f;
 			
 			if(start != door.transform.position){
@@ -95,13 +97,15 @@ public class DoorTrigger : MonoBehaviour {
 			
 			if(levelDoor == StateLevel.GetComponent<StateLevel>().CurrentLevel || 
 				levelDoor == Level.ALL){
+				
 				state = stateDoor.OPEN;
 				openDoor = true;
 				startTime = Time.time;
 				door.audio.Play();
 			}
 			else{
-				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
+				if(text.Length != 0)
+					GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
 			}
 		}
 	}

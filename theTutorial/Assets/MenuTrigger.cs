@@ -41,6 +41,7 @@ public class MenuTrigger : MonoBehaviour {
 		 if (Input.GetKeyDown(KeyCode.Escape) && afterTrigger){
 			managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = false;
 			managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = true;
+			StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.MENUSCREEN;
 			GUIManager.SetActive(false);
 		}
 	
@@ -48,11 +49,9 @@ public class MenuTrigger : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other){
 		
-		StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.MENU;
-		
 		if(other.tag == "Player" && !afterTrigger){
+			StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.MENU;
 			afterTrigger = true;
-			HUDMenu.SetActive(true);
 			GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
 		}
 	}

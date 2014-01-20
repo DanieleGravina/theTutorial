@@ -3,6 +3,10 @@ using System.Collections;
 
 public class GUITextManager : MonoBehaviour {
 	
+	public GameObject player;
+	
+	Player playerScript;
+	
 	bool onWriting = true;
 	
 	bool beginWrite = false;
@@ -23,6 +27,8 @@ public class GUITextManager : MonoBehaviour {
 		timer = 0;
 		
 		index = 0;
+		
+		playerScript = player.GetComponent<Player>();
 	
 	}
 	
@@ -67,6 +73,9 @@ public class GUITextManager : MonoBehaviour {
 					onWriting = false;
 				}
 				
+				if(textPos == buffer.Length - 1)
+					playerScript.FreePlayer();
+				
 			}
 		}
 	
@@ -81,6 +90,8 @@ public class GUITextManager : MonoBehaviour {
 		onWriting = true;
 		actualDelay = delay;
 		beginWrite = true;
+		if(!Globals.CountDownOn)
+			playerScript.BlockPlayer();
 	}
 	
 	/* IEnumerator PokeText(string t)

@@ -139,7 +139,7 @@ public class PlatformMovement : MonoBehaviour {
 				direction.Normalize();
 				if (Mathf.Abs(direction.x) <= 0.5) {
 					platform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
-					end_position.x =platform.position.x;
+					end_position.x = platform.position.x;
 					end_position.y = platform.position.y;
 					if (direction.z > 0){
 						if (System.Math.Abs(contx) != 1 && validPosition(pos,0,1) && updateMap(ID,0,1,dirType.DOWN)){
@@ -314,8 +314,7 @@ public class PlatformMovement : MonoBehaviour {
 		}
 		if (System.Math.Abs(contx) != 1 && System.Math.Abs(contz) != 1){
 			doorSignal.GetComponent<SignalColorManager>().ChangeSignalColor();
-			StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.MAP;
-			Application.LoadLevel ("InitialMenu");
+			StateLevel.GetComponent<StateLevel>().openAllDoor();
 			return true;
 		}
 		//doorSignal.GetComponent<SignalColorManager>().ChangeSignalColor();
