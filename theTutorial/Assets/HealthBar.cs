@@ -6,8 +6,11 @@ public class HealthBar : MonoBehaviour {
 	GameObject lifeRoom, player;
 	
 	const int MAX_HEALTH = 99;
+	const int MIN_HEALTH = 20;
 	
-	public GameObject blood, respawnPoint;
+	public GameObject blood, respawnPoint, LifeWall;
+	
+	LifeWall _lifeWall;
 	
 	public float TimeOut = 5.0f;
 	public float TimeOutDamage = 0.1f;
@@ -38,6 +41,8 @@ public class HealthBar : MonoBehaviour {
 		
 		lifeRoom = GameObject.Find("LifeRoom");
 		player = GameObject.Find ("RigidbodyController");
+		
+		_lifeWall = LifeWall.GetComponent<LifeWall>();
 	
 	}
 	
@@ -67,6 +72,8 @@ public class HealthBar : MonoBehaviour {
 		
 		if(healthPoints > 0){
 			
+			_lifeWall.decreaseLifeWall();
+			
 			if(healthPoints - 10 > 0)
 				healthPoints -= 10;
 			else
@@ -85,13 +92,17 @@ public class HealthBar : MonoBehaviour {
 					respawnPoint.transform.position.y, respawnPoint.transform.position.z);
 				
 				healthPoints = MAX_HEALTH;
+				
+				_lifeWall.restoreSize();
+				
 				guiText.text = healthPoints.ToString();
 				restoreNormalView();
-				lifeRoom.GetComponent<HiddenDoor>().hideDoor();
+				//lifeRoom.GetComponent<HiddenDoor>().hideDoor();
 				
-			}else if(healthPoints < 10){
+			}else if(healthPoints < MIN_HEALTH){
 				
-				lifeRoom.GetComponent<HiddenDoor>().showHiddenDoor();
+				_lifeWall.changeColorWall(Color.red);
+				//lifeRoom.GetComponent<HiddenDoor>().showHiddenDoor();
 				
 			}else{
 				damageOn = true;
@@ -104,9 +115,12 @@ public class HealthBar : MonoBehaviour {
 		
 		guiText.text = healthPoints.ToString();
 		
-		if(healthPoints > 10 && RenderSettings.ambientLight != normalColor){
+		_lifeWall.increaseLifeWall();
+		
+		if(healthPoints > MIN_HEALTH && RenderSettings.ambientLight != normalColor){
 			restoreNormalView();
-			lifeRoom.GetComponent<HiddenDoor>().hideDoor();
+			_lifeWall.changeColorWall(Color.green);
+			//lifeRoom.GetComponent<HiddenDoor>().hideDoor();
 		}
 	}
 	

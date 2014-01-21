@@ -39,6 +39,14 @@ public class RigidbodyFPSController : MonoBehaviour {
 	        if (canJump && Input.GetButton("Jump")) {
 	            rigidbody.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
 	        }
+			
+			if(Input.GetKeyDown(KeyCode.LeftShift)){
+				speed += 5;
+			}
+			
+			if(Input.GetKeyUp(KeyCode.LeftShift)){
+				speed -= 5;
+			}
 	    }
  
 	    // We apply gravity manually for more tuning control
