@@ -12,20 +12,29 @@ public class RigidbodyFPSController : MonoBehaviour {
 	public bool canJump = true;
 	public float jumpHeight = 2.0f;
 	public GameObject jumpSound;
+	public GameObject footSound;
 	
 	private bool grounded = false;
+	bool jump = false;
+	public bool play = false;
  
  
  
 	void Awake () {
 	    rigidbody.freezeRotation = true;
 	    rigidbody.useGravity = false;
+		InvokeRepeating("footSoundPlayer", 1.0f, 0.6f);
 	}
  
 	void FixedUpdate () {
 	    if (grounded) {
 	        // Calculate how fast we should be moving
 	        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+			if (targetVelocity.x !=0 || targetVelocity.z !=0){
+				play = true;
+			}else{
+				play = false;
+			}
 	        targetVelocity = transform.TransformDirection(targetVelocity);
 	        targetVelocity *= speed;
  
@@ -40,6 +49,8 @@ public class RigidbodyFPSController : MonoBehaviour {
 	        // Jump
 	        if (canJump && Input.GetButton("Jump")) {
 	            rigidbody.velocity = new Vector3(velocity.x, CalculateJumpVerticalSpeed(), velocity.z);
+				jump = true;
+				play = false;
 	        }
 			
 			if(Input.GetKeyDown(KeyCode.LeftShift)){
@@ -55,11 +66,14 @@ public class RigidbodyFPSController : MonoBehaviour {
 	    rigidbody.AddForce(new Vector3 (0, -gravity * rigidbody.mass, 0));
  
 	    grounded = false;
+
+
 	}
 	
 	void OnCollisionEnter(Collision collision) {
-		if(!grounded && collision.collider.tag == "floor"){
+		if(jump && collision.collider.tag == "floor"){
 			jumpSound.audio.Play();
+			jump = false;
 		}
 	}
  
@@ -71,6 +85,12 @@ public class RigidbodyFPSController : MonoBehaviour {
 	    // From the jump height and gravity we deduce the upwards speed 
 	    // for the character to reach at the apex.
 	    return Mathf.Sqrt(2 * jumpHeight * gravity);
+	}
+
+	void footSoundPlayer(){
+		if (play){
+			footSound.audio.Play();
+		}
 	}
 }
 

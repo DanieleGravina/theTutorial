@@ -20,6 +20,7 @@ public class Player : MonoBehaviour {
 		
 		mouseLook = GetComponent<MouseLook>();
 		controller = GetComponent<RigidbodyFPSController>();
+
 	}
 	
 	// Update is called once per frame
@@ -39,6 +40,8 @@ public class Player : MonoBehaviour {
 		
 		rigidbody.constraints = RigidbodyConstraints.FreezePosition;
 		controller.enabled = false;
+		controller.play = false;
+
 		
 	}
 	
