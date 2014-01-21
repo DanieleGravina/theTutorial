@@ -19,7 +19,7 @@ public class MouseLook : MonoBehaviour
 {
 
     public enum RotationAxes { MouseXAndY = 0, MouseX = 1, MouseY = 2 }
-    public RotationAxes axes = RotationAxes.MouseXAndY;
+    public RotationAxes axes = RotationAxes.MouseX;
     public float sensitivityX = 15F;
     public float sensitivityY = 15F;
 
@@ -32,6 +32,8 @@ public class MouseLook : MonoBehaviour
 
     float rotationY = 0F;
     public int camera_rot = 0;
+
+	Vector3 init = new Vector3(0,180,0);
 
     void Update()
     {
@@ -49,6 +51,10 @@ public class MouseLook : MonoBehaviour
             }
             else if (axes == RotationAxes.MouseX)
             {
+				init = transform.eulerAngles;
+				init.x = 0;
+				init.z = 0;
+				transform.eulerAngles = init;
                 transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
             }
             else
@@ -66,5 +72,12 @@ public class MouseLook : MonoBehaviour
         // Make the rigid body not change rotation
         if (rigidbody)
             rigidbody.freezeRotation = true;
+		init = transform.eulerAngles;
+		init.x = 0;
+		init.z = 0;
+		transform.eulerAngles = init;
+
+
+
     }
 }
