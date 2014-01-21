@@ -33,8 +33,6 @@ public class AfterLifeRoomTrigger : MonoBehaviour {
 				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
 				GuiTimer.GetComponent<TimerManager>().Restart();
 			}
-			
-			LifeRoom.GetComponent<HiddenDoor>().showHiddenDoorAlways();
 		}
 	}
 }

@@ -34,11 +34,14 @@ public class GenarateMap : MonoBehaviour {
 	public float xOffset = 0.0f;
 	public float yOffset = 0.0f;
 	
+	public int angleX = 90;
+	
+	
 	// Use this for initialization
 	void Start () {
 	
 		Vector3 angles = transform.eulerAngles;
-		angles.x = 90;
+		angles.x = angleX;
 		angles.y = target.transform.eulerAngles.y;
 		transform.eulerAngles = angles;
 		Draw();

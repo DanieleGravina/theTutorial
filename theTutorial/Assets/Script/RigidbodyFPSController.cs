@@ -11,6 +11,8 @@ public class RigidbodyFPSController : MonoBehaviour {
 	public float maxVelocityChange = 10.0f;
 	public bool canJump = true;
 	public float jumpHeight = 2.0f;
+	public GameObject jumpSound;
+	
 	private bool grounded = false;
  
  
@@ -53,6 +55,12 @@ public class RigidbodyFPSController : MonoBehaviour {
 	    rigidbody.AddForce(new Vector3 (0, -gravity * rigidbody.mass, 0));
  
 	    grounded = false;
+	}
+	
+	void OnCollisionEnter(Collision collision) {
+		if(!grounded && collision.collider.tag == "floor"){
+			jumpSound.audio.Play();
+		}
 	}
  
 	void OnCollisionStay () {
