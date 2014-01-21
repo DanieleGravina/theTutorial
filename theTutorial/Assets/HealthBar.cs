@@ -33,9 +33,9 @@ public class HealthBar : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		
-		guiText.text = healthPoints.ToString();
+		//guiText.text = healthPoints.ToString();
 		
-		normalTextSize = guiText.fontSize;
+		//normalTextSize = guiText.fontSize;
 		
 		normalColor = RenderSettings.ambientLight;
 		
@@ -79,8 +79,8 @@ public class HealthBar : MonoBehaviour {
 			else
 				healthPoints = 0;
 			
-			guiText.text = healthPoints.ToString();
-			guiText.fontSize = increasedTextSize;
+			//guiText.text = healthPoints.ToString();
+			//guiText.fontSize = increasedTextSize;
 					
 			RenderSettings.ambientLight = Color.red;
 			
@@ -95,13 +95,14 @@ public class HealthBar : MonoBehaviour {
 				
 				_lifeWall.restoreSize();
 				
-				guiText.text = healthPoints.ToString();
+				//guiText.text = healthPoints.ToString();
 				restoreNormalView();
 				//lifeRoom.GetComponent<HiddenDoor>().hideDoor();
 				
 			}else if(healthPoints < MIN_HEALTH){
 				
 				_lifeWall.changeColorWall(Color.red);
+				TimeOut = 15f;
 				//lifeRoom.GetComponent<HiddenDoor>().showHiddenDoor();
 				
 			}else{
@@ -113,7 +114,7 @@ public class HealthBar : MonoBehaviour {
 	public void increaseLife(){
 		healthPoints += 5;
 		
-		guiText.text = healthPoints.ToString();
+		//guiText.text = healthPoints.ToString();
 		
 		_lifeWall.increaseLifeWall();
 		
@@ -128,6 +129,7 @@ public class HealthBar : MonoBehaviour {
 		RenderSettings.ambientLight = normalColor;
 		blood.guiTexture.enabled = false;
 		damageOn = false;
-		guiText.fontSize = normalTextSize;
+		_lifeWall.changeColorWall(Color.green);
+		//guiText.fontSize = normalTextSize;
 	}
 }

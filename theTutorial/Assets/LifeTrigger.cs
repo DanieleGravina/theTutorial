@@ -6,6 +6,7 @@ public class LifeTrigger : MonoBehaviour {
 	public string[] text;
 	//public GameObject[] assetToDisable;
 	public GameObject LifeGui;
+	public GameObject LifeCamera;
 	
 	bool afterTrigger = false;
 	
@@ -33,7 +34,8 @@ public class LifeTrigger : MonoBehaviour {
 			
 			afterTrigger = true;
 			GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
-			LifeGui.guiText.enabled = true;
+			LifeGui.SetActive(true);
+			LifeCamera.SetActive(true);
 		}
 	}
 }

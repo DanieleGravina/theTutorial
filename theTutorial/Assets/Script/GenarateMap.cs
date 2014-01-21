@@ -20,6 +20,7 @@ public class GenarateMap : MonoBehaviour {
 	
 	public float camHeight = 1.0f;
 	public float camDistance = 2.0f;
+	public float camHeightX = 0f;
 	
 	public bool freezeRotation = true;
 	
@@ -36,13 +37,22 @@ public class GenarateMap : MonoBehaviour {
 	
 	public int angleX = 90;
 	
+	public bool angleOfTarget = true;
+	
+	public int angleY = 0;
+	
 	
 	// Use this for initialization
 	void Start () {
 	
 		Vector3 angles = transform.eulerAngles;
 		angles.x = angleX;
-		angles.y = target.transform.eulerAngles.y;
+		
+		if(angleOfTarget)
+			angles.y = target.transform.eulerAngles.y;
+		else
+			angles.y = angleY;
+		
 		transform.eulerAngles = angles;
 		Draw();
 	}
@@ -50,7 +60,7 @@ public class GenarateMap : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-		transform.position = new Vector3(target.transform.position.x, target.transform.position.y + camHeight, 
+		transform.position = new Vector3(target.transform.position.x + camHeightX, target.transform.position.y + camHeight, 
 			target.position.z);
 		
 		camera.orthographicSize = camDistance;

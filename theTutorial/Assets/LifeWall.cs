@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using System.Collections;
 
 public class LifeWall : MonoBehaviour {
 	
@@ -33,9 +35,9 @@ public class LifeWall : MonoBehaviour {
 	
 	public void increaseLifeWall(){
 		
-		if(transform.localScale.x < 1){
-			transform.localScale += new Vector3(0, 0, DELTA_LIFE);
-			transform.Translate(0, 0, -TRANSLATE); 
+		if(transform.localScale.x <= initialScale.x){
+			transform.localScale += new Vector3(0, 0, DELTA_LIFE/2);
+			transform.Translate(0, 0, -TRANSLATE/2); 
 		}
 	}
 	
@@ -50,3 +52,4 @@ public class LifeWall : MonoBehaviour {
 		transform.localScale = initialScale;
 	}
 }
+
