@@ -37,6 +37,8 @@ public class Selector : MonoBehaviour {
 	
 	public GameObject[] MenuOption;
 	
+	public GameObject MenuTitle;
+	
 	
 	//say in witch state it's the menu
 	state myState = state.NORMAL;
@@ -113,6 +115,21 @@ public class Selector : MonoBehaviour {
 				StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.BLUESCREEN;
 				managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = false;
 				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = true;
+			}
+			
+			if(Input.GetKeyDown(KeyCode.E) && position == 1){
+				
+				MenuOption[0].GetComponent<TextMesh>()
+				.text = "turn up";
+				
+				MenuOption[1].GetComponent<TextMesh>()
+				.text = "turn down";
+				
+				MenuOption[2].GetComponent<TextMesh>()
+				.text = "back";
+				
+				MenuTitle.GetComponent<TextMesh>()
+				.text = "AUDIO";
 			}
 			
 			/*if(timer >= TIMEOUT){

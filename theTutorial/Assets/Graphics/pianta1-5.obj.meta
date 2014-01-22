@@ -610,6 +610,127 @@ ModelImporter:
     4300236: Plane112
     4300238: Plane113
     4300240: Plane114
+    6400000: Box001
+    6400002: Cylinder002
+    6400004: Line001
+    6400006: Line002
+    6400008: Line003
+    6400010: Line004
+    6400012: Line005
+    6400014: Plane001
+    6400016: Plane002
+    6400018: Plane003
+    6400020: Plane004
+    6400022: Plane005
+    6400024: Plane006
+    6400026: Plane007
+    6400028: Plane008
+    6400030: Plane009
+    6400032: Plane010
+    6400034: Plane011
+    6400036: Plane012
+    6400038: Plane013
+    6400040: Plane014
+    6400042: Plane015
+    6400044: Plane016
+    6400046: Plane017
+    6400048: Plane018
+    6400050: Plane019
+    6400052: Plane020
+    6400054: Plane021
+    6400056: Plane022
+    6400058: Plane023
+    6400060: Plane024
+    6400062: Plane025
+    6400064: Plane026
+    6400066: Plane027
+    6400068: Plane028
+    6400070: Plane029
+    6400072: Plane030
+    6400074: Plane031
+    6400076: Plane032
+    6400078: Plane033
+    6400080: Plane034
+    6400082: Plane035
+    6400084: Plane036
+    6400086: Plane037
+    6400088: Plane038
+    6400090: Plane039
+    6400092: Plane040
+    6400094: Plane041
+    6400096: Plane042
+    6400098: Plane043
+    6400100: Plane044
+    6400102: Plane045
+    6400104: Plane046
+    6400106: Plane047
+    6400108: Plane048
+    6400110: Plane049
+    6400112: Plane050
+    6400114: Plane051
+    6400116: Plane052
+    6400118: Plane053
+    6400120: Plane054
+    6400122: Plane055
+    6400124: Plane056
+    6400126: Plane057
+    6400128: Plane058
+    6400130: Plane059
+    6400132: Plane060
+    6400134: Plane061
+    6400136: Plane062
+    6400138: Plane063
+    6400140: Plane064
+    6400142: Plane065
+    6400144: Plane066
+    6400146: Plane067
+    6400148: Plane068
+    6400150: Plane069
+    6400152: Plane070
+    6400154: Plane071
+    6400156: Plane072
+    6400158: Plane073
+    6400160: Plane074
+    6400162: Plane075
+    6400164: Plane076
+    6400166: Plane077
+    6400168: Plane078
+    6400170: Plane079
+    6400172: Plane080
+    6400174: Plane081
+    6400176: Plane082
+    6400178: Plane083
+    6400180: Plane084
+    6400182: Plane085
+    6400184: Plane086
+    6400186: Plane087
+    6400188: Plane088
+    6400190: Plane089
+    6400192: Plane090
+    6400194: Plane091
+    6400196: Plane092
+    6400198: Plane093
+    6400200: Plane094
+    6400202: Plane095
+    6400204: Plane096
+    6400206: Plane097
+    6400208: Plane098
+    6400210: Plane099
+    6400212: Plane100
+    6400214: Plane101
+    6400216: Plane102
+    6400218: Plane103
+    6400220: Plane104
+    6400222: Plane105
+    6400224: Plane106
+    6400226: Plane107
+    6400228: Plane108
+    6400230: Plane109
+    6400232: Plane110
+    6400234: Plane111
+    6400236: Plane112
+    6400238: Plane113
+    6400240: Plane114
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -631,7 +752,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: .0299999993
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 1

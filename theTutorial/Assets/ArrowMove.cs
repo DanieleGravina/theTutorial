@@ -40,4 +40,12 @@ public class ArrowMove : MonoBehaviour {
 		}
 	
 	}
+	
+	public void follow(float x, float z){
+		transform.position = new Vector3(x, transform.position.y, z);
+		start = transform.position;
+		end = new Vector3(start.x, start.y + translate, start.z);
+		distance = translate;
+		startTime = Time.time;
+	}
 }

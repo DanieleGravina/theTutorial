@@ -52,6 +52,8 @@ public class EscapeFromPlayer : MonoBehaviour {
 			
 				newPos = new Vector3(randX, myY, randZ);
 			}
+			
+			transform.GetChild(0).GetComponent<ArrowMove>().follow(randX, randZ);
 				
 			transform.position = newPos;
 		}

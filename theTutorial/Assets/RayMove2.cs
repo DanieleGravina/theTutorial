@@ -13,8 +13,6 @@ public class RayMove2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-		//healthBar = GameObject.Find("Life");
 	
 		distance = Mathf.Abs(begin.transform.position.z - end.transform.position.z);
 		
@@ -41,8 +39,8 @@ public class RayMove2 : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider other){
-		Debug.Log ("touch player");
 		if(other.tag == "Player"){
+			Debug.Log ("touch player");
 			healthBar.GetComponent<HealthBar>().decreaseLife();
 		}
 	}

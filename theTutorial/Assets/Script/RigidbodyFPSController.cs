@@ -15,6 +15,7 @@ public class RigidbodyFPSController : MonoBehaviour {
 	public GameObject footSound;
 	
 	private bool grounded = false;
+	private bool shiftPressed = false;
 	bool jump = false;
 	public bool play = false;
  
@@ -53,12 +54,14 @@ public class RigidbodyFPSController : MonoBehaviour {
 				play = false;
 	        }
 			
-			if(Input.GetKeyDown(KeyCode.LeftShift)){
+			if(Input.GetKeyDown(KeyCode.LeftShift) && !shiftPressed){
 				speed += 5;
+				shiftPressed = true;
 			}
 			
-			if(Input.GetKeyUp(KeyCode.LeftShift)){
+			if(Input.GetKeyUp(KeyCode.LeftShift) && shiftPressed){
 				speed -= 5;
+				shiftPressed = false;
 			}
 	    }
  

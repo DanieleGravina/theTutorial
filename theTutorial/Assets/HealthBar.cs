@@ -5,6 +5,8 @@ public class HealthBar : MonoBehaviour {
 	
 	GameObject lifeRoom, player;
 	
+	int numCall = 0;
+	
 	const int MAX_HEALTH = 99;
 	const int MIN_HEALTH = 20;
 	
@@ -26,16 +28,10 @@ public class HealthBar : MonoBehaviour {
 	
 	float TimerDamage = 0f;
 	
-	//float animTimer = 0f;
-	
 	Color normalColor;
 	
 	// Use this for initialization
 	void Start () {
-		
-		//guiText.text = healthPoints.ToString();
-		
-		//normalTextSize = guiText.fontSize;
 		
 		normalColor = RenderSettings.ambientLight;
 		
@@ -48,6 +44,8 @@ public class HealthBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		//Debug.Log(healthPoints);
 	
 		if((float)healthPoints/MAX_HEALTH <= 0.9){
 			Timer += Time.deltaTime;
@@ -70,6 +68,10 @@ public class HealthBar : MonoBehaviour {
 	
 	public void decreaseLife(){
 		
+		numCall++;
+		Debug.Log (numCall);
+		
+		
 		if(healthPoints > 0){
 			
 			_lifeWall.decreaseLifeWall();
@@ -79,10 +81,7 @@ public class HealthBar : MonoBehaviour {
 			else
 				healthPoints = 0;
 			
-			//guiText.text = healthPoints.ToString();
-			//guiText.fontSize = increasedTextSize;
-					
-			RenderSettings.ambientLight = Color.red;
+			//RenderSettings.ambientLight = Color.red;
 			
 			blood.guiTexture.enabled = true;
 			
@@ -94,16 +93,13 @@ public class HealthBar : MonoBehaviour {
 				healthPoints = MAX_HEALTH;
 				
 				_lifeWall.restoreSize();
-				
-				//guiText.text = healthPoints.ToString();
+	
 				restoreNormalView();
-				//lifeRoom.GetComponent<HiddenDoor>().hideDoor();
 				
 			}else if(healthPoints < MIN_HEALTH){
 				
 				_lifeWall.changeColorWall(Color.red);
 				TimeOut = 15f;
-				//lifeRoom.GetComponent<HiddenDoor>().showHiddenDoor();
 				
 			}else{
 				damageOn = true;
@@ -112,24 +108,23 @@ public class HealthBar : MonoBehaviour {
 	}
 	
 	public void increaseLife(){
-		healthPoints += 5;
 		
-		//guiText.text = healthPoints.ToString();
+		Debug.Log(healthPoints);
+		
+		healthPoints += 5;
 		
 		_lifeWall.increaseLifeWall();
 		
 		if(healthPoints > MIN_HEALTH && RenderSettings.ambientLight != normalColor){
 			restoreNormalView();
 			_lifeWall.changeColorWall(Color.green);
-			//lifeRoom.GetComponent<HiddenDoor>().hideDoor();
 		}
 	}
 	
 	private void restoreNormalView(){
-		RenderSettings.ambientLight = normalColor;
+		//RenderSettings.ambientLight = normalColor;
 		blood.guiTexture.enabled = false;
 		damageOn = false;
 		_lifeWall.changeColorWall(Color.green);
-		//guiText.fontSize = normalTextSize;
 	}
 }
