@@ -11,6 +11,8 @@ public class GUITextManager : MonoBehaviour {
 	
 	bool beginWrite = false;
 	
+	bool textComplete = false;
+	
 	public float delay = 0.07f;
 	float actualDelay;
 	
@@ -73,12 +75,21 @@ public class GUITextManager : MonoBehaviour {
 					onWriting = false;
 				}
 				
-				if(textPos == buffer.Length - 1)
+				if(textPos == buffer.Length - 1){
 					playerScript.FreePlayer();
+					textComplete = true;
+				}
 				
 			}
 		}
 	
+	}
+	
+	public bool TextCompleted(){
+		if(!Globals.CountDownOn)
+		 	return textComplete;
+		else
+			return true;
 	}
 	
 	public void WriteOutputOnGUI(string[] text){
@@ -90,6 +101,8 @@ public class GUITextManager : MonoBehaviour {
 		onWriting = true;
 		actualDelay = delay;
 		beginWrite = true;
+		textComplete = false;
+		
 		if(!Globals.CountDownOn)
 			playerScript.BlockPlayer();
 	}

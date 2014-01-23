@@ -76,8 +76,8 @@ public class HealthBar : MonoBehaviour {
 			
 			_lifeWall.decreaseLifeWall();
 			
-			if(healthPoints - 10 > 0)
-				healthPoints -= 10;
+			if(healthPoints - 5 > 0)
+				healthPoints -= 5;
 			else
 				healthPoints = 0;
 			

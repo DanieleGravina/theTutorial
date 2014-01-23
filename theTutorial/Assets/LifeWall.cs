@@ -25,8 +25,8 @@ public class LifeWall : MonoBehaviour {
 	public void decreaseLifeWall(){
 		
 		if(transform.localScale.x > 0){
-			transform.localScale += new Vector3(0, 0, -DELTA_LIFE);
-			transform.Translate(0, 0, TRANSLATE); 
+			transform.localScale += new Vector3(0, 0, -DELTA_LIFE/2);
+			transform.Translate(0, 0, TRANSLATE/2); 
 		}
 		
 	}

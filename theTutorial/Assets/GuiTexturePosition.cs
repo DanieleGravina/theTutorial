@@ -8,7 +8,7 @@ public class GuiTexturePosition : MonoBehaviour {
 		
 		Rect pixels = guiTexture.pixelInset;
 		
-		Rect newPixels = new Rect(Screen.height / 2, 0, Screen.width, Screen.width);
+		Rect newPixels = new Rect( 0, 0, Screen.width/2, Screen.height/2);
 		
 		guiTexture.pixelInset = newPixels;
 	

@@ -3,13 +3,13 @@ using System.Collections;
 
 public enum Level{
 	MENU,
-	MENUSCREEN,
-	BLUESCREEN,
 	INVENTORY,
 	LIFE,
 	MAP,
 	TIMER,
-	ALL
+	ALL,
+	MENUSCREEN,
+	BLUESCREEN
 }
 
 public class StateLevel : MonoBehaviour {

@@ -17,17 +17,17 @@ public class Selector : MonoBehaviour {
 	
 	string explainMenu = "This is the menu, with four option: ";
 		
-	string explainMenu2  =	"Controls, Audio, Achievement and Exit.";
+	string explainMenu2  =	"Controls, Audio, Back and Exit.";
 		
 	string exit = "DO NOT SELECT EXIT. ";
 	
-	string exit2 = "We have some serious problem ";
+	string exit2 = "We have some serious bug ";
 	
 	string exit3 = "with the exit button, so pay attention";
 	
-	string tryAudio = "Try to select Achievement";
+	string tryAudio = "Try to choose Audio";
 	
-	string joke = "Have you any problem?";
+	string finish = " ";
 	
 	string[] text;
 	
@@ -38,6 +38,8 @@ public class Selector : MonoBehaviour {
 	public GameObject[] MenuOption;
 	
 	public GameObject MenuTitle;
+	
+	public GameObject SignalDoorToInventory;
 	
 	
 	//say in witch state it's the menu
@@ -59,17 +61,20 @@ public class Selector : MonoBehaviour {
 	const float TIMEOUT = 8.0f;
 	
 	bool begin = true;
+	
+	Level currentLevel;
 
 	// Use this for initialization
 	void Start () {
 		
-		text = new string[6];
+		text = new string[7];
 		text[0] = explainMenu;
 		text[1] = explainMenu2;
 		text[2] = exit;
 		text[3] = exit2;
 		text[4] = exit3;
 		text[5] = tryAudio;
+		text[6] = finish;
 	
 		managerCamera = GameObject.Find ("ManagerCamera");
 		
@@ -92,32 +97,42 @@ public class Selector : MonoBehaviour {
 				begin = false;
 			}
 			
+			if(GUIdialog.GetComponent<GUITextManager>().TextCompleted()){
 			
-			if(Input.GetKeyDown("up"))
-			{
-				getInput("UP");
+			
+				if(Input.GetKeyDown("up"))
+				{
+					getInput("UP");
+				}
+				
+				if(Input.GetKeyDown("down"))
+				{
+					getInput("DOWN");
+				}
+				
+				if(Input.GetKeyDown("left")){
+					getInput("LEFT");
+				}
+				
+				if(Input.GetKeyDown("right")){
+					getInput("RIGHT");
+				}
+				
+				if(Input.GetKeyDown(KeyCode.E) && position == 3){
+					StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.BLUESCREEN;
+					managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = false;
+					managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = true;
+				}
+				
+				if(Input.GetKeyDown(KeyCode.E) && position == 2){
+					StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.INVENTORY;
+					SignalDoorToInventory.GetComponent<SignalColorManager>().ChangeSignalColor();
+					managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = false;
+					managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
+				}
 			}
 			
-			if(Input.GetKeyDown("down"))
-			{
-				getInput("DOWN");
-			}
-			
-			if(Input.GetKeyDown("left")){
-				getInput("LEFT");
-			}
-			
-			if(Input.GetKeyDown("right")){
-				getInput("RIGHT");
-			}
-			
-			if(Input.GetKeyDown(KeyCode.E) && position == 3){
-				StateLevel.GetComponent<StateLevel>().CurrentLevel = Level.BLUESCREEN;
-				managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = false;
-				managerCamera.GetComponent<ManagerCamera>().getCamera("BlueScreenCamera").active = true;
-			}
-			
-			if(Input.GetKeyDown(KeyCode.E) && position == 1){
+			/*if(Input.GetKeyDown(KeyCode.E) && position == 1){
 				
 				MenuOption[0].GetComponent<TextMesh>()
 				.text = "turn up";
@@ -130,7 +145,7 @@ public class Selector : MonoBehaviour {
 				
 				MenuTitle.GetComponent<TextMesh>()
 				.text = "AUDIO";
-			}
+			}*/
 			
 			/*if(timer >= TIMEOUT){
 				
