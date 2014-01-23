@@ -49,7 +49,6 @@ public class TakeObject : MonoBehaviour {
 		if(fadeOutArrow){
 			Timer += Time.deltaTime;
 			if(Timer >= FadeOutTimeOut){
-				Debug.Log(alphaArrow);
 				alphaArrow -= 0.1f;
 				Timer = 0;
 			}

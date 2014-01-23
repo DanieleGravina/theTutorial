@@ -16,15 +16,15 @@ public class SignalColorManager : MonoBehaviour {
 	}
 	
 	public void ChangeSignalColor(){
-		if(isOpen){
-			renderer.material.color = Color.red;
-			transform.GetChild (0).light.color = Color.red;
-			isOpen = false;
-		}
-		else{
+		//if(isOpen){
+		//	renderer.material.color = Color.red;
+		//	transform.GetChild (0).light.color = Color.red;
+		//	isOpen = false;
+		//}
+		//else{
 			renderer.material.color = Color.green;
 			transform.GetChild (0).light.color = Color.green;
 			isOpen = true;
-		}
+		//}
 	}
 }
