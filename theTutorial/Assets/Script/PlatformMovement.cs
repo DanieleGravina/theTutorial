@@ -292,7 +292,6 @@ public class PlatformMovement : MonoBehaviour {
 		for(int i = 0; i < MAX_Z; i++){
 			for(int j = 0; j < MAX_X; j++){
 				if(Globals.map[i,j] != solution[i,j] ){
-					//doorSignal.GetComponent<SignalColorManager>().ChangeSignalColor();
 					return false;
 				}		
 			}
@@ -302,7 +301,6 @@ public class PlatformMovement : MonoBehaviour {
 			StateLevel.GetComponent<StateLevel>().openAllDoor();
 			return true;
 		}
-		//doorSignal.GetComponent<SignalColorManager>().ChangeSignalColor();
 		return false;
 
 	}

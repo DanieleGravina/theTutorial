@@ -29,7 +29,8 @@ public class DoorTrigger : MonoBehaviour {
 	
 	const float translate = -4f;
 	
-	Vector3 start, end;
+	public GameObject position;
+	Vector3 start,end;
 	
 	float distance, distCovered, startTime, fracCovered;
 	
@@ -47,7 +48,7 @@ public class DoorTrigger : MonoBehaviour {
 		else
 			translateZ = translate;
 		
-		start = door.transform.position;
+		start = position.transform.position;
 		end = new Vector3(start.x + translateX, start.y, start.z + translateZ);
 		distance = -translate;
 		
@@ -91,7 +92,7 @@ public class DoorTrigger : MonoBehaviour {
 				else
 					translateZ = translate;
 				
-				start = door.transform.position;
+				start = position.transform.position;
 				end = new Vector3(start.x + translateX, start.y, start.z + translateZ);
 			}
 			
