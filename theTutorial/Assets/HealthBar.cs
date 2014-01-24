@@ -114,8 +114,9 @@ public class HealthBar : MonoBehaviour {
 		healthPoints += 5;
 		
 		_lifeWall.increaseLifeWall();
-		
-		if(healthPoints > MIN_HEALTH && RenderSettings.ambientLight != normalColor){
+
+		//&& RenderSettings.ambientLight != normalColor
+		if(healthPoints > MIN_HEALTH){
 			restoreNormalView();
 			_lifeWall.changeColorWall(Color.green);
 		}
