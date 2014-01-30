@@ -1,0 +1,296 @@
+fileFormatVersion: 2
+guid: a7a8f2c5c84819f4faab45b246cefa75
+ModelImporter:
+  serializedVersion: 15
+  fileIDToRecycleName:
+    100000: be_l_piedeEND01
+    100002: be_pinnaEND01
+    100004: be_pinnaEND02
+    100006: be_r_piedeEND01
+    100008: be_spineEND01
+    100010: be_testaEND01
+    100012: be_zampineEND01
+    100014: bn_cauda01
+    100016: bn_colloA01
+    100018: bn_colloB01
+    100020: bn_colloC01
+    100022: bn_colloD01
+    100024: bn_l_zampaAntA01
+    100026: bn_l_zampaAntB01
+    100028: bn_l_zampaAntC01
+    100030: bn_l_zampaANTD01
+    100032: bn_PETTO01
+    100034: bn_pinnaA01
+    100036: bn_pinnaA02
+    100038: bn_pinnaB01
+    100040: bn_pinnaB02
+    100042: bn_r_zampaAntA01
+    100044: bn_r_zampaAntB01
+    100046: bn_r_zampaAntC01
+    100048: bn_r_zampaAntD01
+    100050: bn_spineA01
+    100052: bn_spineB01
+    100054: bn_spineC01
+    100056: bn_testaA01
+    100058: bn_zampineA01
+    100060: bn_zampineB01
+    100062: bn_zampineC01
+    100064: CoG
+    100066: ctrl_collo01
+    100068: ctrl_fianchi01
+    100070: ctrl_petto01
+    100072: ctrl_testa01
+    100074: GOAL_l_zampaANT01
+    100076: GOAL_pinna01
+    100078: GOAL_pinna02
+    100080: GOAL_r_zampaANT01
+    100082: GOAL_zampine01
+    100084: MASTER_BONE
+    100086: MASTER_MESH
+    100088: MASTER_RIG
+    100090: POLE_l_zampaAnt01
+    100092: POLE_r_zampaAnt01
+    100094: sc_collo01
+    100096: Skin
+    100098: spl_spine01
+    100100: TheTutorialDragon_001
+    100102: //RootNode
+    400000: be_l_piedeEND01
+    400002: be_pinnaEND01
+    400004: be_pinnaEND02
+    400006: be_r_piedeEND01
+    400008: be_spineEND01
+    400010: be_testaEND01
+    400012: be_zampineEND01
+    400014: bn_cauda01
+    400016: bn_colloA01
+    400018: bn_colloB01
+    400020: bn_colloC01
+    400022: bn_colloD01
+    400024: bn_l_zampaAntA01
+    400026: bn_l_zampaAntB01
+    400028: bn_l_zampaAntC01
+    400030: bn_l_zampaANTD01
+    400032: bn_PETTO01
+    400034: bn_pinnaA01
+    400036: bn_pinnaA02
+    400038: bn_pinnaB01
+    400040: bn_pinnaB02
+    400042: bn_r_zampaAntA01
+    400044: bn_r_zampaAntB01
+    400046: bn_r_zampaAntC01
+    400048: bn_r_zampaAntD01
+    400050: bn_spineA01
+    400052: bn_spineB01
+    400054: bn_spineC01
+    400056: bn_testaA01
+    400058: bn_zampineA01
+    400060: bn_zampineB01
+    400062: bn_zampineC01
+    400064: CoG
+    400066: ctrl_collo01
+    400068: ctrl_fianchi01
+    400070: ctrl_petto01
+    400072: ctrl_testa01
+    400074: GOAL_l_zampaANT01
+    400076: GOAL_pinna01
+    400078: GOAL_pinna02
+    400080: GOAL_r_zampaANT01
+    400082: GOAL_zampine01
+    400084: MASTER_BONE
+    400086: MASTER_MESH
+    400088: MASTER_RIG
+    400090: POLE_l_zampaAnt01
+    400092: POLE_r_zampaAnt01
+    400094: sc_collo01
+    400096: Skin
+    400098: spl_spine01
+    400100: TheTutorialDragon_001
+    400102: //RootNode
+    4300000: TheTutorialDragon_001
+    7400000: Take 001
+    9500000: //RootNode
+    11100000: //RootNode
+    13700000: TheTutorialDragon_001
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 2
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Take 001
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 120
+      wrapMode: 2
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: MASTER_BONE
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_cauda01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_pinnaA02
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_pinnaA02/bn_pinnaB02
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_pinnaA02/bn_pinnaB02/be_pinnaEND02
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/be_spineEND01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/be_spineEND01/bn_colloA01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/be_spineEND01/bn_colloA01/bn_colloB01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/be_spineEND01/bn_colloA01/bn_colloB01/bn_colloC01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/be_spineEND01/bn_colloA01/bn_colloB01/bn_colloC01/bn_colloD01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/be_spineEND01/bn_colloA01/bn_colloB01/bn_colloC01/bn_colloD01/bn_testaA01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/be_spineEND01/bn_colloA01/bn_colloB01/bn_colloC01/bn_colloD01/bn_testaA01/be_testaEND01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_l_zampaAntA01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_l_zampaAntA01/bn_l_zampaAntB01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_l_zampaAntA01/bn_l_zampaAntB01/bn_l_zampaAntC01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_l_zampaAntA01/bn_l_zampaAntB01/bn_l_zampaAntC01/bn_l_zampaANTD01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_l_zampaAntA01/bn_l_zampaAntB01/bn_l_zampaAntC01/bn_l_zampaANTD01/be_l_piedeEND01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_pinnaA01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_pinnaA01/bn_pinnaB01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_pinnaA01/bn_pinnaB01/be_pinnaEND01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_r_zampaAntA01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_r_zampaAntA01/bn_r_zampaAntB01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_r_zampaAntA01/bn_r_zampaAntB01/bn_r_zampaAntC01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_r_zampaAntA01/bn_r_zampaAntB01/bn_r_zampaAntC01/bn_r_zampaAntD01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_r_zampaAntA01/bn_r_zampaAntB01/bn_r_zampaAntC01/bn_r_zampaAntD01/be_r_piedeEND01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_zampineA01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_zampineA01/bn_zampineB01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_zampineA01/bn_zampineB01/bn_zampineC01
+        weight: 1
+      - path: MASTER_BONE/bn_spineA01/bn_spineB01/bn_spineC01/bn_PETTO01/bn_zampineA01/bn_zampineB01/bn_zampineC01/be_zampineEND01
+        weight: 1
+      - path: MASTER_MESH
+        weight: 1
+      - path: MASTER_MESH/TheTutorialDragon_001
+        weight: 1
+      - path: MASTER_MESH/TheTutorialDragon_001/Skin
+        weight: 1
+      - path: MASTER_RIG
+        weight: 1
+      - path: MASTER_RIG/CoG
+        weight: 1
+      - path: MASTER_RIG/CoG/ctrl_fianchi01
+        weight: 1
+      - path: MASTER_RIG/CoG/ctrl_fianchi01/GOAL_pinna02
+        weight: 1
+      - path: MASTER_RIG/CoG/ctrl_petto01
+        weight: 1
+      - path: MASTER_RIG/CoG/ctrl_petto01/ctrl_collo01
+        weight: 1
+      - path: MASTER_RIG/CoG/ctrl_petto01/ctrl_testa01
+        weight: 1
+      - path: MASTER_RIG/CoG/ctrl_petto01/GOAL_pinna01
+        weight: 1
+      - path: MASTER_RIG/GOAL_l_zampaANT01
+        weight: 1
+      - path: MASTER_RIG/GOAL_r_zampaANT01
+        weight: 1
+      - path: MASTER_RIG/GOAL_zampine01
+        weight: 1
+      - path: MASTER_RIG/POLE_l_zampaAnt01
+        weight: 1
+      - path: MASTER_RIG/POLE_r_zampaAnt01
+        weight: 1
+      - path: MASTER_RIG/sc_collo01
+        weight: 1
+      - path: MASTER_RIG/spl_spine01
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: .00999999978
+    meshCompression: 0
+    addColliders: 1
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 1
+  userData: 

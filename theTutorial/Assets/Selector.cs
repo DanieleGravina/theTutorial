@@ -45,7 +45,7 @@ public class Selector : MonoBehaviour {
 	//say in witch state it's the menu
 	state myState = state.NORMAL;
 	
-	const int DELTA_MOVE = 130;
+	const int DELTA_MOVE = 140;
 	
 	const float DELTA_SCALE = 1.1f;
 	
