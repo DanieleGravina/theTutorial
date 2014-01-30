@@ -120,7 +120,7 @@ public class ManagerBlueScreen : MonoBehaviour {
 				}
 			}
 			
-			if(Input.GetKeyDown(KeyCode.E)){
+			if(Input.GetKeyDown(KeyCode.Return)){
 				
 				if((tree.name == "root" && cursorPosition == 1) 
 					|| (tree.name == "exit" && cursorPosition == 0)){
