@@ -44219,7 +44219,7 @@ GameObject:
   - 124: {fileID: 847326840}
   - 92: {fileID: 847326839}
   - 81: {fileID: 847326838}
-  - 114: {fileID: 847326837}
+  - 114: {fileID: 847326843}
   m_Layer: 0
   m_Name: LifeCamera
   m_TagString: Untagged
@@ -44227,33 +44227,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &847326837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 847326836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f4e71a5d6d9f424ea9e9517a779cf90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 1012144527}
-  marker: {fileID: 2800000, guid: f89fb8e917f4d544ba08a15f875c363f, type: 3}
-  camHeight: 0
-  camDistance: 25
-  camHeightX: -10
-  freezeRotation: 0
-  dimensionIn: 1
-  horizontalAlignment: 0
-  verticalAlignment: 2
-  width: 45
-  height: 25
-  xOffset: 1
-  yOffset: 10
-  angleX: 0
-  angleOfTarget: 0
-  angleY: 90
 --- !u!81 &847326838
 AudioListener:
   m_ObjectHideFlags: 0
@@ -44315,6 +44288,32 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1885030198}
+--- !u!114 &847326843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 847326836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f8abb6095cf4b46a12dbf676347109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1012144527}
+  camHeight: 0
+  camDistance: 25
+  camHeightX: -10
+  freezeRotation: 0
+  dimensionIn: 1
+  horizontalAlignment: 0
+  verticalAlignment: 2
+  width: 45
+  height: 25
+  xOffset: 1
+  yOffset: 10
+  angleX: 0
+  angleOfTarget: 0
+  angleY: 90
 --- !u!1 &848151270
 GameObject:
   m_ObjectHideFlags: 0
@@ -77574,7 +77573,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1530866654}
   m_LocalRotation: {x: 0, y: .999999583, z: 0, w: -.000955434574}
-  m_LocalPosition: {x: -216.087402, y: 2.77111244, z: 149.89418}
+  m_LocalPosition: {x: -35.8937073, y: 2.77111244, z: 149.549835}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1846452762}

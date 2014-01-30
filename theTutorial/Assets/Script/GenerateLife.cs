@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GenarateMap : MonoBehaviour {
+public class GenerateLife : MonoBehaviour {
+
 	
 	public enum sd{
 		pixels, screen_percent
@@ -16,7 +17,6 @@ public class GenarateMap : MonoBehaviour {
 	};
 	
 	public Transform target;
-	public Texture2D marker;
 	
 	public float camHeight = 1.0f;
 	public float camDistance = 2.0f;
@@ -44,7 +44,7 @@ public class GenarateMap : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-	
+		
 		Vector3 angles = transform.eulerAngles;
 		angles.x = angleX;
 		
@@ -59,9 +59,9 @@ public class GenarateMap : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		
 		transform.position = new Vector3(target.transform.position.x + camHeightX, target.transform.position.y + camHeight, 
-			target.position.z);
+		                                 target.position.z);
 		
 		camera.orthographicSize = camDistance;
 		
@@ -117,15 +117,5 @@ public class GenarateMap : MonoBehaviour {
 		}
 		
 		transform.camera.pixelRect = new Rect(hLoc, vLoc, hsize, vsize);
-	}
-	
-	void OnGUI(){
-
-		Vector3 markerPos = transform.camera.camera.WorldToViewportPoint(target.position);
-		int pointX = Mathf.RoundToInt((transform.camera.pixelRect.xMin + transform.camera.pixelRect.xMax) * markerPos.x);
-		int pointY = Mathf.RoundToInt((transform.camera.pixelRect.yMin + transform.camera.pixelRect.yMax) * markerPos.y);
-			
-		GUI.DrawTexture(new Rect(pointX-(marker.width*0.5f),Screen.height-(pointY), marker.width,marker.height)
-			, marker, ScaleMode.StretchToFill, true, 10.0f);	
 	}
 }
