@@ -45,8 +45,12 @@ public class PlatformMovement : MonoBehaviour {
 
 	const int MAX_X = 4;
 	const int MAX_Z = 4;
-	
-	int[,] solution = new int[MAX_Z,MAX_X] {{0,0,0,0},{0,0,0,0},{0,1,2,0},{3,4,2,5}};
+
+  /*0,0,0,0
+	1,2,0,0
+	4,2,3,5
+	0,0,0,0*/
+	int[,] solution = new int[MAX_Z,MAX_X] {{0,0,0,0},{1,2,0,0},{4,2,3,5},{0,0,0,0}};
 
 	public enum dirType{
 		UP,
@@ -61,6 +65,7 @@ public class PlatformMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Globals.finishMap = false;
 		Globals.map =  new int[MAX_Z,MAX_X] {{0,0,0,0},{0,1,2,0},{5,4,2,3},{0,0,0,0}};
 		platform = this.transform;
 		ID = int.Parse(platform.name[0].ToString());
@@ -109,93 +114,95 @@ public class PlatformMovement : MonoBehaviour {
 //è in movimento
 	void OnCollisionEnter(Collision collision) {
 		if (collision.collider.tag == "Player"){
-			if (active == false){
-				pos = findPos(ID);
-				weight=0;
-				direction =platform.position - collision.collider.transform.position;
-				direction.Normalize();
-				if (Mathf.Abs(direction.x) <= 0.5) {
-					platform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
-					end_position.x = platform.position.x;
-					end_position.y = platform.position.y;
-					if (direction.z > 0){
-						if (System.Math.Abs(contx) != 1 && validPosition(pos,0,1) && updateMap(ID,0,1,dirType.DOWN)){
-							contz++;
-						}
-						if (contz == -1){
-							contz++;
-							room.transform.Translate(Vector3.forward * DELTA_Z);
-							start_position = platform.position;
-							active = true;
-							end_position.z = platform.position.z + distance;
-						}
-						if (updateMap(ID,0,1,dirType.DOWN)){
-							room.transform.Translate(Vector3.forward * DELTA_Z);
-							start_position = platform.position;
-							active = true;
-							end_position.z = platform.position.z + distance;
-						}
-					}else{
-						if (System.Math.Abs(contx) != 1 && validPosition(pos,0,-1) && updateMap(ID,0,-1,dirType.UP)){
-							contz--;
-						}
-						if (contz == 1){
-							contz--;
-							room.transform.Translate(Vector3.back * DELTA_Z);
-							start_position = platform.position;
-							active = true;
-							end_position.z = platform.position.z - distance;
-						}
-						if (updateMap(ID,0,-1,dirType.UP)){
-		
-							room.transform.Translate(Vector3.back * DELTA_Z);
-							start_position = platform.position;
-							active = true;
-							end_position.z = platform.position.z - distance;
-						}
-					}
-				}else{
-					platform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
-					end_position.y = platform.position.y;
-					end_position.z = platform.position.z;
-					if (direction.x > 0){
-						if (System.Math.Abs(contz) != 1 && validPosition(pos,-1,0) && updateMap(ID,-1,0,dirType.LEFT)){
-							contx--;
-						}
-						if (contx == 1){
-							contx--;
-							room.transform.Translate(Vector3.right * DELTA_X);
-							start_position = platform.position;
-							active = true;
-							end_position.x = platform.position.x + distance;
-						}
-						if (updateMap(ID,-1,0,dirType.LEFT)){
-							room.transform.Translate(Vector3.right * DELTA_X);
-							start_position = platform.position;
-							active = true;
-							end_position.x = platform.position.x + distance;
+			if (!Globals.finishMap){
+				if (active == false){
+					pos = findPos(ID);
+					weight=0;
+					direction =platform.position - collision.collider.transform.position;
+					direction.Normalize();
+					if (Mathf.Abs(direction.x) <= 0.5) {
+						platform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezeRotation;
+						end_position.x = platform.position.x;
+						end_position.y = platform.position.y;
+						if (direction.z > 0){
+							if (System.Math.Abs(contx) != 1 && validPosition(pos,0,1) && updateMap(ID,0,1,dirType.DOWN)){
+								contz++;
+							}
+							if (contz == -1){
+								contz++;
+								room.transform.Translate(Vector3.forward * DELTA_Z);
+								start_position = platform.position;
+								active = true;
+								end_position.z = platform.position.z + distance;
+							}
+							if (updateMap(ID,0,1,dirType.DOWN)){
+								room.transform.Translate(Vector3.forward * DELTA_Z);
+								start_position = platform.position;
+								active = true;
+								end_position.z = platform.position.z + distance;
+							}
+						}else{
+							if (System.Math.Abs(contx) != 1 && validPosition(pos,0,-1) && updateMap(ID,0,-1,dirType.UP)){
+								contz--;
+							}
+							if (contz == 1){
+								contz--;
+								room.transform.Translate(Vector3.back * DELTA_Z);
+								start_position = platform.position;
+								active = true;
+								end_position.z = platform.position.z - distance;
+							}
+							if (updateMap(ID,0,-1,dirType.UP)){
+			
+								room.transform.Translate(Vector3.back * DELTA_Z);
+								start_position = platform.position;
+								active = true;
+								end_position.z = platform.position.z - distance;
+							}
 						}
 					}else{
-						if (System.Math.Abs(contz) != 1 && validPosition(pos,1,0) && updateMap(ID,1,0,dirType.RIGHT)){
-							contx++;
-						}
-						if (contx == -1){
-							contx++;
-							room.transform.Translate(Vector3.left * DELTA_X);
-							start_position = platform.position;
-							active = true;
-							end_position.x = platform.position.x - distance;
-						}
-						if (updateMap(ID,1,0,dirType.RIGHT)){
-							room.transform.Translate(Vector3.left * DELTA_X);
-							start_position = platform.position;
-							active = true;
-							end_position.x = platform.position.x - distance;
+						platform.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezeRotation;
+						end_position.y = platform.position.y;
+						end_position.z = platform.position.z;
+						if (direction.x > 0){
+							if (System.Math.Abs(contz) != 1 && validPosition(pos,-1,0) && updateMap(ID,-1,0,dirType.LEFT)){
+								contx--;
+							}
+							if (contx == 1){
+								contx--;
+								room.transform.Translate(Vector3.right * DELTA_X);
+								start_position = platform.position;
+								active = true;
+								end_position.x = platform.position.x + distance;
+							}
+							if (updateMap(ID,-1,0,dirType.LEFT)){
+								room.transform.Translate(Vector3.right * DELTA_X);
+								start_position = platform.position;
+								active = true;
+								end_position.x = platform.position.x + distance;
+							}
+						}else{
+							if (System.Math.Abs(contz) != 1 && validPosition(pos,1,0) && updateMap(ID,1,0,dirType.RIGHT)){
+								contx++;
+							}
+							if (contx == -1){
+								contx++;
+								room.transform.Translate(Vector3.left * DELTA_X);
+								start_position = platform.position;
+								active = true;
+								end_position.x = platform.position.x - distance;
+							}
+							if (updateMap(ID,1,0,dirType.RIGHT)){
+								room.transform.Translate(Vector3.left * DELTA_X);
+								start_position = platform.position;
+								active = true;
+								end_position.x = platform.position.x - distance;
+							}
 						}
 					}
+					mapComplete();
+					correctPlatformPosition(ID);
 				}
-				mapComplete();
-				correctPlatformPosition(ID);
 			}
 		}
 	}
@@ -299,6 +306,7 @@ public class PlatformMovement : MonoBehaviour {
 		if (System.Math.Abs(contx) != 1 && System.Math.Abs(contz) != 1){
 			doorSignal.GetComponent<SignalColorManager>().ChangeSignalColor();
 			StateLevel.GetComponent<StateLevel>().openAllDoor();
+			Globals.finishMap = true;
 			return true;
 		}
 		return false;
@@ -306,17 +314,15 @@ public class PlatformMovement : MonoBehaviour {
 	}
 
 //funzione per cambiare colore alle piattaforme che si trovano nella corretta posizione
-/*
-0,0,0,0
-0,0,0,0
-0,1,2,0
-3,4,2,5
-0,0,0,0*/
+/*0,0,0,0
+  1,2,0,0
+  4,2,3,5
+  0,0,0,0*/
 	void correctPlatformPosition(int ID){
 		pos = findPos(ID);
 		switch (ID){
 			case 1:
-				if (pos.z == 2 && pos.x == 1){
+				if (pos.z == 1 && pos.x == 0){
 					platform.gameObject.renderer.material = completeMaterial;
 				}else{
 					platform.gameObject.renderer.material = uncompleteMaterial;
@@ -326,7 +332,7 @@ public class PlatformMovement : MonoBehaviour {
 				}
 				break;
 			case 2:
-				if (pos.z == 2 && pos.x == 2 && Globals.map[pos.z + 1,pos.x] == 2){
+				if (pos.z == 1 && pos.x == 1 && Globals.map[pos.z + 1,pos.x] == 2){
 					platform.gameObject.renderer.material = completeMaterial;
 				}
 				else{
@@ -337,7 +343,7 @@ public class PlatformMovement : MonoBehaviour {
 			}
 				break;
 			case 3:
-				if (pos.z == 3 && pos.x == 0){
+				if (pos.z == 2 && pos.x == 2){
 					platform.gameObject.renderer.material = completeMaterial;
 				}else{
 					platform.gameObject.renderer.material = uncompleteMaterial;
@@ -347,7 +353,7 @@ public class PlatformMovement : MonoBehaviour {
 				}
 				break;
 			case 4:
-				if (pos.z == 3 && pos.x == 1){
+				if (pos.z == 2 && pos.x == 0){
 					platform.gameObject.renderer.material = completeMaterial;
 				}else{
 					platform.gameObject.renderer.material = uncompleteMaterial;
@@ -357,7 +363,7 @@ public class PlatformMovement : MonoBehaviour {
 				}
 				break;
 			case 5:
-				if (pos.z == 3 && pos.x == 3){
+				if (pos.z == 2 && pos.x == 3){
 					platform.gameObject.renderer.material = completeMaterial;
 				}else{
 					platform.gameObject.renderer.material = uncompleteMaterial;

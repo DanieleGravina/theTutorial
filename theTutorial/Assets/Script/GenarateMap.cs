@@ -119,14 +119,14 @@ public class GenarateMap : MonoBehaviour {
 		transform.camera.pixelRect = new Rect(hLoc, vLoc, hsize, vsize);
 	}
 	
-	void onGUI(){
+	void OnGUI(){
 		
 		Vector3 markerPos = transform.camera.camera.WorldToViewportPoint(target.position);
 		
 		int pointX = Mathf.RoundToInt((transform.camera.pixelRect.xMin + transform.camera.pixelRect.xMax) * markerPos.x);
 		int pointY = Mathf.RoundToInt((transform.camera.pixelRect.yMin + transform.camera.pixelRect.yMax) * markerPos.y);
 		
-		GUI.DrawTexture(new Rect(pointX-(marker.width*0.5f), pointY-(marker.height*0.5f), marker.width,marker.height)
+		GUI.DrawTexture(new Rect(pointX-(marker.width*0.5f),Screen.height-(pointY), marker.width,marker.height)
 			, marker, ScaleMode.StretchToFill, true, 10.0f);
 		
 	}

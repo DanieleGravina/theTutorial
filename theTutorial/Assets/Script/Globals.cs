@@ -34,5 +34,7 @@ public class Globals {
 	
 	public static int[,] map = new int[MAX_Z,MAX_X] {{0,0,0,0},{0,1,2,0},{5,4,2,3},{0,0,0,0}};
 
+	public static bool finishMap = false;
+
 	#endregion
 }

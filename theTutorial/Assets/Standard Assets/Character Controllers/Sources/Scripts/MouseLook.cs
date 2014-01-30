@@ -50,6 +50,7 @@ public class MouseLook : MonoBehaviour
             else if (axes == RotationAxes.MouseX)
             {
                 transform.Rotate(0, Input.GetAxis("Mouse X") * sensitivityX, 0);
+				transform.eulerAngles = new Vector3(0,transform.eulerAngles.y,0);
             }
             else
             {
