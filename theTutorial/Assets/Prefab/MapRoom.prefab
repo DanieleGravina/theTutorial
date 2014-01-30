@@ -7207,6 +7207,7 @@ MonoBehaviour:
   StateLevel: {fileID: 0}
   dirDoor: 1
   speed: 3
+  position: {fileID: 0}
 --- !u!114 &11400088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7225,6 +7226,7 @@ MonoBehaviour:
   StateLevel: {fileID: 0}
   dirDoor: 1
   speed: 3
+  position: {fileID: 0}
 --- !u!114 &11400090
 MonoBehaviour:
   m_ObjectHideFlags: 1

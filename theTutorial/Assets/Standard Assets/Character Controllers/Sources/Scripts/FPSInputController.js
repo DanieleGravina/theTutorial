@@ -13,10 +13,10 @@ function Update () {
 	// Get the input vector from kayboard or analog stick
     if(Disorient){
         x=0; y=0;
-        if(Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.UpArrow)) x = 1; 
-        if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.RightArrow)) x -=1;
-        if(Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.DownArrow)) z = 1; 
-        if(Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.LeftArrow)) z -=1; 
+        if(Input.GetKey(KeyCode.D)||Input.GetKey(KeyCode.RightArrow)) x = 1; 
+        if(Input.GetKey(KeyCode.W)||Input.GetKey(KeyCode.UpArrow)) x -=1;
+        if(Input.GetKey(KeyCode.A)||Input.GetKey(KeyCode.LeftArrow)) z = 1; 
+        if(Input.GetKey(KeyCode.S)||Input.GetKey(KeyCode.DownArrow)) z -=1; 
         directionVector = new Vector3(x,0,z);
 
 

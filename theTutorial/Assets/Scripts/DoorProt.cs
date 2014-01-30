@@ -27,7 +27,6 @@ public class DoorProt : MonoBehaviour {
         if (other.gameObject.name == "First Person Controller" && !closed)
         {
             animator.SetBool("Open", true);
-            print("APRI");
         }
     }
 
@@ -36,7 +35,6 @@ public class DoorProt : MonoBehaviour {
         if (other.gameObject.name == "First Person Controller" && !opened)
         {
             animator.SetBool("Open", false);
-            print("CHIUDI");
         }
     }
 }

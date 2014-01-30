@@ -15,14 +15,14 @@ public class GuiText : MonoBehaviour
   
         "Oh! What a brave lad we got here! I won't stop you, please go on.",              //3
 	
-	"Ok son, I will teach you how to move first. Use WASD to move around. ",                                   //4
-        "Press WASD to move. On the keyboard. With your fingers. Yes, those.",                                     //5
+	    "Ok son, I will teach you how to move first.  ",                                   //4
+        "Use WASD to move around. I think you'll find it quite easy.",                                     //5
         "Oh, what's happening? It is something wrong with you, young man?",                           //6
         "You remind me of a drunken elephant I saw in India when I was young.",                          //7 
         "I shot at him. I was quite a hunter when I was a young lord.",                   //8
         "Oh, you did it indeed! I wasn't quite sure because you look so...poor and red-blooded.",                         //9
         "Oh, sorry, don't listen to the opinions of an old man. Now I will teach you the camera. ",              //10
-        "Look around with your mouse. I will wait for you at the end of these rooms, drinking some tea",            //11
+        "Look around with your mouse. I will wait for you at the end of these rooms, drinking some tea.",            //11
         "What are you doing with your head? Are you fine?",                                             //12
         "You must have had a difficult childhood...no money, no servants...look at you now!",                         //13
         "Oh, it's five o'clock! Take your time, i'm not going anywhere, my dear.",                //14
@@ -51,15 +51,18 @@ public class GuiText : MonoBehaviour
         "Good thinking son, maybe you are better then a simple peasant",        //37    
         "Oh! That is exactly where you started! Life is curious sometimes, isn't it?",                                   //38
         "Farewell my son, it was a pleasure to meet you. Although...",         //39                
-        "...I still have to teach you the user interface...Very well then, see you later!"  //40
-                                         };             
-    bool onWriting = true;
+        "...I still have to teach you the user interface...Very well then, see you later!",  //40
+        "Oh...but...that is the exit! How did you find it?!",  //41
+        "Well son, you impressed me! I don't have to teach you anything!",     //42
+        "Oh well...except for the GUI...see you in the next part of the Tutorial!" //43
+                                         };
+    protected bool onWriting = true;
+    public static bool early_win;
     GameObject player;
 
     bool beginWrite = false;
 
-    public float delay = 0.07f;
-    float actualDelay;
+
 
     string[] buffer;
     int textPos, index = 0;
@@ -69,10 +72,10 @@ public class GuiText : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        early_win = true;
         player = GameObject.Find("First Person Controller");
         TypeOut(0, 0, 0);
-        actualDelay = delay;
+
 
         timer = 0;
 
@@ -83,70 +86,64 @@ public class GuiText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.P)) TypeOut(0,1,2);
+
+        if (Input.GetKeyDown(KeyCode.P)) TypeOut(0, 1, 2);
         if (Input.GetMouseButtonUp(0))
         {
 
-            if (onWriting)
-            {
-                actualDelay = 0;
-            }
-            else
+            if (!onWriting)
+
                 if (buffer != null && textPos < (buffer.Length - 1))
                 {
                     guiText.text = "";
-                    actualDelay = delay;
+
                     textPos++;
                     index = 0;
-                  
-                        onWriting = true;
-                        beginWrite = true;
-                }  
-                else  if (buffer != null && textPos >= (buffer.Length - 1))
-                
-                    {
-                        player.GetComponent<CharacterMotor>().canControl = true;
-                        onWriting = false;
-                        beginWrite = false;
-                        guiText.text = "";
-                    }
-                  
-                
 
-          
+                    onWriting = true;
+                    beginWrite = true;
+                }
+                else if (buffer != null && textPos >= (buffer.Length - 1))
+                {
+                    player.GetComponent<CharacterMotor>().canControl = true;
+                    onWriting = false;
+                    beginWrite = false;
+                    guiText.text = "";
+                }
+
+
+
+
         }
 
         if (beginWrite && guiText != null && buffer != null)
         {
             timer += Time.deltaTime;
 
-            if (timer >= actualDelay)
+
+            guiText.text += buffer[textPos].ToCharArray()[index];
+            timer = 0;
+            index++;
+
+            if (index == buffer[textPos].Length)
+            {
+                beginWrite = false;
+
+                index = 0;
+                onWriting = false;
+            }
+
+            if (textPos == buffer.Length)
             {
 
-                guiText.text += buffer[textPos].ToCharArray()[index];
-                timer = 0;
-                index++;
 
-                if (index == buffer[textPos].Length)
-                {
-                    beginWrite = false;
-                  
-                    index = 0;
-                    onWriting = false;
-                }
+                beginWrite = false;
+                index = 0;
 
-                if (textPos == buffer.Length)
-                {
-
-                  
-                    beginWrite = false;
-                    index = 0;
-                  
-                    onWriting = false;
-                }
-
+                onWriting = false;
             }
+
+
         }
 
     }
@@ -160,7 +157,7 @@ public class GuiText : MonoBehaviour
         index = 0;
         guiText.text = "";
         onWriting = true;
-        actualDelay = delay;
+
         beginWrite = true;
     }
 
