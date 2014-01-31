@@ -5,7 +5,7 @@ public class AfterLifeRoomTrigger : MonoBehaviour {
 	
 	public string[] text;
 	
-	public GameObject LifeRoom, GuiTimer;
+	public GameObject LifeRoom, GuiTimer, BloodTexture;
 	
 	bool afterTrigger = false;
 	
@@ -28,6 +28,9 @@ public class AfterLifeRoomTrigger : MonoBehaviour {
 		if(other.tag == "Player" && !afterTrigger){
 			
 			afterTrigger = true;
+
+			if(BloodTexture.guiTexture.enabled)
+				BloodTexture.guiTexture.enabled = false;
 			
 			if(Globals.CountDownOn){
 				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);

@@ -3,7 +3,11 @@ using System.Collections;
 
 public class ExitCreditsButton : MonoBehaviour {
 
-	void OnClick(){	
-		Application.LoadLevel("InitialMenu");
+	void Update(){
+
+		if(Input.GetKey(KeyCode.Escape)){
+
+			Application.LoadLevel("InitialMenu");
+		}
 	}
 }

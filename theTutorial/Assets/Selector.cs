@@ -40,7 +40,9 @@ public class Selector : MonoBehaviour {
 	public GameObject MenuTitle;
 	
 	public GameObject SignalDoorToInventory;
-	
+
+	public GameObject GUIManager;
+
 	
 	//say in witch state it's the menu
 	state myState = state.NORMAL;
@@ -129,6 +131,7 @@ public class Selector : MonoBehaviour {
 					SignalDoorToInventory.GetComponent<SignalColorManager>().ChangeSignalColor();
 					managerCamera.GetComponent<ManagerCamera>().getCamera("MenuCamera").active = false;
 					managerCamera.GetComponent<ManagerCamera>().getCamera("RigidbodyController").active = true;
+					GUIManager.SetActive(true);
 				}
 			}
 			
@@ -145,15 +148,6 @@ public class Selector : MonoBehaviour {
 				
 				MenuTitle.GetComponent<TextMesh>()
 				.text = "AUDIO";
-			}*/
-			
-			/*if(timer >= TIMEOUT){
-				
-				text = new string[1];
-				text[0] = joke;
-				GUIdialog.GetComponent<GUITextManager>().WriteOutputOnGUI(text);
-				myState = state.JOKE;
-				timer = 0.0f;
 			}*/
 			
 		}

@@ -93,13 +93,15 @@ public class HealthBar : MonoBehaviour {
 				healthPoints = MAX_HEALTH;
 				
 				_lifeWall.restoreSize();
+
+				TimeOut = 5.0f;
 	
 				restoreNormalView();
 				
 			}else if(healthPoints < MIN_HEALTH){
 				
 				_lifeWall.changeColorWall(Color.red);
-				TimeOut = 15f;
+				TimeOut = 35f;
 				
 			}else{
 				damageOn = true;
