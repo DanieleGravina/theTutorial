@@ -33,6 +33,7 @@ public class TimerTrigger : MonoBehaviour {
 			}
 			else {
 				Application.LoadLevel("InitialMenu");
+				Globals.buttonLevel = Globals.ButtonLevel.FINAL;
 				Globals.CountDownOn = false;
 			}
 			

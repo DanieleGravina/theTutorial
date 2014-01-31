@@ -556,6 +556,7 @@ public class Character : MonoBehaviour {
 
             case "Exit_Door_2":
             Application.LoadLevel("InitialMenu");
+			Globals.buttonLevel = Globals.ButtonLevel.LEVEL_2;
             Screen.showCursor = true;
                 break;
 			

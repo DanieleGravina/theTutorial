@@ -11,9 +11,17 @@ public class Globals {
 		LEVEL_3
 	}
 
+	public enum ButtonLevel{
+		LEVEL_1,
+		LEVEL_2,
+		FINAL
+	}
+
 	public static bool cakeTaken = false;
 
 	public static LoadType level = LoadType.LEVEL_1;
+
+	public static ButtonLevel buttonLevel = ButtonLevel.LEVEL_1;
 	
 	public static Level currentLevel = Level.MENU;
 	
