@@ -7,7 +7,7 @@ public class HealthBar : MonoBehaviour {
 	
 	int numCall = 0;
 	
-	const int MAX_HEALTH = 99;
+	const int MAX_HEALTH = 105;
 	const int MIN_HEALTH = 20;
 	
 	public GameObject blood, respawnPoint, LifeWall;
@@ -69,7 +69,7 @@ public class HealthBar : MonoBehaviour {
 	public void decreaseLife(){
 		
 		numCall++;
-		Debug.Log (numCall);
+		Debug.Log (healthPoints);
 		
 		
 		if(healthPoints > 0){
